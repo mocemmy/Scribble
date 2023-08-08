@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('author_last_name', sa.String(length=50), nullable=False),
     sa.Column('title', sa.String(length=50), nullable=False),
     sa.Column('genre', sa.String(length=50), nullable=True),
-    sa.Column('summary', sa.String(length=1000), nullable=True),
+    sa.Column('summary', sa.String(length=5000), nullable=True),
     sa.Column('book_cover', sa.String(length=100), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),

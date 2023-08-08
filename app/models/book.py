@@ -15,7 +15,7 @@ class Book(db.Model):
     author_last_name = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     genre = db.Column(db.String(50))
-    summary = db.Column(db.String(1000))
+    summary = db.Column(db.String(5000))
     book_cover = db.Column(db.String(100), default='/images/default-book-cover.jpg')
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
