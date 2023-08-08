@@ -1,0 +1,47 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    box-sizing: border-box;
+    align-items: center;
+    margin: auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+.form-container input,
+.submit-button {
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    outline: none;
+    padding: 0.5rem;
+    width: 20rem;
+    margin: 0.5rem 0;
+}
+
+.submit-button {
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #333333;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #564848;
+    cursor: pointer;
+}
+
+.redirect-container {
+    display: flex;
+    align-items: center;
+}
+
+.form-label {
+    font-size: 3rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    margin-bottom: 1rem;;
+}

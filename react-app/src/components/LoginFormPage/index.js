@@ -23,10 +23,10 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-    <Link exact to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+    <Link className="logo-container" to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
+      <h1 className="form-label">Sign In</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -48,11 +48,13 @@ function LoginFormPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <button type="submit">Log In</button>
+        <button className="submit-button" type="submit">Log In</button>
       </form>
-      <p>New to Scribble?</p>
+      <div className="redirect-container">
+      <p>New to Scribble?&nbsp;</p>
       <Link to='/signup'>Sign up</Link>
-    </>
+      </div>
+    </div>
   );
 }
 

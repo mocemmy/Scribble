@@ -62,10 +62,10 @@ const onClick = (e) => {
   };
 
   return (
-    <>
-      <Link exact to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
-      <h1 className="form-header">Create Account</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <Link className="logo-container" to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
+      <h1 className="form-label">Create Account</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
         {errors.serverErrors && <p className="errors">{errors.serverErrors}</p>}
         <label htmlFor="first-name">First name</label>
         {hasSubmitted && errors.first_name && (
@@ -130,10 +130,10 @@ const onClick = (e) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        <button onClick={onClick} type="submit">Create account</button>
+        <button className="submit-button" onClick={onClick} type="submit">Create account</button>
       </form>
       <p>Already have an account? <Link to='/login'>Sign in</Link></p>
-    </>
+    </div>
   );
 }
 
