@@ -24,6 +24,7 @@ function LoginFormPage() {
 
   return (
     <>
+    <Link exact to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <ul>

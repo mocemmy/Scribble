@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link} from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const validateEmail = (email) => {
   return email.match(
@@ -64,6 +63,7 @@ const onClick = (e) => {
 
   return (
     <>
+      <Link exact to="/"><img className="logo" src="/images/scribble-logo-transparent.png" alt="scribble"/><h1 className='scribble'>&nbsp;Scribble</h1></Link>
       <h1 className="form-header">Create Account</h1>
       <form onSubmit={handleSubmit}>
         {errors.serverErrors && <p className="errors">{errors.serverErrors}</p>}

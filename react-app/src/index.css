@@ -8,12 +8,29 @@
 
 body {
     font-family: sans-serif;
+    width: 100%;
+    margin: 0;
 }
 
 h1 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.75rem;
+    font-weight: lighter;
 }
 
 .errors {
     color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+a {
+    color: #00635D;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

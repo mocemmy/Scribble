@@ -1,0 +1,108 @@
+.landing-page-container {
+    background-color: #f4f1ea;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0rem 5rem;
+    width: 100%;
+}
+
+.landing-page-left {
+    width: 65%;
+}
+
+.landing-page-right {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-signup-container {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    z-index: 1;
+    margin-top: 2.5rem;
+}
+
+.login-signup-container>a{
+    text-decoration: none;
+    background-color: #333333;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.125rem;
+}
+
+.login-signup-container>a:hover{
+    text-decoration: none;
+}
+
+.login-signup-container>p{
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.already-member {
+    padding-top: 1rem;
+}
+
+.login-signup-container>a:hover {
+    background-color: #564848;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+.logo-container:hover {
+    text-decoration: none;
+}
+
+#banner{
+    width: 100%;
+    position: absolute;
+    top: 4.5rem;
+    left: 0;
+}
+
+.discovery-container{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    margin-top: 16rem;
+    padding: 2rem;
+    width: 65%;
+}
+
+.book-container {
+    display: flex;
+}
+
+.book-container img {
+    width: 3rem;
+    margin: 0 0.5rem;
+}
+
+.footer-container {
+    background-color: #f4f1ea;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.footer-container>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+}
