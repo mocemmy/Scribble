@@ -8,7 +8,7 @@ class Follower(db.Model):
     if environment == 'production':
         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     follower_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     created_at = db.Column(db.DateTime, default=datetime.now)

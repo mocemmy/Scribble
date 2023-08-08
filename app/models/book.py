@@ -9,7 +9,7 @@ class Book(db.Model):
     if environment == 'production':
         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     creator_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     author_first_name = db.Column(db.String(50), nullable=False)
     author_last_name = db.Column(db.String(50), nullable=False)
