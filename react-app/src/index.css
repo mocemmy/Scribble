@@ -1,1 +1,19 @@
 /* TODO Add site wide styles */
+
+.logo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.25rem;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.errors {
+    color: red;
+}
