@@ -4,8 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
+import AppHomePage from "./components/AppHomePage";
+import NavBar from "./components/NavBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,11 +22,18 @@ function App() {
           <Route exact path="/">
             <LandingPage isLoaded={isLoaded} />
           </Route>
+          <Route path='/app'>
+            <NavBar />
+            <AppHomePage isLoaded={isLoaded}/>
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route>
+            <h1>404: Page not found</h1>
           </Route>
         </Switch>
       )}
