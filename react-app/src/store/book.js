@@ -23,6 +23,21 @@ export const thunkGetAllBooks = () => async (dispatch) => {
     }
 }
 
+export const thunkCreateBook = (data) => async (dispatch) => {
+    const response = await fetch(`/api/books/new`, {
+		method: "POST",
+		body: data
+	})
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(actionGetBookDetails(data))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
 
 export const thunkGetBookDetails = (bookId) => async (dispatch) => {
     const response = await fetch(`/api/books/${bookId}/details`)
@@ -34,7 +49,18 @@ export const thunkGetBookDetails = (bookId) => async (dispatch) => {
     } else {
         return response
     }
+}
 
+export const thunkGetBooksCurrUser = () => async (dispatch) => {
+    const response = await fetch(`/api/books/current`)
+
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionGetAllBooks(data.books))
+        return data
+    } else {
+        return response
+    }
 }
 
 const initialState = {AllBooks: null, SingleBook: null}

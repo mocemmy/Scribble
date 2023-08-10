@@ -1,0 +1,166 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom'
+import { thunkCreateBook } from "../../store/book";
+
+function BookForm({ type, book }) {
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [author_first_name, setAuthorFirstName] = useState(
+    book ? book.author_first_name : ""
+  );
+  const [author_last_name, setAuthorLastName] = useState(
+    book ? book.author_last_name : ""
+  );
+  const [title, setTitle] = useState(book ? book.title : "");
+  const [genre, setGenre] = useState(book ? book.genre : "");
+  const [summary, setSummary] = useState(book ? book.summary : "");
+  const [book_cover, setBookCover] = useState(book ? book.book_cover : "");
+  const [errors, setErrors] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  useEffect(() => {
+    //useEffect to check for form validation errors
+    const validationErrors = {};
+    if (!author_first_name.length)
+      validationErrors.author_first_name = "Author's first name is required";
+    if (author_first_name.length > 50)
+      validationErrors.author_first_name =
+        "Author's first name must be shorter than 50 characters";
+    if (!author_last_name.length)
+      validationErrors.author_last_name = "Author's last name is required";
+    if (author_last_name.length > 50)
+      validationErrors.author_last_name =
+        "Author's first name must be shorter than 50 characters";
+    if (!title.length) validationErrors.title = "Book title is required";
+    if (title.length > 50)
+      validationErrors.title = "Book title must be shorter than 50 characters";
+    if (genre.length > 50)
+      validationErrors.genre = "Genre must be shorter than 50 characters";
+    if (summary?.length > 5000)
+      validationErrors.genre = "Summary must be shorter than 5000 characters";
+    if (!book_cover)
+      validationErrors.book_cover = "Please input a cover for your book";
+
+    setErrors(validationErrors);
+  }, [author_first_name, author_last_name, title, genre, summary, book_cover]);
+
+  let formTitle;
+  let buttonText;
+  if (type === "CREATE") {
+    formTitle = "Create a New Book";
+    buttonText = "Create Book";
+  } else {
+    formTitle = "Edit Book";
+    buttonText = "Edit Book";
+  }
+
+  const handleCancel = () => {
+    history.push('/app/user')
+  }
+  const onClick = (e) => {
+    e.preventDefault();
+    setHasSubmitted(true)
+    if(type === "CREATE"){
+        handleCreate()
+    } else {
+        handleEdit()
+    }
+  }
+  const handleEdit = () => {
+
+  }
+
+  const handleCreate = async () => {
+    if (!Object.keys(errors).length){
+        const formData = new FormData();
+        console.log(user)
+        formData.append('book_cover', book_cover)
+        formData.append('author_first_name', author_first_name)
+        formData.append('author_last_name', author_last_name)
+        formData.append('title', title)
+        formData.append('genre', genre)
+        formData.append('summary', summary)
+        formData.append('creator_id', user.id)
+        
+        const response = await dispatch(thunkCreateBook(formData));
+        if (response.id) {
+            history.push(`/app/books/${response.id}/details`)
+        } else {
+            setErrors({"serverErrors": response})
+        }
+    }
+  }
+
+  return (
+    <div className="book-form-container">
+      <form encType="multipart/form-data">
+        <h1>{formTitle}</h1>
+        {errors.serverErrors && <p className="errors">{errors.serverErrors}</p>}
+        <label htmlFor="author-first-name">Author's first name</label>
+        {hasSubmitted && errors.author_first_name && (
+          <p className="errors">{errors.author_first_name}</p>
+        )}
+        <input
+          type="text"
+          name="author-first-name"
+          value={author_first_name}
+          onChange={(e) => setAuthorFirstName(e.target.value)}
+        />
+        <label htmlFor="author-last-name">Author's last name</label>
+        {hasSubmitted && errors.author_last_name && (
+          <p className="errors">{errors.author_last_name}</p>
+        )}
+        <input
+          type="text"
+          name="author-last-name"
+          value={author_last_name}
+          onChange={(e) => setAuthorLastName(e.target.value)}
+        />
+        <label htmlFor="title">Book title</label>
+        {hasSubmitted && errors.title && <p className="errors">{errors.title}</p>}
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <label htmlFor="genre">Book genre</label>
+        {hasSubmitted && errors.genre && <p className="errors">{errors.genre}</p>}
+        <input
+          type="text"
+          name="genre"
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+        />
+        <label htmlFor="summary">Book summary</label>
+        {hasSubmitted && errors.summary && <p className="errors">{errors.summary}</p>}
+        <textarea
+          type="text"
+          name="summary"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+        />
+        <label htmlFor="book-cover">Book cover</label>
+        {hasSubmitted && errors.book_cover && <p className="errors">{errors.book_cover}</p>}
+        <input
+          type="file"
+          name="book-cover"
+          accept="image/*"
+          onChange={(e) => setBookCover(e.target.files[0])}
+        />
+        <div className="button-container">
+          <button className="submit-button" onClick={onClick} type="submit">
+            {buttonText}
+          </button>
+          <button className="cancel-button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default BookForm;

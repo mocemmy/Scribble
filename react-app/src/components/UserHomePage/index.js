@@ -10,7 +10,7 @@ function UserHomePage() {
   return (
     <>
         <button onClick={handleCreateNewBook}>Create New Book</button>
-      <h1>User Home</h1>
+      <h1>Your books</h1>
     </>
   );
 }
