@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Book, db
-from app.forms import BookForm
+from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -73,3 +73,45 @@ def get_current_users_books():
     books = Book.query.filter(Book.creator_id == current_user.id).all()
 
     return {"books": [book.to_dict() for book in books]}
+
+
+#Edit book by id
+@book_routes.route('/<int:id>/edit', methods=['PUT'])
+@login_required
+def edit_book(id):
+    book = Book.query.get(id)
+
+    if not book:
+        return {"errors": "Book not found"}, 404
+    if book.creator_id != current_user.id:
+        return {"errors": "Not your book!"}, 403
+    
+    form = EditBookForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        creator_id = str(form.data['creator_id'])
+        author_first_name = str(form.data['author_first_name'])
+        author_last_name = str(form.data['author_last_name'])
+        title = str(form.data['title'])
+        genre = str(form.data['genre'])
+        summary = str(form.data['summary'])
+        if form.data['book_cover']:
+            book_cover = form.data['book_cover']
+            book_cover.filename = get_unique_filename(book_cover.filename)
+            upload = upload_file_to_s3(book_cover)
+
+            if 'url' not in upload:
+                return {"errors": upload}
+            url = str(upload['url'])
+            book.book_cover = url
+
+        book.creator_id = creator_id
+        book.author_first_name = author_first_name
+        book.author_last_name = author_last_name
+        book.title = title
+        book.genre = genre
+        book.summary = summary
+        db.session.commit()
+        return book.to_dict()
+    
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

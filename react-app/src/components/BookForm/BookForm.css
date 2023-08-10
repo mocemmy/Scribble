@@ -1,0 +1,10 @@
+.book-cover-preview {
+    width: 6rem;
+}
+
+.preview-image-container {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

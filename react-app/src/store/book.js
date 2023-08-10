@@ -63,6 +63,22 @@ export const thunkGetBooksCurrUser = () => async (dispatch) => {
     }
 }
 
+export const thunkEditBook = (bookId, data) => async (dispatch) => {
+    const response = await fetch(`/api/books/${bookId}/edit`, {
+		method: "PUT",
+		body: data
+	})
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(actionGetBookDetails(data))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 const initialState = {AllBooks: null, SingleBook: null}
 
 export default function reducer(state = initialState, action) {

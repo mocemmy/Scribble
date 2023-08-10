@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom'
-import { thunkCreateBook } from "../../store/book";
+import { thunkCreateBook, thunkEditBook } from "../../store/book";
+import './BookForm.css'
+
 
 function BookForm({ type, book }) {
   const user = useSelector((state) => state.session.user);
@@ -17,26 +19,27 @@ function BookForm({ type, book }) {
   const [genre, setGenre] = useState(book ? book.genre : "");
   const [summary, setSummary] = useState(book ? book.summary : "");
   const [book_cover, setBookCover] = useState(book ? book.book_cover : "");
+  const [currentCover, setCurrentCover] = useState(book ? book.book_cover: "")
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
   useEffect(() => {
     //useEffect to check for form validation errors
     const validationErrors = {};
-    if (!author_first_name.length)
+    if (!author_first_name?.length)
       validationErrors.author_first_name = "Author's first name is required";
-    if (author_first_name.length > 50)
+    if (author_first_name?.length > 50)
       validationErrors.author_first_name =
         "Author's first name must be shorter than 50 characters";
-    if (!author_last_name.length)
+    if (!author_last_name?.length)
       validationErrors.author_last_name = "Author's last name is required";
-    if (author_last_name.length > 50)
+    if (author_last_name?.length > 50)
       validationErrors.author_last_name =
         "Author's first name must be shorter than 50 characters";
-    if (!title.length) validationErrors.title = "Book title is required";
-    if (title.length > 50)
+    if (!title?.length) validationErrors.title = "Book title is required";
+    if (title?.length > 50)
       validationErrors.title = "Book title must be shorter than 50 characters";
-    if (genre.length > 50)
+    if (genre?.length > 50)
       validationErrors.genre = "Genre must be shorter than 50 characters";
     if (summary?.length > 5000)
       validationErrors.genre = "Summary must be shorter than 5000 characters";
@@ -44,7 +47,7 @@ function BookForm({ type, book }) {
       validationErrors.book_cover = "Please input a cover for your book";
 
     setErrors(validationErrors);
-  }, [author_first_name, author_last_name, title, genre, summary, book_cover]);
+  }, [author_first_name, author_last_name, title, genre, summary, book_cover, book]);
 
   let formTitle;
   let buttonText;
@@ -68,14 +71,31 @@ function BookForm({ type, book }) {
         handleEdit()
     }
   }
-  const handleEdit = () => {
-
+  const handleEdit = async () => {
+    if (!Object.keys(errors).length){
+        const formData = new FormData();
+        if(book_cover !== currentCover){ //book cover was changed
+            formData.append('book_cover', book_cover)
+        }
+        formData.append('author_first_name', author_first_name)
+        formData.append('author_last_name', author_last_name)
+        formData.append('title', title)
+        formData.append('genre', genre)
+        formData.append('summary', summary)
+        formData.append('creator_id', user.id)
+        
+        const response = await dispatch(thunkEditBook(book.id, formData));
+        if (response.id) {
+            history.push(`/app/books/${response.id}/details`)
+        } else {
+            setErrors({"serverErrors": response})
+        }
+    }
   }
 
   const handleCreate = async () => {
     if (!Object.keys(errors).length){
         const formData = new FormData();
-        console.log(user)
         formData.append('book_cover', book_cover)
         formData.append('author_first_name', author_first_name)
         formData.append('author_last_name', author_last_name)
@@ -150,6 +170,10 @@ function BookForm({ type, book }) {
           accept="image/*"
           onChange={(e) => setBookCover(e.target.files[0])}
         />
+        <div className="preview-image-container">
+        {currentCover && <p>Current Book Cover</p>}
+        {currentCover  && <img className="book-cover-preview" src={currentCover} alt={currentCover} />}
+        </div>
         <div className="button-container">
           <button className="submit-button" onClick={onClick} type="submit">
             {buttonText}
