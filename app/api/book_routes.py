@@ -115,3 +115,23 @@ def edit_book(id):
         return book.to_dict()
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+#delete book by id
+@book_routes.route('/<int:id>/delete', methods=["DELETE"])
+@login_required
+def delete_book(id):
+    """
+    Delete a book by its id
+    """
+    book = Book.query.get(id)
+    if not book:
+        return {"errors": "Book not found"}, 404
+    if book.creator_id != current_user.id:
+        return {"errors": "Not Your Book!"}, 403
+    
+    db.session.delete(book)
+    db.session.commit()
+
+    return {"message": "Book was successfuly deleted"}
+    
+    

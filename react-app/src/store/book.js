@@ -79,6 +79,23 @@ export const thunkEditBook = (bookId, data) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteBook = (bookId) => async (dispatch) => {
+    const response = await fetch(`/api/books/${bookId}/delete`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetBooksCurrUser())
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
+
+
 const initialState = {AllBooks: null, SingleBook: null}
 
 export default function reducer(state = initialState, action) {
