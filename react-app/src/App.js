@@ -9,6 +9,7 @@ import AppHomePage from "./components/AppHomePage";
 import NavBar from "./components/NavBar";
 import BrowseBooks from "./components/BrowseBooks";
 import BookDetails from "./components/BookDetails";
+import UserHomePage from "./components/UserHomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,12 @@ function App() {
               </Route>
               <Route path="/app/books/:bookId/details">
                 <BookDetails />
+              </Route>
+              <Route path='/app/user'>
+                <UserHomePage />
+              </Route>
+              <Route path="/app/create-book">
+                <h1>create book form</h1>
               </Route>
               <Route path="*">
                 <AppHomePage isLoaded={isLoaded} />

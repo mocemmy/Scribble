@@ -1,0 +1,58 @@
+.user-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.user-icon-container {
+    height: 100%;
+}
+
+#userDropdown{
+    position: absolute;
+    top: 3.5rem;
+    right: 2rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.15)
+}
+
+.userDropdown-li {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-top: 1px solid rgba(0,0,0,0.25);
+    color: black;
+    list-style-type: none;
+}
+
+.userDropdown-li a{
+    color: black;
+}
+
+.logout-button:hover{
+    text-decoration: underline;
+}
+
+.user-icon:hover,
+.logout-button:hover {
+    cursor: pointer;
+}
+
+.user-icon-container:hover {
+    background-color: #333333;
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
+}
+
+#user-first-lastName {
+    border-top: none;
+    font-weight: bold;
+}
