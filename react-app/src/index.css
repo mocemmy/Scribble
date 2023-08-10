@@ -34,3 +34,10 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* 
+    background-color: #f4f1ea;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.15);
+    background-color: #333333; button color
+    background-color: #564848; button color hover
+*/

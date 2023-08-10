@@ -1,0 +1,12 @@
+.book-details-page {
+    display: flex;
+    max-width: 1024px;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+.book-info-container,
+.book-image-container {
+    padding: 2rem;
+    box-sizing: border-box;
+}

@@ -7,6 +7,8 @@ import { authenticate } from "./store/session";
 import LandingPage from "./components/LandingPage";
 import AppHomePage from "./components/AppHomePage";
 import NavBar from "./components/NavBar";
+import BrowseBooks from "./components/BrowseBooks";
+import BookDetails from "./components/BookDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,11 +24,21 @@ function App() {
           <Route exact path="/">
             <LandingPage isLoaded={isLoaded} />
           </Route>
-          <Route path='/app'>
+          <Route path="/app">
             <NavBar />
-            <AppHomePage isLoaded={isLoaded}/>
+            <Switch>
+              <Route path="/app/browse-books">
+                <BrowseBooks />
+              </Route>
+              <Route path="/app/books/:bookId/details">
+                <BookDetails />
+              </Route>
+              <Route path="*">
+                <AppHomePage isLoaded={isLoaded} />
+              </Route>
+            </Switch>
           </Route>
-          <Route path="/login" >
+          <Route path="/login">
             <LoginFormPage />
           </Route>
           <Route path="/signup">

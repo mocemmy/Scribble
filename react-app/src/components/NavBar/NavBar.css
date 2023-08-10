@@ -1,0 +1,28 @@
+.nav-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f4f1ea;
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+
+}
+
+.nav-bar-links {
+    text-decoration: none;
+    color: black;
+    height: 100%;
+
+}
+.nav-bar-links>span {
+    font-size: 0.75rem;
+}
+
+.nav-bar-links:hover {
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+}

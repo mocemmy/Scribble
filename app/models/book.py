@@ -16,7 +16,7 @@ class Book(db.Model):
     title = db.Column(db.String(50), nullable=False)
     genre = db.Column(db.String(50))
     summary = db.Column(db.String(5000))
-    book_cover = db.Column(db.String(100), default='/images/default-book-cover.jpg')
+    book_cover = db.Column(db.String(1000), default='/images/default-book-cover.jpg')
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
@@ -31,6 +31,7 @@ class Book(db.Model):
             'title': self.title,
             'genre': self.genre,
             'summary': self.summary,
+            'book_cover': self.book_cover,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

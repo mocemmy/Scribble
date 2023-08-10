@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/session";
+import './NavBar.css'
+
 
 function NavBar() {
     const dispatch = useDispatch();
@@ -17,6 +19,7 @@ function NavBar() {
               alt="scribble"
             />&nbsp;<h1>Scribble</h1>
             </Link>
+            <Link className='nav-bar-links' to='/app/browse-books'>Browse&nbsp;<span>&#9660;</span></Link>
             <div className="search-bar-container">
             <input 
             type='text' placeholder="Search books" />
