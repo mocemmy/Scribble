@@ -41,9 +41,9 @@ function ReviewForm({ type, review }) {
         book_id: bookId,
         user_id: user.id,
       };
-
       if (type === "CREATE") {
         dispatch(thunkCreateReview(data, bookId));
+        history.push(`/app/books/${bookId}/details`);
       } else {
         // dispatch(thunkEditReview(review.id, data))
       }

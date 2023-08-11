@@ -58,6 +58,7 @@ function ReviewSummary({ bookId }) {
           <p>
             {stars.map((num) => (
               <i
+                key={num}
                 className={
                   reviewInfo.avg_rating >= num
                     ? filledStar

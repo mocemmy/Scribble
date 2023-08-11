@@ -42,7 +42,7 @@ function App() {
                 <EditBook />
               </Route>
               <Route path='/app/books/:bookId/review'>
-                <ReviewForm />
+                <ReviewForm type="CREATE" />
               </Route>
               <Route path='/app/books/search'>
                 <SearchResults />

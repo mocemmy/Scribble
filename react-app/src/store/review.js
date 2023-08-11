@@ -43,16 +43,23 @@ export const thunkCreateReview = (data, bookId) => async (dispatch) => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(data)
+		body: JSON.stringify({
+            review_body: data.review_body,
+            review_stars: data.review_stars,
+            user_id: parseInt(data.user_id),
+            book_id: parseInt(data.book_id)
+        })
 
     })
-    console.log('here')
+   
+    console.log(data)
     if(response.ok){
         const data = await response.json();
         dispatch(thunkGetReviews(bookId))
         return data
     } else {
         const errors = await response.json();
+        console.log(errors)
         return errors
     }
 }
