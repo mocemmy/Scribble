@@ -22,7 +22,7 @@ function ReviewDisplay({ review }) {
       <div className="review-content">
         <div className="review-header">
           <p>{stars.map(num => (
-            <i className={review.review_stars >= num ? filledStar : emptyStar}/>
+            <i key={num} className={review.review_stars >= num ? filledStar : emptyStar}/>
           ))}</p>
           <p>{dispTime}</p>
         </div>

@@ -40,6 +40,9 @@ function App() {
               <Route path="/app/books/:bookId/edit">
                 <EditBook />
               </Route>
+              <Route path='/app/books/:bookId/review'>
+                <h1>Leave a review</h1>
+              </Route>
               <Route path='/app/books/search'>
                 <SearchResults />
               </Route>

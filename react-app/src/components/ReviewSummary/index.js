@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetReviewInfo, thunkGetReviews } from "../../store/review";
 import Loading from "../Loading";
 import ReviewDisplay from "../ReviewDisplay";
+import { useHistory, Link } from 'react-router-dom'
 import './ReviewSummary.css'
 
 function ReviewSummary({ bookId }) {
   const reviewInfo = useSelector((state) => state.reviews.ReviewInformation);
   const reviews = useSelector((state) => state.reviews.AllReviews);
+  const user = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (bookId) {
@@ -19,7 +22,13 @@ function ReviewSummary({ bookId }) {
 
   if (!reviewInfo || !reviews) return <Loading />;
   const reviewArr = Object.values(reviews);
-
+  let alreadyReviewed = false;
+  if(reviewArr && user) {
+    reviewArr.forEach(review => {
+        if(review.user_id === user.id) alreadyReviewed = true;
+    })
+  }
+  
   let reviewFlag;
   if (reviewInfo.review_count === 1) {
     reviewFlag = "review";
@@ -41,7 +50,7 @@ function ReviewSummary({ bookId }) {
           <h2>
             What do <span>you</span> think?
           </h2>
-          <button>Write a Review</button>
+       {!alreadyReviewed && <Link to={`/app/books/${bookId}/review`}>Write a Review</Link>}
         </div>
         <div>
           <h3>Community Reviews</h3>

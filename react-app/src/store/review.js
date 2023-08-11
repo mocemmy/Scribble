@@ -26,7 +26,6 @@ export const thunkGetReviewInfo = (bookId) => async (dispatch) => {
 
 export const thunkGetReviews = (bookId) => async (dispatch) => {
     const response = await fetch(`/api/books/${bookId}/reviews`)
-    console.log('here')
 
     if(response.ok){
         const data = await response.json()

@@ -16,7 +16,6 @@ function BookDetails() {
   }, [dispatch, bookId]);
 
   if (!book) return <Loading />;
-  console.log(book);
   return (
     <>
       <div className="book-details-page-container">

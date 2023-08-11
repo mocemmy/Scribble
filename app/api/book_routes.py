@@ -3,8 +3,9 @@ from flask_login import login_required, current_user
 from app.models import Book, Review, db
 from sqlalchemy import or_
 from app.forms import BookForm, EditBookForm
-from app.aws_helpers import upload_file_to_s3, get_unique_filename
+from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.api.auth_routes import validation_errors_to_error_messages
+from datetime import datetime
 
 book_routes = Blueprint('books', __name__)
 
@@ -104,6 +105,7 @@ def edit_book(id):
             if 'url' not in upload:
                 return {"errors": upload}
             url = str(upload['url'])
+            remove_file_from_s3(book.book_cover)
             book.book_cover = url
 
         book.creator_id = creator_id
@@ -112,6 +114,7 @@ def edit_book(id):
         book.title = title
         book.genre = genre
         book.summary = summary
+        book.updated_at = datetime.now()
         db.session.commit()
         return book.to_dict()
     
@@ -129,6 +132,8 @@ def delete_book(id):
         return {"errors": "Book not found"}, 404
     if book.creator_id != current_user.id:
         return {"errors": "Not Your Book!"}, 403
+    
+    remove_file_from_s3(book.book_cover)
     
     db.session.delete(book)
     db.session.commit()
