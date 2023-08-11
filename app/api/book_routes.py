@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Book, db
+from app.models import Book, Review, db
 from sqlalchemy import or_
 from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename
@@ -135,6 +135,40 @@ def delete_book(id):
 
     return {"message": "Book was successfuly deleted"}
     
+#get reviews for a book by its id
+@book_routes.route('/<int:id>/reviews')
+@login_required
+def book_reviews(id):
+    """
+    Query for reviews for a book by the book's id
+    """
+    book = Book.query.get(id)
+    if not book:
+        return {"errors": "Book not found"}, 404
+    
+    reviews = Review.query.filter(Review.book_id == id).all()
+
+    return {"reviews": [{**review.to_dict(), "user": {**review.user.to_dict()}} for review in reviews]}
+
+@book_routes.route('/<int:id>/review-information')
+@login_required
+def review_information(id):
+    """
+    Query for summary of review information by book id
+    """
+
+    book = Book.query.get(id)
+    if not book: 
+        return {"errors": "Book not found"}, 404
+    reviews = Review.query.filter(Review.book_id == id).all()
+    information = {
+        "book_id": id,
+        "review_count": len(reviews),
+        "avg_rating": sum(review.review_stars for review in reviews) / len(reviews)
+    }
+    return information
+
+
 
 #search books
 @book_routes.route('/search', methods=['POST'])
@@ -144,8 +178,6 @@ def search_books():
     Query for books matching the search terms
     """
     search_terms = request.json
-
-    # search_args = [col.like('%%%s%%' % search_terms) for col in [Book.author_first_name, Book.author_last_name, Book.title]]
 
     books = Book.query.filter(or_(Book.title.ilike(f'%{search_terms}%'), Book.author_first_name.ilike(f'%{search_terms}%'), Book.author_last_name.ilike(f'%{search_terms}%'))).all()
 

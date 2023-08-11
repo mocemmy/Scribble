@@ -111,7 +111,6 @@ export const thunkSearchBooks = (search) => async (dispatch) => {
 
     if(response.ok){
         const data = await response.json()
-        console.log(data)
         dispatch(actionSetSearchResults(data.books))
         return data
     } else {

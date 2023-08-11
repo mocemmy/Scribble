@@ -11,7 +11,7 @@ function LandingPage({isLoaded}) {
     <>
       <div className="landing-page-container">
         <div className="landing-page-left">
-          <Link className="logo-container" exact to="/">
+          <Link className="logo-container" to="/">
             <img
               className="logo"
               src="/images/scribble-logo-transparent.png"
