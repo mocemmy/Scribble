@@ -44,6 +44,9 @@ function App() {
               <Route path='/app/books/:bookId/review'>
                 <ReviewForm type="CREATE" />
               </Route>
+              <Route path='/app/reviews/:reviewId/edit'>
+                <ReviewForm type="EDIT" />
+              </Route>
               <Route path='/app/books/search'>
                 <SearchResults />
               </Route>

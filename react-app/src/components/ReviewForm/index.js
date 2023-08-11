@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { thunkCreateReview } from "../../store/review";
+import {
+  thunkCreateReview,
+  thunkEditReview,
+  thunkGetSingleReview,
+} from "../../store/review";
+import Loading from "../Loading";
 
-function ReviewForm({ type, review }) {
-  const { bookId } = useParams();
+function ReviewForm({ type }) {
+  let { bookId, reviewId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
+  const review = useSelector((state) => state.reviews.SingleReview);
   const [review_body, setReviewBody] = useState(
     review ? review.review_body : ""
   );
@@ -17,6 +23,17 @@ function ReviewForm({ type, review }) {
   const [activeRating, setActiveRating] = useState(review_stars);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    dispatch(thunkGetSingleReview(reviewId));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (review) {
+      setReviewBody(review.review_body);
+      setReviewStars(review.review_stars);
+    }
+  }, [review]);
 
   useEffect(() => {
     const validationErrors = {};
@@ -31,6 +48,10 @@ function ReviewForm({ type, review }) {
     setErrors(validationErrors);
   }, [review_body, review_stars]);
 
+  if (type === "EDIT" && !review) return <Loading />;
+
+  if (!bookId) bookId = review.book_id;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setHasSubmitted(true);
@@ -43,10 +64,10 @@ function ReviewForm({ type, review }) {
       };
       if (type === "CREATE") {
         dispatch(thunkCreateReview(data, bookId));
-        history.push(`/app/books/${bookId}/details`);
       } else {
-        // dispatch(thunkEditReview(review.id, data))
+        dispatch(thunkEditReview(data, review.id, bookId));
       }
+      history.push(`/app/books/${bookId}/details`);
     }
   };
 
