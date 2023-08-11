@@ -35,6 +35,12 @@ a:hover {
     text-decoration: underline;
 }
 
+
+.fa-star,
+.fa-star-half-stroke {
+    color: #e87400;
+}
+
 /* 
     background-color: #f4f1ea;
     box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.15);

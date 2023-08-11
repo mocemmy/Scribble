@@ -8,6 +8,9 @@ function ReviewDisplay({ review }) {
     day: "numeric",
     year: "numeric"
   });
+  const stars = [1,2,3,4,5]
+  const filledStar = "fa-solid fa-star"
+  const emptyStar = "fa-regular fa-star"
 
   return (
     <div className="review-container">
@@ -18,7 +21,9 @@ function ReviewDisplay({ review }) {
       </div>
       <div className="review-content">
         <div className="review-header">
-          <p>{review.review_stars}</p>
+          <p>{stars.map(num => (
+            <i className={review.review_stars >= num ? filledStar : emptyStar}/>
+          ))}</p>
           <p>{dispTime}</p>
         </div>
         <p>{review.review_body}</p>

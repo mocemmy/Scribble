@@ -9,3 +9,17 @@
     padding: 2rem;
     box-sizing: border-box;
 }
+
+.book-image-container {
+    top: 5rem ;
+    left: 2rem;
+    position: fixed;
+}
+
+.dummy-book-display {
+    width: 30rem;
+}
+
+.book-details-page-container {
+    display: flex;
+}
