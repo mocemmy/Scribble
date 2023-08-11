@@ -14,12 +14,12 @@ function BrowseBooks() {
 
     if(!books) return <Loading />
     const booksArr = Object.values(books);
-    console.log(books)
     return (
         <div>
-            {booksArr.map(book => (
+            {!!booksArr.length && booksArr.map(book => (
                 <BookDisplay key={book.id} book={book} />
             ))}
+            {!booksArr.length && <h4>No books to browse!</h4>}
         </div>
     )
 }

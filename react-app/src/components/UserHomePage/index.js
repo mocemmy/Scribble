@@ -14,20 +14,22 @@ function UserHomePage() {
     useEffect(() => {
       dispatch(thunkGetBooksCurrUser());
     }, [dispatch])
-    
+
     if(!books) return <Loading />
     const booksArr = Object.values(books)
     const handleCreateNewBook = () => {
         history.push('/app/create-book')
     }
 
+
   return (
     <>
         <button onClick={handleCreateNewBook}>Create New Book</button>
       <h1>Your books</h1>
-      {booksArr.map(book => (
+      {!!booksArr.length && booksArr.map(book => (
         <BookDisplay key={book.id} book={book} type="OWNED" />
       ))}
+      {!booksArr.length && <h4>No books yet!</h4>}
     </>
   );
 }
