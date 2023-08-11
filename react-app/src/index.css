@@ -26,13 +26,16 @@ h1 {
     display: none !important;
 }
 
-a {
+a,
+.options-container>button  {
     color: #00635D;
     text-decoration: none;
 }
 
-a:hover {
+a:hover,
+.options-container>button:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 

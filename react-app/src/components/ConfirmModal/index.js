@@ -1,6 +1,6 @@
 import React from "react";
 import { useModal } from "../../context/Modal";
-// import "./ConfirmModal.css";
+import "./ConfirmModal.css";
 
 const ConfirmModal = ({ modalTitle, yesHandler }) => {
   const { closeModal } = useModal();
@@ -14,7 +14,7 @@ const ConfirmModal = ({ modalTitle, yesHandler }) => {
 
   return (
     <div className="confirm-modal-container">
-      <h1 className="modal-title">{modalTitle}</h1>
+      <h1 className="form-title">{modalTitle}</h1>
       <div className="button-container">
         <button className="confirm-button" onClick={handleClick}>
           Yes
