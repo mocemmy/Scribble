@@ -36,16 +36,6 @@ function ProfileDropdown() {
         closeMenu();
     };
 
-    // const handleDeleteUser = () => {
-    //     if (user.id === 15 || user.id === 16) {
-    //         window.alert("You can't delete the demo user!");
-    //     } else {
-    //         dispatch(sessionActions.thunkDeleteUser(user));
-    //         history.push("/");
-    //     }
-    // };
-
-
     const closeMenu = () => setUserMenu(false);
 
     const toggleMenu = () => {
@@ -59,7 +49,7 @@ function ProfileDropdown() {
     return (
         <>
             <div className="user-icon-container" onClick={toggleMenu}>
-                <img className="user-icon" src='/images/user-ico-w-background.png' alt='user icon'/>
+                <img className="user-icon" src='/images/user-ico-light.png' alt='user icon'/>
             </div>
 
             <ul id="userDropdown" className={ulClassName} ref={ulRef}>
