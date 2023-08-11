@@ -115,8 +115,8 @@ function BookForm({ type, book }) {
 
   return (
     <div className="book-form-container">
-      <form encType="multipart/form-data">
-        <h1>{formTitle}</h1>
+      <form encType="multipart/form-data" className="book-form">
+        <h1 className="form-label">{formTitle}</h1>
         {errors.serverErrors && <p className="errors">{errors.serverErrors}</p>}
         <label htmlFor="author-first-name">Author's first name</label>
         {hasSubmitted && errors.author_first_name && (
@@ -175,11 +175,11 @@ function BookForm({ type, book }) {
         {currentCover  && <img className="book-cover-preview" src={currentCover} alt={currentCover} />}
         </div>
         <div className="button-container">
+          <button className="submit-button cancel-button" onClick={handleCancel}>
+            Cancel
+          </button>
           <button className="submit-button" onClick={onClick} type="submit">
             {buttonText}
-          </button>
-          <button className="cancel-button" onClick={handleCancel}>
-            Cancel
           </button>
         </div>
       </form>

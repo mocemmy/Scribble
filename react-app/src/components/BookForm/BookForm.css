@@ -8,3 +8,65 @@
     flex-direction: column;
     align-items: center;
 }
+
+.book-form-container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.book-form label {
+    text-align: left;
+    width: 100%;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+}
+
+.book-form input,
+.book-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.book-form textarea {
+    resize: none;
+    padding: 0.5rem;
+    min-height: 10rem;
+    max-height: fit-content;
+}
+
+.book-form textarea ::-webkit-scrollbar {
+    scroll-margin-right: 0.5rem;
+}
+
+.book-form input:focus,
+.book-form textarea:focus {
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
+.cancel-button {
+    background-color: #f4f1ea;
+    color: black;
+}
+
+.cancel-button:hover {
+    background-color: #c6c4be;
+}
