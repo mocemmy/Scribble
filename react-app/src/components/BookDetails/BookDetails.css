@@ -1,25 +1,36 @@
 .book-details-page {
     display: flex;
     max-width: 1024px;
-    margin: auto;
+    margin: 0;
 }
 
 .book-info-container,
 .book-image-container {
     padding: 2rem;
+    padding-left: 0;
     box-sizing: border-box;
+}
+.book-info-container {
+    margin-left: 20rem;
 }
 
 .book-image-container {
     top: 5rem ;
     left: 2rem;
     position: fixed;
+    width: 30rem;
 }
 
 .dummy-book-display {
-    width: 30rem;
+    margin-left: 20rem;
+    width: 0;
 }
 
 .book-details-page-container {
     display: flex;
+    margin: 0;
+}
+
+#book-cover {
+    width: 15rem;
 }

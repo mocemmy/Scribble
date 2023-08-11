@@ -20,10 +20,9 @@ function BookDetails() {
   return (
     <>
       <div className="book-details-page-container">
-        <div className="dummy-book-display"></div>
         <div className="book-details-page">
           <div className="book-image-container">
-            <img src={book.book_cover} alt="book cover" />
+            <img id="book-cover" src={book.book_cover} alt="book cover" />
             <p>Want to read</p>
             <p>Rate this book:</p>
           </div>
