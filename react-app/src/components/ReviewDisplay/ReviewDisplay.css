@@ -1,0 +1,30 @@
+.review-container img {
+    width: 5rem;
+}
+
+.review-container {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+}
