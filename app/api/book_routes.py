@@ -1,6 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Book, db
+from sqlalchemy import or_
 from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -134,4 +135,19 @@ def delete_book(id):
 
     return {"message": "Book was successfuly deleted"}
     
+
+#search books
+@book_routes.route('/search', methods=['POST'])
+@login_required
+def search_books():
+    """"
+    Query for books matching the search terms
+    """
+    search_terms = request.json
+
+    # search_args = [col.like('%%%s%%' % search_terms) for col in [Book.author_first_name, Book.author_last_name, Book.title]]
+
+    books = Book.query.filter(or_(Book.title.ilike(f'%{search_terms}%'), Book.author_first_name.ilike(f'%{search_terms}%'), Book.author_last_name.ilike(f'%{search_terms}%'))).all()
+
+    return {'books': [book.to_dict() for book in books]}
     

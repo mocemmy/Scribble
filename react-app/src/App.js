@@ -12,6 +12,7 @@ import BookDetails from "./components/BookDetails";
 import UserHomePage from "./components/UserHomePage";
 import BookForm from "./components/BookForm";
 import EditBook from "./components/EditBook";
+import SearchResults from "./components/Search/SearchResults";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
               </Route>
               <Route path="/app/books/:bookId/edit">
                 <EditBook />
+              </Route>
+              <Route path='/app/books/search'>
+                <SearchResults />
               </Route>
               <Route path='/app/user'>
                 <UserHomePage />

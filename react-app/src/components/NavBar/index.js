@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import ProfileDropdown from "../ProfileDropdown";
+import Search from "../Search";
 
 function NavBar() {
 
@@ -19,12 +20,7 @@ function NavBar() {
         <Link className="nav-bar-links" to="/app/browse-books">
           Browse&nbsp;<span>&#9660;</span>
         </Link>
-        <div className="search-bar-container">
-          <input type="text" placeholder="Search books" />
-          <button type="submit">
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
+        <Search />
         <ProfileDropdown />
       </div>
     </>
