@@ -6,7 +6,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('reviews', __name__)
 
-@review_routes.route('/new')
+@review_routes.route('/new', methods=["POST"])
 @login_required
 def create_review():
     #check if user has already reviewed this book:

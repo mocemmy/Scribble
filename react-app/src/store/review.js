@@ -37,6 +37,26 @@ export const thunkGetReviews = (bookId) => async (dispatch) => {
     }
 }
 
+export const thunkCreateReview = (data, bookId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/new`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data)
+
+    })
+    console.log('here')
+    if(response.ok){
+        const data = await response.json();
+        dispatch(thunkGetReviews(bookId))
+        return data
+    } else {
+        const errors = await response.json();
+        return errors
+    }
+}
+
 const initialState = {AllReviews: null, ReviewInformation: null}
 
 export default function reducer(state = initialState, action) {

@@ -13,6 +13,7 @@ import UserHomePage from "./components/UserHomePage";
 import BookForm from "./components/BookForm";
 import EditBook from "./components/EditBook";
 import SearchResults from "./components/Search/SearchResults";
+import ReviewForm from "./components/ReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
                 <EditBook />
               </Route>
               <Route path='/app/books/:bookId/review'>
-                <h1>Leave a review</h1>
+                <ReviewForm />
               </Route>
               <Route path='/app/books/search'>
                 <SearchResults />
