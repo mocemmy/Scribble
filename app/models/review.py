@@ -12,7 +12,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     book_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('books.id')))
-    review_body = db.Column(db.String(255), nullable=False)
+    review_body = db.Column(db.String(1000), nullable=False)
     review_stars = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
