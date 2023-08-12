@@ -27,13 +27,21 @@ h1 {
 }
 
 a,
-.options-container>button  {
+.options-container>button,
+.button-as-link {
     color: #00635D;
     text-decoration: none;
 }
 
+.button-as-link {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+}
+
 a:hover,
-.options-container>button:hover {
+.options-container>button:hover,
+.button-as-link:hover {
     text-decoration: underline;
     cursor: pointer;
 }

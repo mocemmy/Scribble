@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Loading from '../Loading';
 import { thunkGetBooksCurrUser } from '../../store/book';
 import BookDisplay from '../BookDisplay';
+import './UserHomePage.css'
 
 
 function UserHomePage() {
@@ -24,12 +25,12 @@ function UserHomePage() {
 
   return (
     <>
-        <button onClick={handleCreateNewBook}>Create New Book</button>
-      <h1>Your books</h1>
+      <h1 className='page-header'>Your books</h1>
       {!!booksArr.length && booksArr.map(book => (
         <BookDisplay key={book.id} book={book} type="OWNED" />
-      ))}
+        ))}
       {!booksArr.length && <h4>No books yet!</h4>}
+        <button className="button-as-link" onClick={handleCreateNewBook}>Create New Book</button>
     </>
   );
 }
