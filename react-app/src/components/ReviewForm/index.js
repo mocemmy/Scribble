@@ -7,6 +7,7 @@ import {
   thunkGetSingleReview,
 } from "../../store/review";
 import Loading from "../Loading";
+import { thunkGetBookDetails } from "../../store/book";
 
 function ReviewForm({ type }) {
   let { bookId, reviewId } = useParams();
@@ -61,7 +62,7 @@ function ReviewForm({ type }) {
 
   if (!bookId) bookId = review.book_id;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
     if (!Object.keys(errors).length) {
@@ -72,10 +73,11 @@ function ReviewForm({ type }) {
         user_id: user.id,
       };
       if (type === "CREATE") {
-        dispatch(thunkCreateReview(data, bookId));
+        await dispatch(thunkCreateReview(data, bookId));
       } else {
-        dispatch(thunkEditReview(data, review.id, bookId));
+        await dispatch(thunkEditReview(data, review.id, bookId));
       }
+      dispatch(thunkGetBookDetails(bookId))
       history.push(`/app/books/${bookId}/details`);
     }
   };

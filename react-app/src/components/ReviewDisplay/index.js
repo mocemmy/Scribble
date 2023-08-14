@@ -22,9 +22,9 @@ function ReviewDisplay({ review }) {
   const filledStar = "fa-solid fa-star";
   const emptyStar = "fa-regular fa-star";
 
-  const handleDeleteReview = () => {
+  const handleDeleteReview = async () => {
     if (review) {
-      dispatch(thunkDeleteReview(review.id, review.book_id));
+      await dispatch(thunkDeleteReview(review.id, review.book_id));
       dispatch(thunkGetBookDetails(review.book_id));
     }
   };
