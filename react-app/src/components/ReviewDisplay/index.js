@@ -25,14 +25,16 @@ function ReviewDisplay({ review }) {
   const handleDeleteReview = () => {
     if (review) {
       dispatch(thunkDeleteReview(review.id, review.book_id));
-      dispatch(thunkGetBookDetails(review.book_id))
+      dispatch(thunkGetBookDetails(review.book_id));
     }
   };
 
   return (
     <div className="review-container">
       <div className="user-info">
-        <img src={review.user.profile_pic} alt="profile pic" />
+        <div className="profile-img-container">
+          <img src={review.user.profile_pic} alt="profile pic" />
+        </div>
         {review.user.first_name}
         <p>follow</p>
       </div>
@@ -48,7 +50,9 @@ function ReviewDisplay({ review }) {
           </p>
           <p>{dispTime}</p>
         </div>
-        <p>{review.review_body}</p>
+        <div className="review-text">
+          <p>{review.review_body}</p>
+        </div>
         <div className="options-container">
           {owned && (
             <Link to={`/app/reviews/${review.id}/edit`}>Edit review</Link>

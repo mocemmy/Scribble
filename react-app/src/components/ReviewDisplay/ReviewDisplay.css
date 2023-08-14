@@ -1,37 +1,44 @@
 .review-container img {
-    width: 5rem;
+    max-width: 100%;
+}
+
+.profile-img-container {
+    width: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 4rem;
 }
 
 .review-container {
     display: flex;
+    flex-shrink: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
-
 .user-info {
     display: flex;
     flex-direction: column;
-    width: fit-content;
     align-items: center;
-    box-sizing: border-box;
     padding: 1rem;
-    padding-left: 0;
-}
-
-.review-content {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 1rem;
-    width: 100%;
 }
 
 .review-header {
     display: flex;
     justify-content: space-between;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
 }
-.options-container>button {
-    background-color: transparent;
-    border: none;
-    font-size: 1rem;
+
+.review-text {
+    overflow-wrap: break-word;
+}
+
+.review-content {
+    width: 100%;
+}
+
+.options-container {
+    padding-bottom: 1rem;
 }

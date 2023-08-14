@@ -1,7 +1,14 @@
 .review-page-container {
     display: flex;
+    width: 100%;
 }
 
 .review-display {
+    padding-left: 20rem;
+    box-sizing: border-box;
     width: 100%;
+}
+
+.review-display-container {
+    padding-bottom: 2rem;
 }

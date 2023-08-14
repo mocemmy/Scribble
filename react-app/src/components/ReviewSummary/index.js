@@ -31,7 +31,6 @@ function ReviewSummary({ bookId, setCount }) {
 
   return (
     <div className="review-page-container">
-      <div className="dummy-book-display"></div>
       <div className="review-display">
         <h1>Ratings & Reviews</h1>
         <div>
@@ -46,7 +45,7 @@ function ReviewSummary({ bookId, setCount }) {
           <h3>Community Reviews</h3>
           <ReviewInfoDisplay book={book}/>
         </div>
-        <div>
+        <div className="review-display-container">
           {reviewArr.map((review) => (
             <ReviewDisplay review={review} key={review.id} />
           ))}
