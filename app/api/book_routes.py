@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Book, Review, db
-from sqlalchemy import or_, func
+from sqlalchemy import or_, and_, func
 from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -191,8 +191,17 @@ def search_books():
     Query for books matching the search terms
     """
     search_terms = request.json
+    search_words = search_terms.split()
 
-    books = Book.query.filter(or_(Book.title.ilike(f'%{search_terms}%'), Book.author_first_name.ilike(f'%{search_terms}%'), Book.author_last_name.ilike(f'%{search_terms}%'))).all()
+    args = []
+    for word in search_words:
+        args.append(or_(Book.title.ilike(f'%{word}%'), Book.author_first_name.ilike(f'%{word}%'), Book.author_last_name.ilike(f'%{word}%')))
+
+    and_clauses = and_(*args)
+    
+
+    books = Book.query.filter(and_clauses).all()
+
 
     return {'books': [book.to_dict() for book in books]}
     
