@@ -193,15 +193,11 @@ def search_books():
     search_terms = request.json
     search_words = search_terms.split()
 
-    args = []
+    or_clauses = []
     for word in search_words:
-        args.append(or_(Book.title.ilike(f'%{word}%'), Book.author_first_name.ilike(f'%{word}%'), Book.author_last_name.ilike(f'%{word}%')))
+        or_clauses.append(or_(Book.title.ilike(f'%{word}%'), Book.author_first_name.ilike(f'%{word}%'), Book.author_last_name.ilike(f'%{word}%')))
 
-    and_clauses = and_(*args)
-    
-
+    and_clauses = and_(*or_clauses)
     books = Book.query.filter(and_clauses).all()
-
-
     return {'books': [book.to_dict() for book in books]}
     

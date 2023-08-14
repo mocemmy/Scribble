@@ -15,11 +15,17 @@ function Search() {
         }
     }
 
+    const handleEnter = (e) =>  {
+      if(e.key === 'Enter' || e.key === 'NumpadEnter') handleSearch();
+
+    }
+
     return (
         <>
         <div className="search-bar-container">
           <input type="text" placeholder="Search books" 
           value={search}
+          onKeyDown={handleEnter}
           onChange={e=>setSearch(e.target.value)}
           />
           <button type="submit"
