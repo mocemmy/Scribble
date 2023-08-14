@@ -79,7 +79,10 @@ def get_current_users_books():
 
     books = Book.query.filter(Book.creator_id == current_user.id).all()
 
-    return {"books": [book.to_dict() for book in books]}
+    return {'books': [{**book.to_dict(),
+                        "review_count": len(book.reviews),
+                        "avg_rating": book.avg_rating
+                        } for book in books]}
 
 
 #Edit book by id
