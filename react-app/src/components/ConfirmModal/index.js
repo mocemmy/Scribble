@@ -15,7 +15,7 @@ const ConfirmModal = ({ modalTitle, yesHandler }) => {
   return (
     <div className="confirm-modal-container">
       <h1 className="form-title">{modalTitle}</h1>
-      <div className="button-container">
+      <div className="modal-button-container">
         <button className="confirm-button" onClick={handleClick}>
           Yes
         </button>

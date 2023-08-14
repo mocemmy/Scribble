@@ -12,6 +12,7 @@
 }
 .book-info-container {
     margin-left: 20rem;
+    min-height: 25rem;
 }
 
 .book-image-container {

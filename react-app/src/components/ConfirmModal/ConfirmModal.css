@@ -11,7 +11,7 @@
     border-radius: 0.25rem;
 }
 
-.button-container {
+.modal-button-container {
     display: flex;
     justify-content: center;
     gap: 2rem;

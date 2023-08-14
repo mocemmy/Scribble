@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .list_books import list_books
+from sqlalchemy import func
 from datetime import datetime
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class Book(db.Model):
@@ -21,6 +23,15 @@ class Book(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
     lists = db.relationship('List', secondary=list_books, back_populates='books')
+
+    reviews = db.relationship('Review', back_populates='book')
+
+    @property
+    def avg_rating(self):
+        if len(self.reviews) > 0:
+            return sum(review.review_stars for review in self.reviews) / len(self.reviews)
+        else:
+            return "No reviews yet"
 
     def to_dict(self):
         return {

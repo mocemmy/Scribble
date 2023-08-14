@@ -45,10 +45,6 @@
     max-height: fit-content;
 }
 
-.book-form textarea ::-webkit-scrollbar {
-    scroll-margin-right: 0.5rem;
-}
-
 .book-form input:focus,
 .book-form textarea:focus {
     outline: none;
@@ -62,9 +58,15 @@
     box-sizing: border-box;
 }
 
+.button-container>button {
+    width: 100%;
+    font-size: 1rem;
+}
+
 .cancel-button {
     background-color: #f4f1ea;
     color: black;
+    border-radius: 1rem;
 }
 
 .cancel-button:hover {

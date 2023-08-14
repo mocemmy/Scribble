@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Book, Review, db
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -19,7 +19,10 @@ def get_books():
     """
     books = Book.query.order_by(Book.created_at.desc()).all()
 
-    return {'books': [book.to_dict() for book in books]}
+    return {'books': [{**book.to_dict(),
+                        "review_count": len(book.reviews),
+                        "avg_rating": book.avg_rating
+                        } for book in books]}
 
 #Get book details
 @book_routes.route('/<int:id>/details')
@@ -155,6 +158,7 @@ def book_reviews(id):
 
     return {"reviews": [{**review.to_dict(), "user": {**review.user.to_dict()}} for review in reviews]}
 
+#get review summary for a book by its id
 @book_routes.route('/<int:id>/review-information')
 @login_required
 def review_information(id):
@@ -166,6 +170,8 @@ def review_information(id):
     if not book: 
         return {"errors": "Book not found"}, 404
     reviews = Review.query.filter(Review.book_id == id).all()
+    if len(reviews) == 0:
+        return {"message": "No reviews yet"}
     information = {
         "book_id": id,
         "review_count": len(reviews),
