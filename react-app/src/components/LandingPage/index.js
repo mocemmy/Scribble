@@ -1,17 +1,25 @@
 import { Link, useHistory } from "react-router-dom";
 import "./LandingPage.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as sessionActions from "../../store/session";
 
-function LandingPage({isLoaded}) {
-  const user = useSelector(state => state.session.user)
-  const history = useHistory()
-  
-  if(isLoaded && user) history.push('/app')
+function LandingPage({ isLoaded }) {
+  const user = useSelector((state) => state.session.user);
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleDemoLogin = () => {
+    const demoUser = "jane@aa.io";
+    const demoPassword = "password";
+    dispatch(sessionActions.login(demoUser, demoPassword));
+  };
+
+  if (isLoaded && user) history.push("/app");
   return (
     <>
       <div className="landing-page-container">
-        <div className="landing-page-left">
-          <Link className="logo-container" to="/">
+        <div className="landing-logo-container">
+          <Link to="/">
             <img
               className="logo"
               src="/images/scribble-logo-transparent.png"
@@ -23,13 +31,12 @@ function LandingPage({isLoaded}) {
         <div className="banner-container">
           <img id="banner" src="/images/scribble-banner.png" alt="banner" />
         </div>
-        <div className="landing-page-right">
-          <div className="login-signup-container">
-            <Link to="/signup">Sign up with email</Link>
-            <p className="already-member">
-              Already a member? <Link to="/login">Sign in</Link>
-            </p>
-          </div>
+        <div className="login-signup-container">
+          <Link to="/signup">Sign up with email</Link>
+          <button onClick={handleDemoLogin}>Log in as Demo User</button>
+          <p className="already-member">
+            Already a member? <Link to="/login">Sign in</Link>
+          </p>
         </div>
       </div>
       <div className="discovery-container">

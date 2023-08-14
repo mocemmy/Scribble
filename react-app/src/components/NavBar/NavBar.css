@@ -10,7 +10,28 @@
     right: 0;
     box-sizing: border-box;
     padding: 0 2rem;
+    height: 5rem;
 }
+
+.nav-bar-container>a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+
+.nav-bar-container>a:hover {
+    text-decoration: none;
+}
+
+.user-icon-container {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
 .dummy-nav-bar {
     height: 5rem;
 }

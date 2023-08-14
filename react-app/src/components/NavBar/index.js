@@ -9,7 +9,7 @@ function NavBar() {
     <>
       <div className="dummy-nav-bar"></div>
       <div className="nav-bar-container">
-        <Link className="logo-container" to="/">
+        <Link to="/">
           <img
             className="logo"
             src="/images/scribble-logo-transparent.png"

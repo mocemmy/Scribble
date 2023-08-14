@@ -1,20 +1,8 @@
 .landing-page-container {
     background-color: #f4f1ea;
-    display: flex;
     box-sizing: border-box;
-    padding: 0rem 5rem;
     width: 100%;
-}
-
-.landing-page-left {
-    width: 65%;
-}
-
-.landing-page-right {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: fit-content;
 }
 
 .login-signup-container {
@@ -28,10 +16,13 @@
     height: fit-content;
     background-color: white;
     z-index: 1;
-    margin-top: 2.5rem;
+    position: absolute;
+    top: 2.5rem;
+    right: 3rem;
 }
 
-.login-signup-container>a{
+.login-signup-container>a,
+.login-signup-container>button {
     text-decoration: none;
     background-color: #333333;
     color: white;
@@ -39,8 +30,19 @@
     border-radius: 0.125rem;
 }
 
-.login-signup-container>a:hover{
+.login-signup-container>button {
+    border: none;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 0.5rem 1.35rem;
+    margin-top: 1rem;
+}
+
+.login-signup-container>a:hover,
+.login-signup-container>button:hover {
     text-decoration: none;
+    cursor: pointer;
+    background-color: #564848;
 }
 
 .login-signup-container>p{
@@ -51,31 +53,32 @@
     padding-top: 1rem;
 }
 
-.login-signup-container>a:hover {
-    background-color: #564848;
+.landing-logo-container {
+    margin-left: 5rem;
 }
 
-.logo-container {
+.landing-logo-container > a{
     display: flex;
     align-items: center;
     text-decoration: none;
     color: black;
 }
-.logo-container:hover {
+.landing-logo-container>a:hover {
     text-decoration: none;
 }
 
+.banner-container {
+    width: 100%;
+    margin: 0;
+}
 #banner{
     width: 100%;
-    position: absolute;
-    top: 4.5rem;
-    left: 0;
 }
+
 
 .discovery-container{
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.5rem;
-    margin-top: 16rem;
     padding: 2rem;
     width: 65%;
     margin-left: 5rem;
