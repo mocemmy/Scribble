@@ -16,7 +16,7 @@ function EditBook() {
         if(bookId){
             async function fetchData() {
 
-                const response = await dispatch(thunkGetBookDetails(bookId))
+                await dispatch(thunkGetBookDetails(bookId))
                 setBookFound(true)
             }
             fetchData();
@@ -27,7 +27,7 @@ function EditBook() {
         if(book?.id === bookId){
             setBookFound(true)
         }
-    }, [book])
+    }, [book, bookId])
 
     if(!book || !bookFound) return <Loading />
     return (

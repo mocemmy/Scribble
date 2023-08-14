@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loading from "../Loading";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { thunkGetBookDetails } from "../../store/book";
 import "./BookDetails.css";
 import ReviewSummary from "../ReviewSummary";

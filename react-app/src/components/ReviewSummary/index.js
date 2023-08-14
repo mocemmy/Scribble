@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetReviewInfo, thunkGetReviews } from "../../store/review";
+import { thunkGetReviews } from "../../store/review";
 import Loading from "../Loading";
 import ReviewDisplay from "../ReviewDisplay";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./ReviewSummary.css";
 import ReviewInfoDisplay from "../ReviewInfoDisplay";
 
-function ReviewSummary({ bookId, setCount }) {
+function ReviewSummary({ bookId }) {
   const reviews = useSelector((state) => state.reviews.AllReviews);
   const book = useSelector((state) => state.books.SingleBook)
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     if (bookId) {

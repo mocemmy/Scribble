@@ -28,14 +28,15 @@ function ReviewForm({ type }) {
 
   useEffect(() => {
     dispatch(thunkGetSingleReview(reviewId));
-  }, [dispatch]);
+  }, [dispatch, reviewId]);
 
   useEffect(() => {
     if (review && review.id === +reviewId) {
       setReviewBody(review.review_body);
       setReviewStars(review.review_stars);
+      setActiveRating(review.review_stars)
     }
-  }, [review]);
+  }, [review, reviewId]);
 
   useEffect(() => {
     const validationErrors = {};
@@ -50,7 +51,7 @@ function ReviewForm({ type }) {
     setErrors(validationErrors);
   }, [review_body, review_stars]);
 
-  if (type === "EDIT" && !review || type === "EDIT" && review.id !== +reviewId) return <Loading />;
+  if ((type === "EDIT" && !review) || (type === "EDIT" && review.id !== +reviewId)) return <Loading />;
 
   const handleText = (e) => {
     const text = e.target.value;
