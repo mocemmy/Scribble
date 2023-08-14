@@ -1,21 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { thunkGetBookDetails } from "../../store/book";
 import "./BookDetails.css";
 import ReviewSummary from "../ReviewSummary";
+import ReviewInfoDisplay from "../ReviewInfoDisplay";
 
 function BookDetails() {
   const { bookId } = useParams();
   const book = useSelector((state) => state.books.SingleBook);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(thunkGetBookDetails(bookId));
   }, [dispatch, bookId]);
 
-  if (!book) return <Loading />;
+  if (!book || +bookId !== book.id) return <Loading />;
   return (
     <>
       <div className="book-details-page-container">
@@ -31,7 +33,7 @@ function BookDetails() {
               <h3>
                 {book.author_first_name}&nbsp;{book.author_last_name}
               </h3>
-              <p>rating information: add later</p>
+              <ReviewInfoDisplay book={book}/>
               <p>{book.summary}</p>
             </div>
           </div>

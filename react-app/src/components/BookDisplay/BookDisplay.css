@@ -11,3 +11,15 @@
 .book-container {
     margin: 1rem;
 }
+
+.review-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: small;
+    color: gray;
+}
+
+.author-name {
+    margin-bottom: 0;
+}

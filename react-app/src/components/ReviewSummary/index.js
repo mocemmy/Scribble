@@ -5,22 +5,22 @@ import Loading from "../Loading";
 import ReviewDisplay from "../ReviewDisplay";
 import { useHistory, Link } from "react-router-dom";
 import "./ReviewSummary.css";
+import ReviewInfoDisplay from "../ReviewInfoDisplay";
 
-function ReviewSummary({ bookId }) {
-  const reviewInfo = useSelector((state) => state.reviews.ReviewInformation);
+function ReviewSummary({ bookId, setCount }) {
   const reviews = useSelector((state) => state.reviews.AllReviews);
+  const book = useSelector((state) => state.books.SingleBook)
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     if (bookId) {
-      dispatch(thunkGetReviewInfo(bookId));
       dispatch(thunkGetReviews(bookId));
     }
   }, [dispatch, bookId]);
 
-  if (!reviewInfo || !reviews) return <Loading />;
+  if (!book || !reviews || +bookId !== book.id) return <Loading />;
   const reviewArr = Object.values(reviews);
   let alreadyReviewed = false;
   if (reviewArr && user) {
@@ -28,17 +28,6 @@ function ReviewSummary({ bookId }) {
       if (review.user_id === user.id) alreadyReviewed = true;
     });
   }
-
-  let reviewFlag;
-  if (reviewInfo.review_count === 1) {
-    reviewFlag = "review";
-  } else {
-    reviewFlag = "reviews";
-  }
-  const stars = [1, 2, 3, 4, 5];
-  const filledStar = "fa-solid fa-star";
-  const emptyStar = "fa-regular fa-star";
-  const halfStar = "fa-solid fa-star-half-stroke";
 
   return (
     <div className="review-page-container">
@@ -55,24 +44,7 @@ function ReviewSummary({ bookId }) {
         </div>
         <div>
           <h3>Community Reviews</h3>
-          <p>
-            {stars.map((num) => (
-              <i
-                key={num}
-                className={
-                  reviewInfo.avg_rating >= num
-                    ? filledStar
-                    : num - reviewInfo.avg_rating < 1
-                    ? halfStar
-                    : emptyStar
-                }
-              />
-            ))}{" "}
-            <span>{reviewInfo.avg_rating}</span>
-          </p>
-          <p>
-            {reviewInfo.review_count} {reviewFlag}
-          </p>
+          <ReviewInfoDisplay book={book}/>
         </div>
         <div>
           {reviewArr.map((review) => (

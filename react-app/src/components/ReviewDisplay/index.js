@@ -3,7 +3,8 @@ import "./ReviewDisplay.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmModal from "../ConfirmModal";
-import { thunkDeleteReview, thunkGetReviewInfo } from "../../store/review";
+import { thunkDeleteReview } from "../../store/review";
+import { thunkGetBookDetails } from "../../store/book";
 
 function ReviewDisplay({ review }) {
   const user = useSelector((state) => state.session.user);
@@ -24,7 +25,7 @@ function ReviewDisplay({ review }) {
   const handleDeleteReview = () => {
     if (review) {
       dispatch(thunkDeleteReview(review.id, review.book_id));
-      dispatch(thunkGetReviewInfo(review.book_id));
+      dispatch(thunkGetBookDetails(review.book_id))
     }
   };
 

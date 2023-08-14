@@ -34,7 +34,9 @@ def get_book_details(id):
 
     book = Book.query.get(id)
 
-    return {"book_details": book.to_dict()}
+    return {"book_details": {**book.to_dict(),
+                             "review_count": len(book.reviews),
+                             "avg_rating": book.avg_rating}}
 
 #Create new book
 @book_routes.route('/new', methods=['POST'])

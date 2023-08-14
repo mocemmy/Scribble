@@ -4,6 +4,7 @@ import { thunkDeleteBook } from "../../store/book";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmModal from "../ConfirmModal";
 import "./BookDisplay.css";
+import ReviewInfoDisplay from "../ReviewInfoDisplay";
 
 function BookDisplay({ book, type }) {
   const history = useHistory();
@@ -24,9 +25,10 @@ function BookDisplay({ book, type }) {
       </Link>
       <div>
         <Link to={`/app/books/${book.id}/details`}>{book.title}</Link>
-        <p>
+        <p className="author-name">
           {book.author_first_name}&nbsp;{book.author_last_name}
         </p>
+        <ReviewInfoDisplay book={book} />
         <div className="options-container">
           {type === "OWNED" && (
             <button onClick={handleEditBook}>Edit book</button>
