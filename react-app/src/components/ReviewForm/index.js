@@ -22,6 +22,7 @@ function ReviewForm({ type }) {
   );
   const [activeRating, setActiveRating] = useState(review_stars);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [charactersLeft, setCharactersLeft] = useState(1000)
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -49,6 +50,14 @@ function ReviewForm({ type }) {
   }, [review_body, review_stars]);
 
   if (type === "EDIT" && !review || type === "EDIT" && review.id !== +reviewId) return <Loading />;
+
+  const handleText = (e) => {
+    const text = e.target.value;
+    const characterCount = text.length;
+    setCharactersLeft(1000 - characterCount)
+    setReviewBody(text);
+    
+  }
 
   if (!bookId) bookId = review.book_id;
 
@@ -108,7 +117,8 @@ function ReviewForm({ type }) {
             />
           ))}
         </div>
-        <label htmlFor="review-body">What did you think?</label>
+        <label htmlFor="review-body">What did you think? {charactersLeft >= 0 && charactersLeft < 5000 && <span className="character-count">{charactersLeft}</span>}
+                    {charactersLeft < 0 && <span className="character-count-errors">{charactersLeft}</span>}</label>
         {hasSubmitted && errors.review_body && (
           <p className="errors">{errors.review_body}</p>
         )}
@@ -116,7 +126,7 @@ function ReviewForm({ type }) {
           type="text"
           name="review-body"
           value={review_body}
-          onChange={(e) => setReviewBody(e.target.value)}
+          onChange={handleText}
         />
         <div className="button-container">
           <button

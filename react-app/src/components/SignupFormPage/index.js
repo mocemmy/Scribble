@@ -178,6 +178,9 @@ function SignupFormPage() {
           required
         />
         <label htmlFor="profile-pic">Profile Picture</label>
+        {hasSubmitted && errors.profile_pic && (
+          <p className="errors">{errors.profile_pic}</p>
+        )}
         <input
           type="file"
           name="profile-pic"

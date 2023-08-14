@@ -72,3 +72,19 @@
 .cancel-button:hover {
     background-color: #c6c4be;
 }
+
+.character-count,
+.character-count-errors {
+    color: white;
+    border: 1px solid white;
+    height: fit-content;
+    width: fit-content;
+    padding: 0.25rem;
+    background-color: green;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.character-count-errors {
+    background-color: red;
+}

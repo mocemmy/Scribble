@@ -19,7 +19,8 @@ function BookForm({ type, book }) {
   const [genre, setGenre] = useState(book ? book.genre : "");
   const [summary, setSummary] = useState(book ? book.summary : "");
   const [book_cover, setBookCover] = useState(book ? book.book_cover : "");
-  const [currentCover, setCurrentCover] = useState(book ? book.book_cover: "")
+  const [currentCover, _setCurrentCover] = useState(book ? book.book_cover: "")
+  const [charactersLeft, setCharactersLeft] = useState(5000)
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -93,6 +94,15 @@ function BookForm({ type, book }) {
     }
   }
 
+  const handleSummary = (e) => {
+    const summary = e.target.value;
+
+    const characterCount = summary.length;
+    setCharactersLeft(5000 - characterCount)
+    setSummary(summary);
+    
+  }
+
   const handleCreate = async () => {
     if (!Object.keys(errors).length){
         const formData = new FormData();
@@ -154,16 +164,18 @@ function BookForm({ type, book }) {
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
         />
-        <label htmlFor="summary">Book summary</label>
+        <label htmlFor="summary">Book summary {charactersLeft >= 0 && charactersLeft < 5000 && <span className="character-count">{charactersLeft}</span>}
+                    {charactersLeft < 0 && <span className="character-count-errors">{charactersLeft}</span>}</label>
         {hasSubmitted && errors.summary && <p className="errors">{errors.summary}</p>}
         <textarea
           type="text"
           name="summary"
           value={summary}
-          onChange={(e) => setSummary(e.target.value)}
+          onChange={handleSummary}
         />
         <label htmlFor="book-cover">Book cover</label>
         {hasSubmitted && errors.book_cover && <p className="errors">{errors.book_cover}</p>}
+    
         <input
           type="file"
           name="book-cover"
