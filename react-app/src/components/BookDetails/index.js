@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Loading from "../Loading";
 import { useEffect, useState } from "react";
 import { thunkGetBookDetails } from "../../store/book";
@@ -24,8 +24,7 @@ function BookDetails() {
         <div className="book-details-page">
           <div className="book-image-container">
             <img id="book-cover" src={book.book_cover} alt="book cover" />
-            <p>Want to read</p>
-            <p>Rate this book:</p>
+            <p onClick={e=> window.alert("Feature coming soon")}>Want to read</p>
           </div>
           <div className="book-info-container">
             <div>

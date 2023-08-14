@@ -1,5 +1,7 @@
-
-
 .review-page-container {
     display: flex;
+}
+
+.review-display {
+    width: 100%;
 }

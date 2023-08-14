@@ -32,7 +32,7 @@ function ReviewSummary({ bookId, setCount }) {
   return (
     <div className="review-page-container">
       <div className="dummy-book-display"></div>
-      <div>
+      <div className="review-display">
         <h1>Ratings & Reviews</h1>
         <div>
           <h2>
