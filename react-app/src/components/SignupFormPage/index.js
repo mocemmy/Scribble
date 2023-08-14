@@ -25,7 +25,6 @@ function SignupFormPage() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
-    console.log(hasSubmitted)
     const validationErrors = {};
     if (!first_name.length)
       validationErrors.first_name = "First name is required";
@@ -65,13 +64,13 @@ function SignupFormPage() {
   const onClick = (e) => {
     e.preventDefault();
     setHasSubmitted(true);
-    handleSubmit();
+    handleSubmit(e);
   };
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (!Object.keys(errors).length) {
       const formData = new FormData();
       formData.append("profile_pic", profile_pic);
@@ -81,9 +80,20 @@ function SignupFormPage() {
       formData.append("email", email);
       formData.append("password", password);
 
-      const data = await dispatch(signUp(formData));
-      if (data) {
-        setErrors({ serverErrors: data });
+      const response = await dispatch(signUp(formData));
+      if (response.errors) {
+        const serverErrors = {}
+        serverErrors.serverErrors = []
+        if(response.errors.email){
+          serverErrors.email = response.errors.email
+        }
+        if(response.errors.username){
+          serverErrors.username = response.errors.username
+        }
+        for(let field in response.errors){
+          if(field !== 'email' && field !== 'username') serverErrors.serverErrors.push(response.errors[field])
+        }
+        setErrors(serverErrors);
       }
     }
   };
@@ -135,6 +145,9 @@ function SignupFormPage() {
           required
         />
         <label htmlFor="username">Username</label>
+        {hasSubmitted && errors.username && (
+          <p className="errors">{errors.username}</p>
+        )}
         <input
           type="text"
           name="username"
@@ -147,7 +160,7 @@ function SignupFormPage() {
           <p className="errors">{errors.password}</p>
         )}
         <input
-          type="text"
+          type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -158,7 +171,7 @@ function SignupFormPage() {
           <p className="errors">{errors.confirmPassword}</p>
         )}
         <input
-          type="text"
+          type="password"
           name="confirm-password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}

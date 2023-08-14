@@ -29,7 +29,7 @@ function ReviewForm({ type }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (review) {
+    if (review && review.id === +reviewId) {
       setReviewBody(review.review_body);
       setReviewStars(review.review_stars);
     }
@@ -48,7 +48,7 @@ function ReviewForm({ type }) {
     setErrors(validationErrors);
   }, [review_body, review_stars]);
 
-  if (type === "EDIT" && !review) return <Loading />;
+  if (type === "EDIT" && !review || type === "EDIT" && review.id !== +reviewId) return <Loading />;
 
   if (!bookId) bookId = review.book_id;
 

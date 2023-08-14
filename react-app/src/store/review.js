@@ -130,7 +130,7 @@ export default function reducer(state = initialState, action) {
             newState.ReviewInformation = action.reviewInfo
             return newState;
         case GET_REVIEWS:
-            newState = {...state, AllReviews: {}}
+            newState = {...state, AllReviews: {}, SingleReview: null}
             action.reviews.forEach(review => newState.AllReviews[review.id] = review)
             return newState;
         case GET_SINGLE_REVIEW:

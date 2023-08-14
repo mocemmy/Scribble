@@ -9,7 +9,7 @@ function AppHomePage({ isLoaded }) {
   return (
     <div className="app-home-page">
       <h1>Home page</h1>
-      <p>Will show updates from authors and reviewers you are following</p>
+      <p>Will show updates from authors and reviewers you are following, to view all books, use the browse tab</p>
     </div>
   );
 }
