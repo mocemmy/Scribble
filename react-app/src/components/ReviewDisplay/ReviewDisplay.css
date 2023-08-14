@@ -1,5 +1,5 @@
 .review-container img {
-    max-width: 100%;
+    width: 100%;
 }
 
 .profile-img-container {
@@ -14,6 +14,7 @@
     flex-shrink: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding-right: 2rem;
 }
 .user-info {
     display: flex;
@@ -32,7 +33,8 @@
 }
 
 .review-text {
-    overflow-wrap: break-word;
+    width: min-content;
+    width: 100%;
 }
 
 .review-content {
