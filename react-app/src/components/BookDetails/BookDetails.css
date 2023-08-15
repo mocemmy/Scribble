@@ -2,6 +2,11 @@
     display: flex;
     width: 100%;
     margin: 0;
+
+}
+
+#root {
+    width: 100%;
 }
 
 .book-info-container,
@@ -11,16 +16,20 @@
     box-sizing: border-box;
 }
 .book-info-container {
-    margin-left: 20rem;
+    padding-left: 20rem;
     min-height: 25rem;
     width: 100%;
 }
 
 .book-image-container {
+    position: sticky;
     top: 5rem ;
     left: 2rem;
-    position: fixed;
     width: fit-content;
+    height: 100%;
+}
+#book-cover {
+    width: 15rem;
 }
 
 .dummy-book-display {
@@ -28,11 +37,18 @@
     width: 0;
 }
 
-.book-details-page-container {
+.book-info-container {
     display: flex;
     margin: 0;
     padding: 0;
 }
+
+.book-details-page-container {
+    position: relative;
+    height: fit-content;
+    display: flex;
+}
+
 
 #book-cover {
     width: 15rem;
