@@ -3,6 +3,8 @@ function ReviewInfoDisplay({ book }) {
   const filledStar = "fa-solid fa-star";
   const emptyStar = "fa-regular fa-star";
   const halfStar = "fa-solid fa-star-half-stroke";
+
+  const avgRating = parseInt(book.avg_rating).toFixed(2)
   return (
     <div>
       {book.review_count === 0 && (
@@ -12,7 +14,7 @@ function ReviewInfoDisplay({ book }) {
               <i key={num} className="fa-regular fa-star" />
             ))}
           </p>
-          <p>{book.avg_rating}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p>{book.avg_rating}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         </div>
       )}
       {book.review_count !== 0 && (
@@ -32,7 +34,7 @@ function ReviewInfoDisplay({ book }) {
             ))}
           </p>
           <p>
-            {book.avg_rating} avg rating -{" "}
+            {avgRating} avg rating -{" "}
             {book.review_count !== 1 ? (
               <span>{book.review_count} reviews</span>
             ) : (
