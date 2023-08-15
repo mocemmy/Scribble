@@ -16,9 +16,20 @@ function LoginFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    const response = await dispatch(login(email, password));
+    if (response.errors) {
+      const serverErrors = {}
+      serverErrors.serverErrors = []
+      if(response.errors.email){
+        serverErrors.email = response.errors.email
+      }
+      if(response.errors.password){
+        serverErrors.password = response.errors.password
+      }
+      for(let field in response.errors){
+        if(field !== 'email' && field !== 'password') serverErrors.serverErrors.push(response.errors[field])
+      }
+      setErrors(serverErrors)
     }
   };
 
@@ -28,11 +39,12 @@ function LoginFormPage() {
       <h1 className="form-label">Sign In</h1>
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
+          {errors.serverErrors && errors.serverErrors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label htmlFor="email">Email</label>
+        {errors.email && <p className="errors">{errors.email}</p>}
         <input
             type="text"
             name='email'
@@ -41,6 +53,7 @@ function LoginFormPage() {
             required
           />
         <label htmlFor="password">Password</label>
+        {errors.password && <p className="errors">{errors.password}</p>}
           <input
             type="password"
             name="password"

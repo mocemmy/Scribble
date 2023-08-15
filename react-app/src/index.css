@@ -34,6 +34,16 @@ a,
     text-decoration: none;
 }
 
+.logo-container {
+    display: flex;   
+    align-items: center;
+    text-decoration: none;
+    color: black
+}
+.logo-container:hover {
+    text-decoration: none;
+}
+
 .button-as-link {
     background-color: transparent;
     border: none;
