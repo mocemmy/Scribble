@@ -1,6 +1,6 @@
 .list-book-covers {
-    width: 5rem;
-    height: 7rem;
+    width: 4rem;
+    height: 6rem;
     padding: 0.15rem;
 }
 
@@ -11,4 +11,18 @@
 .list-length {
     font-size: small;
     color: gray;
+    margin: 0.25rem 0;
+    margin-bottom: 0;
+}
+
+#list-title {
+    font-weight: bold;
+    margin: 0;
+}
+
+.list-item-container {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    width: 22rem;
+    padding: 1rem 0;
 }
