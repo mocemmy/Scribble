@@ -129,7 +129,7 @@ export default function reducer(state = initialState, action) {
         case GET_BOOKS:
             newState = {...state, AllBooks: {...state.AllBooks}, SingleBook: {}, SearchBooks: {}}
             newState.AllBooks = {}
-            action.books.forEach(book => {newState.AllBooks[book.id] = book})
+            action.books.forEach(book => newState.AllBooks[book.id] = book)
             return newState
         case GET_BOOK_DETAILS:
             newState = {...state, AllBooks:{...state.AllBooks}, SingleBook: {}, SearchBooks: {}}

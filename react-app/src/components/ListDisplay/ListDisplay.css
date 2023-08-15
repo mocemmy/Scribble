@@ -1,0 +1,14 @@
+.list-book-covers {
+    width: 5rem;
+    height: 7rem;
+    padding: 0.15rem;
+}
+
+.list-display-container {
+    font-size: small;
+}
+
+.list-length {
+    font-size: small;
+    color: gray;
+}

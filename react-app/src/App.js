@@ -14,6 +14,8 @@ import BookForm from "./components/BookForm";
 import EditBook from "./components/EditBook";
 import SearchResults from "./components/Search/SearchResults";
 import ReviewForm from "./components/ReviewForm";
+import BrowseLists from "./components/BrowseLists";
+import ListDetails from "./components/ListDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ function App() {
               <Route path="/app/browse-books">
                 <BrowseBooks />
               </Route>
+              <Route path='/app/browse-lists'>
+                <BrowseLists />
+              </Route>
               <Route path="/app/books/:bookId/details">
                 <BookDetails />
               </Route>
@@ -55,6 +60,9 @@ function App() {
               </Route>
               <Route path="/app/create-book">
                 <BookForm type='CREATE'/>
+              </Route>
+              <Route path='/app/lists/:listId/details'>
+                <ListDetails />
               </Route>
               <Route path="*">
                 <AppHomePage isLoaded={isLoaded} />

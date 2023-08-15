@@ -17,6 +17,7 @@ class List(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
     books = db.relationship('Book', secondary=list_books, back_populates='lists')
+    user = db.relationship('User', back_populates='lists')
 
     def to_dict(self):
         return {
@@ -24,6 +25,8 @@ class List(db.Model):
             'creator_id': self.creator_id,
             'list_name': self.list_name,
             'description': self.description,
+            'books': [book.to_dict() for book in self.books],
+            'creator': self.user.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
