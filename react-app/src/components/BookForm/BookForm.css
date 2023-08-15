@@ -10,8 +10,8 @@
 }
 
 .book-form-container {
-    max-width: 700px;
     margin: auto;
+    width: 700px;
 }
 
 .book-form {
