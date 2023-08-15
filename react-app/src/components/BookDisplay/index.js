@@ -47,6 +47,9 @@ function BookDisplay({ book, type }) {
           )}
         </div>
       </div>
+      <div className="want-to-read-container">
+        <button onClick={e => window.alert("Feature coming Soon!")} className="want-to-read">Want to Read</button>
+      </div>
     </div>
   );
 }
