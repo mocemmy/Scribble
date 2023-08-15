@@ -18,7 +18,7 @@ function NavBar() {
           &nbsp;<h1>Scribble</h1>
         </Link>
         <Link className="nav-bar-links" to="/app/browse-books">
-          Browse&nbsp;<span>&#9660;</span>
+          Browse Books&nbsp;<span>&#9660;</span>
         </Link>
         <Link className="nav-bar-links" to="/app/browse-lists">
           Browse Lists&nbsp;<span>&#9660;</span>
