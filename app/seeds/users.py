@@ -14,6 +14,8 @@ def seed_users():
         first_name="Delia", last_name="Owens", username='delia', email='delia@aa.io', password='password') #4
     naomi = User(
         first_name="Naomi", last_name="Novik", username='naomi', email='naomi@aa.io', password='password') #5
+    suzanne = User(
+        first_name="Suzanne", last_name="Collins", username='suzanne', email='suzanne@aa.io', password='password') #6
     
 
     db.session.add(demo)
@@ -21,6 +23,7 @@ def seed_users():
     db.session.add(rick)
     db.session.add(delia)
     db.session.add(naomi)
+    db.session.add(suzanne)
     db.session.commit()
 
 
