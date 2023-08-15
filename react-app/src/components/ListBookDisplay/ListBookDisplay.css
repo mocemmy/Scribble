@@ -1,0 +1,42 @@
+.list-number {
+    margin: 0;
+}
+
+.list-book-container {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    margin: 0;
+    padding: 1rem;
+    width: fit-content;
+    margin-left: 2rem;
+}
+
+.want-to-read {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+    background-color: #409D69;
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    font-weight: bold;
+}
+
+.want-to-read-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;;
+}
+
+.author-name {
+    font-size: small;
+}
+
+.list-title {
+    font-weight: bold;
+    color: black;
+}
+
+.want-to-read:hover {
+    cursor: pointer;
+}

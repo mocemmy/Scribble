@@ -16,7 +16,6 @@ def get_lists():
     """
 
     lists = List.query.order_by(List.created_at.desc()).all()
-    print('*************************', lists)
     return {"lists": [list.to_dict() for list in lists]}
 
 #get list details:
@@ -28,7 +27,8 @@ def get_list_details(id):
     """
     list = List.query.get(id)
 
-    return list.to_dict()
+    return {**list.to_dict(), "books": [{**book.to_dict(), "review_count": len(book.reviews),
+                        "avg_rating": book.avg_rating} for book in list.books]}
 
 
 #search lists

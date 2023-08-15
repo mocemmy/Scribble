@@ -12,7 +12,7 @@ function ReviewInfoDisplay({ book }) {
               <i key={num} className="fa-regular fa-star" />
             ))}
           </p>
-          <p>{book.avg_rating}</p>
+          <p>{book.avg_rating}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         </div>
       )}
       {book.review_count !== 0 && (
@@ -36,7 +36,7 @@ function ReviewInfoDisplay({ book }) {
             {book.review_count !== 1 ? (
               <span>{book.review_count} reviews</span>
             ) : (
-              <span>{book.review_count} review</span>
+              <span>{book.review_count} review&nbsp;</span>
             )}
           </p>
         </div>
