@@ -21,8 +21,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
-    reviews = db.relationship('Review', back_populates='user')
-    lists = db.relationship('List', back_populates='user')
+    reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
+    lists = db.relationship('List', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):

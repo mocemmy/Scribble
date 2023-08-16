@@ -24,7 +24,7 @@ class Book(db.Model):
 
     lists = db.relationship('List', secondary=list_books, back_populates='books')
 
-    reviews = db.relationship('Review', back_populates='book')
+    reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
 
     @property
     def avg_rating(self):
