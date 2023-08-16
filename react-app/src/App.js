@@ -16,6 +16,7 @@ import SearchResults from "./components/Search/SearchResults";
 import ReviewForm from "./components/ReviewForm";
 import BrowseLists from "./components/BrowseLists";
 import ListDetails from "./components/ListDetails";
+import ListForm from "./components/ListForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function App() {
                 <BookDetails />
               </Route>
               <Route path="/app/books/:bookId/edit">
-                <EditBook />
+                <EditBook type="EDIT" />
               </Route>
               <Route path='/app/books/:bookId/review'>
                 <ReviewForm type="CREATE" />
@@ -60,6 +61,12 @@ function App() {
               </Route>
               <Route path="/app/create-book">
                 <BookForm type='CREATE'/>
+              </Route>
+              <Route path='/app/create-list'>
+                <ListForm type='CREATE' />
+              </Route>
+              <Route path="/app/lists/:listId/edit">
+                <ListForm type="EDIT" />
               </Route>
               <Route path='/app/lists/:listId/details'>
                 <ListDetails />

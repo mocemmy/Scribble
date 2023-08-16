@@ -81,6 +81,8 @@ def delete_review(id):
 
     if not review:
         return {"errors": "Review not found"}, 404
+    if review.user_id != current_user.id:
+        return {"errors": "Not your review!"}, 403
     
     db.session.delete(review)
     db.session.commit()

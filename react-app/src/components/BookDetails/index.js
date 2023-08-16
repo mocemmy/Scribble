@@ -6,6 +6,10 @@ import { thunkGetBookDetails } from "../../store/book";
 import "./BookDetails.css";
 import ReviewSummary from "../ReviewSummary";
 import ReviewInfoDisplay from "../ReviewInfoDisplay";
+import OpenModalButton from "../OpenModalButton";
+import AddBookToListModal from "../AddBookToListModal";
+
+
 
 function BookDetails() {
   const { bookId } = useParams();
@@ -21,7 +25,20 @@ function BookDetails() {
     <div className="book-details-page-container">
       <div className="book-image-container">
         <img id="book-cover" src={book.book_cover} alt="book cover" />
-        <p onClick={(e) => window.alert("Feature coming soon")}>Want to read</p>
+
+        <button
+          className="want-to-read"
+          onClick={(e) => window.alert("Feature coming soon")}
+        >
+          Want to Read
+        </button>
+        <OpenModalButton
+          className='want-to-read'
+          buttonText="Add book to a list"
+          modalComponent={
+            <AddBookToListModal bookId={bookId} />
+          }
+        />
       </div>
       <div className="right-side-container">
         <div className="book-info-container">

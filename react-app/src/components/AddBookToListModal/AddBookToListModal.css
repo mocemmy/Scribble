@@ -1,0 +1,40 @@
+.list-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    font-size: 1rem;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, .15);
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.modal-container {
+    padding: 1rem;
+}
+
+.modal-title {
+    margin: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+    width: 10rem;
+    text-align: center;
+}
+
+#selected {
+    background-color: gray;
+}
+
+.list-button:hover,
+#modal-cancel {
+    cursor: pointer;
+}
+
+#selected:hover {
+    cursor: text;
+}
+
+#modal-cancel{
+    width: 100%;
+    margin: 0.5rem 0;
+}

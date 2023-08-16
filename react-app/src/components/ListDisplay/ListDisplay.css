@@ -26,3 +26,8 @@
     width: 22rem;
     padding: 1rem 0;
 }
+
+#list-options {
+    padding: 0;
+    padding-top: 0.5rem;;
+}

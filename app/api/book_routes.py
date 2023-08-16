@@ -202,5 +202,8 @@ def search_books():
 
     and_clauses = and_(*or_clauses)
     books = Book.query.filter(and_clauses).all()
-    return {'books': [book.to_dict() for book in books]}
+    return {'books': [{**book.to_dict(),
+                        "review_count": len(book.reviews),
+                        "avg_rating": book.avg_rating
+                        } for book in books]}
     

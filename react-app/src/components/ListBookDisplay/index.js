@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import ReviewInfoDisplay from "../ReviewInfoDisplay";
+import OpenModalButton from "../OpenModalButton";
+import ConfirmModal from "../ConfirmModal";
 import "./ListBookDisplay.css";
+import { useDispatch } from "react-redux";
+import { thunkRemoveBookFromList } from "../../store/list";
 
-function ListBookDisplay({ book, num }) {
+function ListBookDisplay({ book, num, type, listId }) {
+  const dispatch = useDispatch();
+  
+  const handleRemoveBookFromList = () => {
+    if(book.id && listId) dispatch(thunkRemoveBookFromList(book.id, listId))
+  }
+
   return (
     <div className="book-container list-book-container">
       <p className="list-number">{num + 1}</p>
@@ -17,13 +27,27 @@ function ListBookDisplay({ book, num }) {
         </p>
         <ReviewInfoDisplay book={book} />
       </div>
+      
       <div className="want-to-read-container">
+        {type !== "OWNED" &&
         <button
           className="want-to-read"
           onClick={(e) => window.alert("Feature coming soon!")}
         >
           Want to Read
-        </button>
+        </button>}
+        {type === "OWNED" && (
+            <OpenModalButton
+              className="button-as-link"
+              buttonText={"Remove book from list"}
+              modalComponent={
+                <ConfirmModal
+                  modalTitle="Are you sure you want to remove this book from your list?"
+                  yesHandler={handleRemoveBookFromList}
+                />
+              }
+            />
+          )}
       </div>
     </div>
   );

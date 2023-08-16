@@ -7,3 +7,15 @@
     font-family: Copernicus,"Libre Baskerville",Georgia,serif;
     margin: 1rem;
 }
+.user-content-container{
+    display: flex;
+    gap: 2rem;
+    display: flex;
+    width: fit-content;
+}
+
+.create-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}

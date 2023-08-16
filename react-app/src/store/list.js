@@ -33,6 +33,118 @@ export const thunkGetListDetails = (listId) => async (dispatch) => {
     }
 }
 
+export const thunkGetListsCurrUser = () => async (dispatch) => {
+    const response = await fetch('/api/lists/curr')
+
+    if(response.ok) {
+        const data = await response.json()
+        dispatch(actionGetAllLists(data.lists))
+        return data
+    } else {
+        return response
+    }
+}
+
+export const thunkCreateList = (data) => async (dispatch) => {
+    const response = await fetch('/api/lists/new', {
+        method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            list_name: data.list_name,
+            description: data.description,
+            creator_id: data.creator_id
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetListsCurrUser())
+        return data
+    } else {
+        return response
+    }
+}
+
+export const thunkEditList = (data, listId) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${listId}/edit`, {
+        method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            list_name: data.list_name,
+            description: data.description,
+            creator_id: data.creator_id
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetListsCurrUser())
+        return data
+    } else {
+        return response
+    }
+}
+
+export const thunkDeleteList = (listId) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${listId}/delete`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetListsCurrUser())
+        return data
+    } else {
+        return response
+    }
+}
+
+export const thunkRemoveBookFromList = (bookId, listId) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${listId}/remove`, {
+        method: "POST",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            book_id: bookId
+        })
+    })
+
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetListDetails(listId))
+        return data
+    } else {
+        return response;
+    }
+}
+
+export const thunkAddBookToList = (bookId, listId) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${listId}/add`, {
+        method: "POST",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            book_id: bookId
+        })
+    })
+
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(thunkGetListDetails(listId))
+        return data
+    } else {
+        return response;
+    }
+}
+
+
+
 
 const initialState = {AllLists: null, SingleList: null, SearchLists: null}
 
