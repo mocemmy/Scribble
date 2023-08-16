@@ -32,6 +32,10 @@
     color: black;
 }
 
+.logout-button {
+    font-size: 1rem;
+}
+
 .logout-button:hover{
     text-decoration: underline;
 }

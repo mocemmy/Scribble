@@ -29,7 +29,7 @@ function ListDisplay({ list, type }) {
             ))}
             <p id='list-title'>{list.list_name}</p>
         </Link>
-        {list.books.length > 1 ? <p className='list-length'>{list.books.length} books</p> : <p className='list-length'>{list.books.length} book</p>}
+        {list.books.length === 1 ? <p className='list-length'>{list.books.length} book</p> : <p className='list-length'>{list.books.length} books</p>}
         <div id='list-options' className="options-container">
           {type === "OWNED" && (
             <button onClick={handleEditList}>Edit list</button>
