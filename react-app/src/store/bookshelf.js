@@ -77,6 +77,26 @@ export const thunkRemoveBookFromShelf = (bookId, shelfId) => async (dispatch) =>
     }
 }
 
+export const thunkRemoveBookFromAllShelves = (bookId) => async (dispatch) => {
+    const response = await fetch(`/api/bookshelves/remove-all`, {
+        method: "POST",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            book_id: bookId
+        })
+    })
+    if(response.ok) {
+        const data = await response.json()
+        dispatch(thunkGetBookshelvesCurr())
+        return data
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 
 const initialState = {AllBookshelves: null, SingleBookshelf: null}
 
@@ -88,7 +108,7 @@ export default function reducer(state=initialState, action){
             newState.AllBookshelves = action.bookshelves
             return newState;
         case GET_BOOKSHELF_DETAILS:
-            newState = {...state, AllBookshelves: null, SingleBookshelf: {}}
+            newState = {...state, SingleBookshelf: {}}
             newState.SingleBookshelf = action.shelf
             return newState;
         default:

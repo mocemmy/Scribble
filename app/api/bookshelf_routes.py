@@ -18,6 +18,29 @@ def bookshelves_curr():
     return {"bookshelves": [shelf.to_dict() for shelf in bookshelves]}
 
 
+#Remove a book from all of the current user's shelves:
+@bookshelf_routes.route('/remove-all', methods=['POST'])
+@login_required
+def remove_book_all_shelves():
+    """
+    Query to remove a book from all of the current user's bookshelves
+    """
+    data = request.json
+    book_id = data['book_id']
+    #find the book from the request body
+    book = Book.query.get(book_id)
+    if not book:
+        return {"errors": "Book not found"}, 404
+    bookshelves = Bookshelf.query.filter(Bookshelf.user_id == current_user.id).all()
+
+    for shelf in bookshelves:
+         for shelf_book in shelf.books:
+            if shelf_book.id == book.id:
+                shelf.books.remove(shelf_book)
+    db.session.commit()
+    return {"message": "Book removed from all shelves"}
+
+
 #Add a book to a bookshelf by the bookshelf's id:
 @bookshelf_routes.route('/<int:id>/add', methods=['POST'])
 @login_required
@@ -25,17 +48,27 @@ def add_book(id):
     """
     Add a book to a bookshelf by its id
     """
+    #find the bookshelf by id
     bookshelf = Bookshelf.query.get(id)
+    other_shelves = Bookshelf.query.filter(Bookshelf.user_id == current_user.id, Bookshelf.id != id).all()
     if not bookshelf:
         return {"errors": "Bookshelf not found"}, 404
     if bookshelf.user_id != current_user.id:
         return {"errors": "Not your bookshelf!"}, 403
     data = request.json
     book_id = data['book_id']
+    #find the book from the request body
     book = Book.query.get(book_id)
     if not book:
         return {"errors": "Book not found"}, 404
+    #add the book to the bookshelf
     bookshelf.books.append(book)
+
+    #remove the book from any other bookshelves the user has:
+    for shelf in other_shelves:
+        for shelf_book in shelf.books:
+            if shelf_book.id == book.id:
+                shelf.books.remove(shelf_book)
     db.session.commit()
     return bookshelf.to_dict()
 

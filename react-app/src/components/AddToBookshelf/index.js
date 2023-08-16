@@ -14,6 +14,7 @@ import AddBookToShelfModal from "../AddBookToShelfModal";
 function AddToBookshelf({ bookId, type = "" }) {
   const dispatch = useDispatch();
   const [toggleAdded, setToggleAdded] = useState(false);
+  const [currShelf, setCurrShelf] = useState()
   const bookshelves = useSelector((state) => state.bookshelves.AllBookshelves);
 
   let tbr, shelfArr;
@@ -21,6 +22,14 @@ function AddToBookshelf({ bookId, type = "" }) {
     shelfArr = Object.values(bookshelves);
     tbr = shelfArr.find((shelf) => shelf.shelf_type === "Want to Read");
   }
+
+  useEffect(() => {
+    if(shelfArr){
+        for(const shelf of shelfArr){
+            if(shelf.books.find(book => +bookId === book.id)) setCurrShelf(shelf.shelf_type)
+        }
+    }
+  }, [bookshelves])
 
   useEffect(() => {
     if (bookshelves) {
@@ -62,7 +71,7 @@ function AddToBookshelf({ bookId, type = "" }) {
   return (
     <>
       <div className={`want-to-read-container ${type}`}>
-        {!toggleAdded && (
+        {!toggleAdded && (!currShelf || currShelf === "Want to Read") && (
           <button onClick={handleToggleTBR} className={alreadyAdded}>
             Want to Read
           </button>
@@ -72,6 +81,7 @@ function AddToBookshelf({ bookId, type = "" }) {
             <i className="fa-solid fa-check"></i> Want to Read
           </button>
         )}
+        {!toggleAdded && currShelf && currShelf !== "Want to Read" && <button className="want-to-read added inactive" disabled={true}><i className="fa-solid fa-check"></i> {currShelf}</button>}
         <OpenModalButton
           className="want-to-read"
           buttonText="&#9660;"
