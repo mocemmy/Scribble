@@ -7,21 +7,26 @@ import BookDisplay from "../BookDisplay";
 import "./UserHomePage.css";
 import { thunkGetListsCurrUser } from "../../store/list";
 import ListDisplay from "../ListDisplay";
+import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
+import BookshelfDisplay from "../BookshelfDisplay";
 
 function UserHomePage() {
   const history = useHistory();
   const books = useSelector((state) => state.books.AllBooks);
   const lists = useSelector((state) => state.lists.AllLists);
+  const bookshelves = useSelector((state) => state.bookshelves.AllBookshelves)
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(thunkGetBooksCurrUser());
     dispatch(thunkGetListsCurrUser());
+    dispatch(thunkGetBookshelvesCurr());
   }, [dispatch]);
 
-  if (!books || !lists) return <Loading />;
+  if (!books || !lists || !bookshelves) return <Loading />;
   const booksArr = Object.values(books);
   const listArr = Object.values(lists);
+  const bookshelfArr = Object.values(bookshelves);
   const handleCreateNewBook = () => {
     history.push("/app/create-book");
   };
@@ -50,6 +55,12 @@ function UserHomePage() {
             listArr.map((list) => (
               <ListDisplay type="OWNED" key={list.id} list={list} />
             ))}
+        </div>
+        <div className="sub-content-container">
+          <h1 className="page-header">Your bookshelves</h1>
+          {bookshelfArr.map(shelf => (
+            <BookshelfDisplay key={shelf.id} shelf={shelf} />
+          ))}
         </div>
     </div>
   );

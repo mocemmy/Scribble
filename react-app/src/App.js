@@ -17,6 +17,7 @@ import ReviewForm from "./components/ReviewForm";
 import BrowseLists from "./components/BrowseLists";
 import ListDetails from "./components/ListDetails";
 import ListForm from "./components/ListForm";
+import BookshelfDetails from "./components/BookshelfDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -70,6 +71,9 @@ function App() {
               </Route>
               <Route path='/app/lists/:listId/details'>
                 <ListDetails />
+              </Route>
+              <Route path='/app/bookshelves/:shelfId/details'>
+                <BookshelfDetails />
               </Route>
               <Route path="*">
                 <AppHomePage isLoaded={isLoaded} />

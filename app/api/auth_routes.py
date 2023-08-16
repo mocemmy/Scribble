@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Bookshelf
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename
@@ -88,8 +88,18 @@ def sign_up():
         url = str(upload['url'])
         user = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password, profile_pic=url)
 
+
         db.session.add(user)
         db.session.commit()
+        tbr = Bookshelf(user_id=user.id, shelf_type="Want to Read")
+        currently_reading = Bookshelf(user_id=user.id, shelf_typ="Reading")
+        already_read = Bookshelf(user_id=user.id, shelf_type="Read")
+
+        db.session.add(tbr)
+        db.session.add(currently_reading)
+        db.session.add(already_read)
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages_dict(form.errors)}, 401

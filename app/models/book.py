@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .list_books import list_books
+from .shelf_books import shelf_books
 from sqlalchemy import func
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -25,6 +26,7 @@ class Book(db.Model):
     lists = db.relationship('List', secondary=list_books, back_populates='books')
 
     reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
+    shelves = db.relationship('Bookshelf', secondary=shelf_books, back_populates='books')
 
     @property
     def avg_rating(self):

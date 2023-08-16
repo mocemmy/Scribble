@@ -8,6 +8,7 @@ import ReviewSummary from "../ReviewSummary";
 import ReviewInfoDisplay from "../ReviewInfoDisplay";
 import OpenModalButton from "../OpenModalButton";
 import AddBookToListModal from "../AddBookToListModal";
+import AddToBookshelf from "../AddToBookshelf";
 
 
 
@@ -26,12 +27,7 @@ function BookDetails() {
       <div className="book-image-container">
         <img id="book-cover" src={book.book_cover} alt="book cover" />
 
-        <button
-          className="want-to-read"
-          onClick={(e) => window.alert("Feature coming soon")}
-        >
-          Want to Read
-        </button>
+        <AddToBookshelf bookId={bookId} type="book-details" />
         <OpenModalButton
           className='want-to-read'
           buttonText="Add book to a list"

@@ -1,0 +1,84 @@
+from flask import Blueprint, request
+from flask_login import login_required, current_user
+from app.models import Book, Bookshelf, db
+from app.api.auth_routes import validation_errors_to_error_messages
+from datetime import datetime
+
+bookshelf_routes = Blueprint('bookshelves', __name__)
+
+#Get bookshelves of the current user:
+@bookshelf_routes.route('/')
+@login_required
+def bookshelves_curr():
+    """
+    Query to get all of the bookshelves of the current user
+    """
+    bookshelves = Bookshelf.query.filter(Bookshelf.user_id == current_user.id).all()
+
+    return {"bookshelves": [shelf.to_dict() for shelf in bookshelves]}
+
+
+#Add a book to a bookshelf by the bookshelf's id:
+@bookshelf_routes.route('/<int:id>/add', methods=['POST'])
+@login_required
+def add_book(id):
+    """
+    Add a book to a bookshelf by its id
+    """
+    bookshelf = Bookshelf.query.get(id)
+    if not bookshelf:
+        return {"errors": "Bookshelf not found"}, 404
+    if bookshelf.user_id != current_user.id:
+        return {"errors": "Not your bookshelf!"}, 403
+    data = request.json
+    book_id = data['book_id']
+    book = Book.query.get(book_id)
+    if not book:
+        return {"errors": "Book not found"}, 404
+    bookshelf.books.append(book)
+    db.session.commit()
+    return bookshelf.to_dict()
+
+
+#Remove a book from a bookshelf by the bookshelf's id:
+@bookshelf_routes.route('/<int:id>/remove', methods=['POST'])
+@login_required
+def remove_book(id):
+    """
+    Remove a book from a bookshelf by the bookshelf's id
+    """
+    bookshelf = Bookshelf.query.get(id)
+    if not bookshelf:
+        return {"errors": "Bookshelf not found"}, 404
+    if bookshelf.user_id != current_user.id:
+        return {"errors": "Not your bookshelf!"}, 403
+    data = request.json
+    book_id = data['book_id']
+    book = Book.query.get(book_id)
+    if not book:
+        return {"errors": "Book not found"}, 404
+    for shelf_book in bookshelf.books:
+        if shelf_book.id == book.id:
+            bookshelf.books.remove(shelf_book)
+            db.session.commit()
+            return {"message": "Book removed from the bookshelf"}
+    return {"errors": "book is not on the bookshelf"}
+
+
+
+#Get a Bookshelf's details by its id:
+@bookshelf_routes.route('/<int:id>')
+@login_required
+def bookshelf_details(id):
+    """
+    Query for a bookshelf's details by its id
+    """
+
+    bookshelf = Bookshelf.query.get(id)
+
+    if not bookshelf:
+        return {"errors": "Bookshelf not found"}, 404
+    if bookshelf.user_id != current_user.id:
+        return {"errors": "Not your bookshelf"}, 403
+    
+    return bookshelf.to_dict()

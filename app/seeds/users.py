@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, Bookshelf, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -24,6 +24,30 @@ def seed_users():
     db.session.add(delia)
     db.session.add(naomi)
     db.session.add(suzanne)
+    db.session.commit()
+    #add default bookshelves for seed users
+    bookshelves = [
+        Bookshelf(user_id=demo.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=jane.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=rick.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=delia.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=naomi.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=suzanne.id, shelf_type="Want to Read"),
+        Bookshelf(user_id=demo.id, shelf_type="Reading"),
+        Bookshelf(user_id=jane.id, shelf_type="Reading"),
+        Bookshelf(user_id=rick.id, shelf_type="Reading"),
+        Bookshelf(user_id=delia.id, shelf_type="Reading"),
+        Bookshelf(user_id=naomi.id, shelf_type="Reading"),
+        Bookshelf(user_id=suzanne.id, shelf_type="Reading"),
+        Bookshelf(user_id=demo.id, shelf_type="Read"),
+        Bookshelf(user_id=jane.id, shelf_type="Read"),
+        Bookshelf(user_id=rick.id, shelf_type="Read"),
+        Bookshelf(user_id=delia.id, shelf_type="Read"),
+        Bookshelf(user_id=naomi.id, shelf_type="Read"),
+        Bookshelf(user_id=suzanne.id, shelf_type="Read"),
+    ]
+    for shelf in bookshelves:
+        db.session.add(shelf)
     db.session.commit()
 
 

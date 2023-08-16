@@ -3,13 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session'
 import books from './book'
 import reviews from './review'
+import bookshelves from './bookshelf'
 import lists from './list'
 
 const rootReducer = combineReducers({
   session,
   books,
   reviews,
-  lists
+  lists,
+  bookshelves
 });
 
 

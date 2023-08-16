@@ -74,9 +74,7 @@ def upgrade():
     op.create_table('bookshelves',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('book_id', sa.Integer(), nullable=True),
     sa.Column('shelf_type', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['book_id'], ['books.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -98,6 +96,14 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['book_id'], ['books.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('shelf_books',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('book_id', sa.Integer(), nullable=True),
+    sa.Column('bookshelf_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['book_id'], ['books.id'], ),
+    sa.ForeignKeyConstraint(['bookshelf_id'], ['bookshelves.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

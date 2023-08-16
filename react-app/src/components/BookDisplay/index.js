@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import ConfirmModal from "../ConfirmModal";
 import "./BookDisplay.css";
 import ReviewInfoDisplay from "../ReviewInfoDisplay";
+import AddToBookshelf from "../AddToBookshelf";
 
 function BookDisplay({ book, type }) {
   const history = useHistory();
@@ -47,9 +48,7 @@ function BookDisplay({ book, type }) {
           )}
         </div>
       </div>
-      <div className="want-to-read-container">
-        <button onClick={e => window.alert("Feature coming Soon!")} className="want-to-read">Want to Read</button>
-      </div>
+      <AddToBookshelf bookId={book.id} />
     </div>
   );
 }
