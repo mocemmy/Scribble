@@ -9,6 +9,7 @@ import {
 import Loading from "../Loading";
 import "./AddToBookshelf.css";
 import OpenModalButton from "../OpenModalButton";
+import { useModal } from '../../context/Modal';
 import AddBookToShelfModal from "../AddBookToShelfModal";
 
 function AddToBookshelf({ bookId, type = "" }) {
@@ -16,6 +17,8 @@ function AddToBookshelf({ bookId, type = "" }) {
   const [toggleAdded, setToggleAdded] = useState(false);
   const [currShelf, setCurrShelf] = useState()
   const bookshelves = useSelector((state) => state.bookshelves.AllBookshelves);
+
+  const { setModalContent, setOnModalClose } = useModal();
 
   let tbr, shelfArr;
   if (bookshelves) {
@@ -68,6 +71,10 @@ function AddToBookshelf({ bookId, type = "" }) {
   };
   const alreadyAdded = toggleAdded ? "want-to-read added" : "want-to-read";
 
+  const openModal = () => {
+    setModalContent(<AddBookToShelfModal bookId={bookId} currShelf={currShelf} />)
+  }
+
   return (
     <>
       <div className={`want-to-read-container ${type}`}>
@@ -81,12 +88,12 @@ function AddToBookshelf({ bookId, type = "" }) {
             <i className="fa-solid fa-check"></i> Want to Read
           </button>
         )}
-        {!toggleAdded && currShelf && currShelf !== "Want to Read" && <button className="want-to-read added inactive" disabled={true}><i className="fa-solid fa-check"></i> {currShelf}</button>}
+        {!toggleAdded && currShelf && currShelf !== "Want to Read" && <button className="want-to-read added" onClick={openModal}><i className="fa-solid fa-check"></i> {currShelf}</button>}
         <OpenModalButton
           className="want-to-read"
           buttonText="&#9660;"
           modalComponent={
-            <AddBookToShelfModal bookId={bookId} shelves={shelfArr} />
+            <AddBookToShelfModal bookId={bookId} currShelf={currShelf} />
           }
         />
       </div>

@@ -1,38 +1,58 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { thunkAddBookToShelf, thunkGetBookshelvesCurr, thunkRemoveBookFromAllShelves } from "../../store/bookshelf";
+import {
+  thunkAddBookToShelf,
+  thunkGetBookshelvesCurr,
+  thunkRemoveBookFromAllShelves,
+} from "../../store/bookshelf";
 import Loading from "../Loading";
 
+function AddBookToShelfModal({ bookId, currShelf }) {
+  const dispatch = useDispatch();
+  const shelves = useSelector((state) => state.bookshelves.AllBookshelves);
+  const { closeModal } = useModal();
 
-function AddBookToShelfModal({ bookId }) {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const shelves = useSelector(state => state.bookshelves.AllBookshelves)
+  useEffect(() => {
+    dispatch(thunkGetBookshelvesCurr());
+  }, [dispatch]);
 
+  if (!shelves) return <Loading />;
 
-    useEffect(() => {
-        dispatch(thunkGetBookshelvesCurr())
-    }, [dispatch])
+  const handleAddToShelf = async (e, shelfId) => {
+    dispatch(thunkAddBookToShelf(+bookId, shelfId));
+    closeModal();
+  };
+  const handleRemoveFromShelves = () => {
+    dispatch(thunkRemoveBookFromAllShelves(+bookId));
+    closeModal();
+  };
 
-    if(!shelves) return <Loading />
+  const handleCancel = () =>{
+    closeModal()
+  }
 
-    const handleAddToShelf = async (e, shelfId) => {
-        dispatch(thunkAddBookToShelf(+bookId, shelfId))
-    }
-    const handleRemoveFromShelves = () => {
-        dispatch(thunkRemoveBookFromAllShelves(+bookId))
-    }
-
-    return (
-        <div>
-            <h1 className="modal-title">Choose a shelf for this book</h1>
-            {shelves.map(shelf => (
-                <button onClick={e => handleAddToShelf(e, shelf.id)} key={shelf.id}>{shelf.shelf_type}</button>
-            ))}
-            <button onClick={handleRemoveFromShelves}><i className="fa-regular fa-trash-can"></i> Remove from my shelf</button>
-        </div>
-    )
-}   
+  return (
+    <div className="shelf-container">
+      <h1 className="add-shelf-title">Choose a shelf for this book</h1>
+      <div className="buttons-container">
+        {shelves.map((shelf) => (
+          <button
+            className={currShelf === shelf.shelf_type ? "selected" : "button"}
+            onClick={(e) => handleAddToShelf(e, shelf.id)}
+            key={shelf.id}
+          >
+            {shelf.shelf_type}
+          </button>
+        ))}
+        <button className="button-as-link" onClick={handleRemoveFromShelves}>
+          <i className="fa-regular fa-trash-can"></i> Remove from my shelf
+        </button>
+        <button className="shelf-cancel-button" onClick={handleCancel}>Cancel</button>
+      </div>
+    </div>
+  );
+}
 
 export default AddBookToShelfModal;
