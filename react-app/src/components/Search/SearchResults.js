@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Loading from "../UtiltyComponents/Loading";
 import BookDisplay from "../BookComponents/BookDisplay";
 
-function SearchResults () {
+function SearchResults ({searchPhrase}) {
     const books = useSelector(state => state.books.SearchBooks)
     const [searchLoaded, setSearchLoaded] = useState(false)
     useEffect(() => {
@@ -16,7 +16,7 @@ function SearchResults () {
 
     return (
         <>
-            <h3>Search results:</h3>
+            <h3>Search results for {searchPhrase}: </h3>
             {booksArr.map(book => (
                 <BookDisplay key={book.id} book={book} />
             ))}
