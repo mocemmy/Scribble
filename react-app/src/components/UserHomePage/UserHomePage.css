@@ -20,7 +20,7 @@
     justify-content: space-around;
 }
 
-.bookshelf-container {
+.user-shelf-container {
     display: flex;
     align-items: center;
     gap: 1rem;

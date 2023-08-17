@@ -37,7 +37,7 @@ function UserHomePage() {
 
   return (
     <>
-     <div className="bookshelf-container">
+     <div className="user-shelf-container">
           <h1 className="bookshelf-header">Your bookshelves:</h1>
           {bookshelfArr.map(shelf => (
             <BookshelfDisplay key={shelf.id} shelf={shelf} />

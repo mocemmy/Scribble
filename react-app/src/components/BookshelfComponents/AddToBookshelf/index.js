@@ -11,6 +11,7 @@ import "./AddToBookshelf.css";
 import OpenModalButton from "../../OpenModalButton";
 import { useModal } from '../../../context/Modal';
 import AddBookToShelfModal from "../../BookshelfComponents/AddBookToShelfModal";
+import { findCurrShelf } from "../../UtiltyComponents/helperFuncs";
 
 function AddToBookshelf({ bookId, type = "" }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function AddToBookshelf({ bookId, type = "" }) {
   const [currShelf, setCurrShelf] = useState()
   const bookshelves = useSelector((state) => state.bookshelves.AllBookshelves);
 
-  const { setModalContent, setOnModalClose } = useModal();
+  const { setModalContent } = useModal();
 
   let tbr, shelfArr;
   if (bookshelves) {
@@ -28,9 +29,8 @@ function AddToBookshelf({ bookId, type = "" }) {
 
   useEffect(() => {
     if(shelfArr){
-        for(const shelf of shelfArr){
-            if(shelf.books.find(book => +bookId === book.id)) setCurrShelf(shelf.shelf_type)
-        }
+        const curr = findCurrShelf(shelfArr, bookId)
+        setCurrShelf(curr)
     }
   }, [bookshelves])
 
