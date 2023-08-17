@@ -1,0 +1,16 @@
+.search-tab-container>button{
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+}
+
+.search-tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.selected-tab {
+    border-bottom: 2px solid black !important;
+    margin-bottom: -2px;
+}
