@@ -19,7 +19,7 @@ const ConfirmModal = ({ modalTitle, yesHandler }) => {
         <button className="confirm-button" onClick={handleClick}>
           Yes
         </button>
-        <button className="cancel-button" onClick={closeModal}>
+        <button className="confirm-button cancel-button" onClick={closeModal}>
           No
         </button>
       </div>
