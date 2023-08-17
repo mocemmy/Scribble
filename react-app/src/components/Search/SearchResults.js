@@ -16,15 +16,20 @@ function SearchResults() {
   const [searchLoaded, setSearchLoaded] = useState(false);
   const lists = useSelector(state => state.lists.SearchLists);
   const dispatch = useDispatch();
-  const { searchPhrase } = useSearch()
+  const { searchPhrase, setSearchPhrase } = useSearch()
 
   useEffect(() => {
-    if(searchPhrase){
-        dispatch(thunkSearchBooks(searchPhrase))
-        dispatch(thunkSearchLists(searchPhrase))
-    } else if(storedSearch){
+    if(storedSearch){
         dispatch(thunkSearchBooks(storedSearch))
         dispatch(thunkSearchLists(storedSearch))
+    } else if(searchPhrase){
+        dispatch(thunkSearchBooks(searchPhrase))
+        dispatch(thunkSearchLists(searchPhrase))
+    }
+
+    return () => {
+        localStorage.removeItem("search")
+        setSearchPhrase(null)
     }
   }, [searchPhrase, storedSearch])
 
@@ -42,7 +47,7 @@ function SearchResults() {
         <button className={searchLists ? "tab" : "tab selected-tab"} onClick={(e) => setSearchLists(false)}>Books</button>
         <button className={searchLists ? "tab selected-tab" : "tab"} onClick={(e) => setSearchLists(true)}>Listopia</button>
       </div>
-      <h3>Search results for <span className="search-phrase">"{searchPhrase}"</span>: </h3>
+      <h3>Search results for <span className="search-phrase">"{storedSearch}"</span>: </h3>
       {!booksArr.length && !searchLists && <h4>No books found</h4>}
       {!!booksArr.length && !searchLists && booksArr.map((book) => (
         <BookDisplay key={book.id} book={book} />

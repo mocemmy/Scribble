@@ -1,16 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { thunkSearchBooks } from '../../store/book';
 import { useSearch } from '../../context/Search';
-import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Search() {
   const { searchPhrase, setSearchPhrase } = useSearch();
   const storedSearch = localStorage.getItem("search")
-    const [search, setSearch] = useState(searchPhrase ? searchPhrase : storedSearch ? storedSearch : "");
+    const [search, setSearch] = useState( storedSearch ? storedSearch : "");
     const dispatch = useDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+      if(!storedSearch) setSearch("")
+    }, [storedSearch, searchPhrase])
 
     const handleSearch = async () => {
         if(search.length){
