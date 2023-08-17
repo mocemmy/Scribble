@@ -120,7 +120,7 @@ function ReviewForm({ type }) {
             />
           ))}
         </div>
-        <label htmlFor="review-body">What did you think? {charactersLeft >= 0 && charactersLeft < 5000 && <span className="character-count">{charactersLeft}</span>}
+        <label htmlFor="review-body">What did you think? {charactersLeft >= 0 && charactersLeft < 1000 && <span className="character-count">{charactersLeft}</span>}
                     {charactersLeft < 0 && <span className="character-count-errors">{charactersLeft}</span>}</label>
         {hasSubmitted && errors.review_body && (
           <p className="errors">{errors.review_body}</p>
