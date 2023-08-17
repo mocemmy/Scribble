@@ -1,0 +1,28 @@
+.current-shelf {
+    color: gray !important;
+}
+
+.bookshelf-container {
+    display: flex;
+    align-items: flex-start;
+    width: 1024px;
+}
+
+.shelf-container {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    height: 100%;
+}
+
+.shelf-container > button {
+    text-align: left;
+    width: 100%;
+}
+
+.current-shelf-title {
+    font-size: 1.25rem;
+    background-color: #F4F4EA;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    margin-left: 1rem;
+}

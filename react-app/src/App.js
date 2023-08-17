@@ -18,6 +18,7 @@ import BookshelfDetails from './components/BookshelfComponents/BookshelfDetails'
 import AppHomePage from './components/AppHomePage'
 import LoginFormPage from './components/AuthComponents/LoginFormPage'
 import SignupFormPage from './components/AuthComponents/SignupFormPage'
+import MyBooksPage from "./components/BookshelfComponents/MyBooksPage";
 
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
             <Switch>
               <Route path="/app/browse-books">
                 <BrowseBooks />
+              </Route>
+              <Route path="/app/my-books">
+                <MyBooksPage />
               </Route>
               <Route path='/app/browse-lists'>
                 <BrowseLists />

@@ -1,5 +1,7 @@
+
 const GET_BOOKSHELVES_CURR = 'bookshelves/GET_BOOKSHELVES_CURR'
 const GET_BOOKSHELF_DETAILS = 'bookshelves/GET_BOOKSHELF_DETAILS'
+const GET_BOOKS_ON_SHELF = 'bookshelves/GET_BOOKS_ON_SHELF'
 
 
 const actionGetBookshelvesCurr = (bookshelves) => ({
@@ -10,6 +12,11 @@ const actionGetBookshelvesCurr = (bookshelves) => ({
 const actionGetBookshelfDetails = (shelf) => ({
     type: GET_BOOKSHELF_DETAILS,
     shelf
+})
+
+const actionGetBooksOnShelf = (books) => ({
+    type: GET_BOOKS_ON_SHELF,
+    books
 })
 
 export const thunkGetBookshelvesCurr = () => async (dispatch) => {
@@ -23,6 +30,34 @@ export const thunkGetBookshelvesCurr = () => async (dispatch) => {
         return response
     }
 }
+
+export const thunkGetAllBooksOnShelves = () => async (dispatch) => {
+    const response = await fetch('/api/bookshelves/all-books')
+
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionGetBooksOnShelf(data.books))
+        return data
+    } else {
+        const errors = response.json()
+        return errors
+    }
+}
+
+export const thunkGetBooksOnShelf = (shelfId) => async (dispatch) => {
+    const response = await fetch(`/api/bookshelves/${shelfId}/books`)
+
+    if(response.ok){
+        const data = await response.json()
+        dispatch(actionGetBooksOnShelf(data.books))
+        return data
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
+
+
 
 export const thunkGetBookshelfDetails = (shelfId) => async (dispatch) => {
     const response = await fetch(`/api/bookshelves/${shelfId}`)
@@ -98,7 +133,7 @@ export const thunkRemoveBookFromAllShelves = (bookId) => async (dispatch) => {
 }
 
 
-const initialState = {AllBookshelves: null, SingleBookshelf: null}
+const initialState = {AllBookshelves: null, SingleBookshelf: null, Books: null}
 
 export default function reducer(state=initialState, action){
     let newState;
@@ -110,6 +145,10 @@ export default function reducer(state=initialState, action){
         case GET_BOOKSHELF_DETAILS:
             newState = {...state, SingleBookshelf: {}}
             newState.SingleBookshelf = action.shelf
+            return newState;
+        case GET_BOOKS_ON_SHELF:
+            newState = {...state, Books: {}}
+            newState.Books = action.books;
             return newState;
         default:
             return state

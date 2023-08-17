@@ -2,7 +2,7 @@ const GET_BOOKS = "books/GET_BOOKS"
 const GET_BOOK_DETAILS = "books/GET_BOOK_DETAILS"
 const SEARCH_BOOKS = 'books/SEARCH_BOOKS'
 
-const actionGetAllBooks = (books) => ({
+export const actionGetAllBooks = (books) => ({
     type: GET_BOOKS,
     books
 })
@@ -28,6 +28,8 @@ export const thunkGetAllBooks = () => async (dispatch) => {
         return response
     }
 }
+
+
 
 export const thunkCreateBook = (data) => async (dispatch) => {
     const response = await fetch(`/api/books/new`, {

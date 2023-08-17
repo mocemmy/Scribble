@@ -1,0 +1,17 @@
+
+.list-header {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 2rem;
+}
+
+.book-list-container {
+    width: 100%;
+}
+
+.bookshelf-book-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+}

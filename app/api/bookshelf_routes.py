@@ -17,6 +17,36 @@ def bookshelves_curr():
 
     return {"bookshelves": [shelf.to_dict() for shelf in bookshelves]}
 
+#get all books on any of the current user's shelves:
+@bookshelf_routes.route('/all-books')
+@login_required
+def all_books_on_shelves():
+    """
+    Query for all of the books on any of the current user's bookshelves
+    """
+    bookshelves = Bookshelf.query.filter(Bookshelf.user_id == current_user.id).all()
+    books = [shelf.to_dict()['books'] for shelf in bookshelves]
+    books_flattened = []
+    for shelf_books in books:
+        books_flattened.extend(shelf_books)
+    return {"books": books_flattened}
+
+
+#get all books on a shelf by its id:
+@bookshelf_routes.route('/<int:id>/books')
+@login_required
+def get_books_on_shelf(id):
+    """
+    Query for all of the books on a shelf by its id
+    """
+    bookshelf = Bookshelf.query.get(id)
+    if not bookshelf:
+        return {"errors": "Bookshelf not found"}, 404
+    if bookshelf.user_id != current_user.id:
+        return {"errors": "Not your bookshelf!"}, 403
+    
+    return {"books": bookshelf.to_dict()['books']}
+
 
 #Remove a book from all of the current user's shelves:
 @bookshelf_routes.route('/remove-all', methods=['POST'])
