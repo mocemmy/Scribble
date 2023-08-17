@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import Loading from "../Loading";
-import BookDisplay from "../BookDisplay";
 import { useEffect, useState } from "react";
+import Loading from "../UtiltyComponents/Loading";
+import BookDisplay from "../BookComponents/BookDisplay";
 
 function SearchResults () {
     const books = useSelector(state => state.books.SearchBooks)

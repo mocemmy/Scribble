@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import "./NavBar.css";
-import ProfileDropdown from "../ProfileDropdown";
+import ProfileDropdown from "./ProfileDropdown";
 import Search from "../Search";
+import "./NavBar.css";
 
 function NavBar() {
 

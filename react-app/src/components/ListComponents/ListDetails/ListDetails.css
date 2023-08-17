@@ -1,0 +1,14 @@
+.list-info-container {
+    margin-left: 3rem;
+}
+
+.description {
+    font-size: small;
+    color: gray;
+}
+
+.list-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

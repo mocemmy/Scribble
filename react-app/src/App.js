@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
-import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import LandingPage from "./components/LandingPage";
-import AppHomePage from "./components/AppHomePage";
-import NavBar from "./components/NavBar";
-import BrowseBooks from "./components/BrowseBooks";
-import BookDetails from "./components/BookDetails";
-import UserHomePage from "./components/UserHomePage";
-import BookForm from "./components/BookForm";
-import EditBook from "./components/EditBook";
-import SearchResults from "./components/Search/SearchResults";
-import ReviewForm from "./components/ReviewForm";
-import BrowseLists from "./components/BrowseLists";
-import ListDetails from "./components/ListDetails";
-import ListForm from "./components/ListForm";
-import BookshelfDetails from "./components/BookshelfDetails";
+import LandingPage from './components/SplashPageComponents/LandingPage'
+import NavBar from './components/NavBar'
+import BrowseBooks from './components/BookComponents/BrowseBooks'
+import BrowseLists from "./components/ListComponents/BrowseLists";
+import BookDetails from './components/BookComponents/BookDetails'
+import EditBook from './components/BookComponents/EditBook'
+import ReviewForm from './components/ReviewComponents/ReviewForm'
+import SearchResults from './components/Search/SearchResults'
+import UserHomePage from './components/UserHomePage'
+import BookForm from "./components/BookComponents/BookForm";
+import ListForm from './components/ListComponents/ListForm'
+import ListDetails from './components/ListComponents/ListDetails'
+import BookshelfDetails from './components/BookshelfComponents/BookshelfDetails'
+import AppHomePage from './components/AppHomePage'
+import LoginFormPage from './components/AuthComponents/LoginFormPage'
+import SignupFormPage from './components/AuthComponents/SignupFormPage'
+
 
 function App() {
   const dispatch = useDispatch();

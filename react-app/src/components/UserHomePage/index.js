@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Loading from "../Loading";
+import Loading from "../UtiltyComponents/Loading";
 import { thunkGetBooksCurrUser } from "../../store/book";
-import BookDisplay from "../BookDisplay";
+import BookDisplay from "../BookComponents/BookDisplay";
 import "./UserHomePage.css";
 import { thunkGetListsCurrUser } from "../../store/list";
-import ListDisplay from "../ListDisplay";
+import ListDisplay from "../ListComponents/ListDisplay";
 import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
-import BookshelfDisplay from "../BookshelfDisplay";
+import BookshelfDisplay from "../BookshelfComponents/BookshelfDisplay";
 
 function UserHomePage() {
   const history = useHistory();

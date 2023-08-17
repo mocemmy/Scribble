@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { thunkSearchBooks } from '../../store/book';
 import { useHistory } from 'react-router-dom';
+import { thunkSearchBooks } from '../../store/book';
 
 function Search() {
     const [search, setSearch] = useState('');
