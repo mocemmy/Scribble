@@ -1,20 +1,34 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useContext } from "react";
 import Loading from "../UtiltyComponents/Loading";
 import BookDisplay from "../BookComponents/BookDisplay";
 import './SearchResults.css'
+import { useSearch } from "../../context/Search";
+import { thunkSearchLists } from "../../store/list";
+import ListDisplay from "../ListComponents/ListDisplay";
 
 
-function SearchResults({ searchPhrase }) {
+function SearchResults() {
   const books = useSelector((state) => state.books.SearchBooks);
   const [searchLists, setSearchLists] = useState(false);
   const [searchLoaded, setSearchLoaded] = useState(false);
-  useEffect(() => {
-    setSearchLoaded(true);
-  }, [books]);
+  const lists = useSelector(state => state.lists.SearchLists);
+  const dispatch = useDispatch();
+  const { searchPhrase } = useSearch()
 
-  if (!searchLoaded || !books) return <Loading />;
+  useEffect(() => {
+    if(searchPhrase){
+        dispatch(thunkSearchLists(searchPhrase))
+    }
+  }, [])
+
+  useEffect(() => {
+    if(books && lists) setSearchLoaded(true);
+  }, [books, lists]);
+
+  if (!searchLoaded) return <Loading />;
   const booksArr = Object.values(books);
+  const listArr = Object.values(lists)
 
   return (
     <>
@@ -23,9 +37,13 @@ function SearchResults({ searchPhrase }) {
         <button className={searchLists ? "tab selected-tab" : "tab"} onClick={(e) => setSearchLists(true)}>Listopia</button>
       </div>
       <h3>Search results for {searchPhrase}: </h3>
-      {!booksArr.length && <h4>No books found</h4>}
+      {!booksArr.length && !searchLists && <h4>No books found</h4>}
       {!!booksArr.length && !searchLists && booksArr.map((book) => (
         <BookDisplay key={book.id} book={book} />
+      ))}
+      {!listArr.length && searchLists && <h4>No lists found</h4>}
+      {!!listArr.length && searchLists && listArr.map((list) => (
+        <ListDisplay key={list.id} list={list} />
       ))}
     </>
   );
