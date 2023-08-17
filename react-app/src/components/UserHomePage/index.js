@@ -36,6 +36,13 @@ function UserHomePage() {
   };
 
   return (
+    <>
+     <div className="bookshelf-container">
+          <h1 className="bookshelf-header">Your bookshelves:</h1>
+          {bookshelfArr.map(shelf => (
+            <BookshelfDisplay key={shelf.id} shelf={shelf} />
+          ))}
+        </div>
     <div className="user-content-container">
         <div className="sub-content-container">
           <h1 className="page-header">Your books <button className="button-as-link" onClick={handleCreateNewBook}>
@@ -56,13 +63,9 @@ function UserHomePage() {
               <ListDisplay type="OWNED" key={list.id} list={list} />
             ))}
         </div>
-        <div className="sub-content-container">
-          <h1 className="page-header">Your bookshelves</h1>
-          {bookshelfArr.map(shelf => (
-            <BookshelfDisplay key={shelf.id} shelf={shelf} />
-          ))}
-        </div>
+       
     </div>
+    </>
   );
 }
 

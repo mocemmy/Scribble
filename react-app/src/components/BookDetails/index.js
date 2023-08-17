@@ -10,8 +10,6 @@ import OpenModalButton from "../OpenModalButton";
 import AddBookToListModal from "../AddBookToListModal";
 import AddToBookshelf from "../AddToBookshelf";
 
-
-
 function BookDetails() {
   const { bookId } = useParams();
   const book = useSelector((state) => state.books.SingleBook);
@@ -26,15 +24,16 @@ function BookDetails() {
     <div className="book-details-page-container">
       <div className="book-image-container">
         <img id="book-cover" src={book.book_cover} alt="book cover" />
-
-        <AddToBookshelf bookId={bookId} type="book-details" />
-        <OpenModalButton
-          className='want-to-read'
-          buttonText="Add book to a list"
-          modalComponent={
-            <AddBookToListModal bookId={bookId} />
-          }
-        />
+        <div className="add-buttons-container">
+          <AddToBookshelf bookId={bookId} type="book-details" />
+          <div className="want-to-read-div">
+            <OpenModalButton
+              className="add-to-list-button"
+              buttonText="Add book to a list"
+              modalComponent={<AddBookToListModal bookId={bookId} />}
+            />
+          </div>
+        </div>
       </div>
       <div className="right-side-container">
         <div className="book-info-container">

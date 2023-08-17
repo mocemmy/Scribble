@@ -53,3 +53,15 @@
 #book-cover {
     width: 15rem;
 }
+
+.add-buttons-container {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.add-to-list-button {
+    width: 11rem;
+}

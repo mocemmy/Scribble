@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Book, Review, db
+from app.models import Book, Review, List, db
 from sqlalchemy import or_, and_
 from app.forms import BookForm, EditBookForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -184,6 +184,22 @@ def review_information(id):
     }
     return information
 
+
+#remove book from all lists of the current user
+@book_routes.route('/<int:id>/remove-lists')
+@login_required
+def remove_from_lists(id):
+    """
+    Query to remove a book from all of the current user's lists
+    """
+
+    lists = List.query.filter(List.creator_id == current_user.id).all()
+    for list in lists:
+        for list_book in list.books:
+            if list_book.id == id:
+                list.books.remove(list_book)
+    db.session.commit()
+    return {"message": "Removed book from all lists"}
 
 
 #search books

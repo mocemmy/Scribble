@@ -143,6 +143,19 @@ export const thunkAddBookToList = (bookId, listId) => async (dispatch) => {
     }
 }
 
+export const thunkRemoveBookAllLists = (bookId) => async (dispatch) => {
+    const response = await fetch(`/api/books/${bookId}/remove-lists`)
+
+    if (response.ok){
+        const data = await response.json()
+        dispatch(thunkGetListsCurrUser())
+        return data
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
+
 
 
 

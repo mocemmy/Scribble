@@ -60,12 +60,13 @@
 }
 
 .want-to-read,
-.want-to-read-main {
-    border-radius: 0 !important;
+.want-to-read-main,
+.add-to-list-button {
     background-color: #409D69;
     color: white;
     padding: 0.5rem;
     border: none;
+    font-weight: bold;
 }
 .want-to-read-main {
     width: 9rem;
@@ -73,7 +74,8 @@
 }
 
 .want-to-read:hover,
-.want-to-read-main:hover {
+.want-to-read-main:hover,
+.add-to-list-button:hover {
     background-color: rgb(73, 173, 126);
     cursor: pointer;
 }
