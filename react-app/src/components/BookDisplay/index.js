@@ -48,7 +48,9 @@ function BookDisplay({ book, type }) {
           )}
         </div>
       </div>
-      <AddToBookshelf bookId={book.id} />
+      <div className="want-to-read-container">
+        <AddToBookshelf bookId={book.id} />
+      </div>
     </div>
   );
 }

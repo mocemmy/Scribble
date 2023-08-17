@@ -69,7 +69,7 @@ function AddToBookshelf({ bookId, type = "" }) {
     }
     if(tbr) dispatch(thunkGetBookshelfDetails(tbr.id))
   };
-  const alreadyAdded = toggleAdded ? "want-to-read added" : "want-to-read";
+  const alreadyAdded = toggleAdded ? "want-to-read-main added" : "want-to-read-main";
 
   const openModal = () => {
     setModalContent(<AddBookToShelfModal bookId={bookId} currShelf={currShelf} />)
@@ -77,7 +77,7 @@ function AddToBookshelf({ bookId, type = "" }) {
 
   return (
     <>
-      <div className={`want-to-read-container ${type}`}>
+      <div className={`want-to-read-div ${type}`}>
         {!toggleAdded && (!currShelf || currShelf === "Want to Read") && (
           <button onClick={handleToggleTBR} className={alreadyAdded}>
             Want to Read
@@ -88,7 +88,7 @@ function AddToBookshelf({ bookId, type = "" }) {
             <i className="fa-solid fa-check"></i> Want to Read
           </button>
         )}
-        {!toggleAdded && currShelf && currShelf !== "Want to Read" && <button className="want-to-read added" onClick={openModal}><i className="fa-solid fa-check"></i> {currShelf}</button>}
+        {!toggleAdded && currShelf && currShelf !== "Want to Read" && <button className="want-to-read-main added" onClick={openModal}><i className="fa-solid fa-check"></i> {currShelf}</button>}
         <OpenModalButton
           className="want-to-read"
           buttonText="&#9660;"

@@ -10,17 +10,6 @@
     width: fit-content;
     margin-left: 2rem;
 }
-.want-to-read {
-    width: fit-content;
-    height: fit-content;
-    padding: 0.5rem;
-    background-color: #409D69;
-    border: none;
-    border-radius: 0.25rem;
-    color: white;
-    font-weight: bold;
-}
-
 .want-to-read-container {
     display: flex;
     align-items: center;

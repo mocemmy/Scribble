@@ -5,6 +5,7 @@ import ConfirmModal from "../ConfirmModal";
 import "./ListBookDisplay.css";
 import { useDispatch } from "react-redux";
 import { thunkRemoveBookFromList } from "../../store/list";
+import AddToBookshelf from "../AddToBookshelf";
 
 function ListBookDisplay({ book, num, type, listId }) {
   const dispatch = useDispatch();
@@ -30,12 +31,7 @@ function ListBookDisplay({ book, num, type, listId }) {
       
       <div className="want-to-read-container">
         {type !== "OWNED" &&
-        <button
-          className="want-to-read"
-          onClick={(e) => window.alert("Feature coming soon!")}
-        >
-          Want to Read
-        </button>}
+        <AddToBookshelf bookId={book.id} />}
         {type === "OWNED" && (
             <OpenModalButton
               className="button-as-link"
