@@ -9,20 +9,28 @@
 }
 
 .shelf-container {
+    background-color: #F4F4EA;
     border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
     height: 100%;
 }
 
 .shelf-container > button {
     text-align: left;
-    width: 100%;
+    width: 10rem;
+    margin-left: 0;
 }
 
 .current-shelf-title {
     font-size: 1.25rem;
     background-color: #F4F4EA;
-    padding: 0.25rem;
+    padding: 0.25rem 1rem;
     border-radius: 0.25rem;
     margin-left: 1rem;
+}
+
+.list-header {
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
