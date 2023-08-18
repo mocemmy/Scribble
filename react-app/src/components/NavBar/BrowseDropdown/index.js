@@ -29,8 +29,8 @@ function BrowseDropdown () {
         <div className='browse-container'>
             <Link onClick={toggleMenu} className="browse-links" to="/app/browse-books">Browse&nbsp;&#9660;</Link>
             <div className={showMenu ? "dropdown" : "hidden"} ref={dropdownRef}>
-                <Link to='/app/browse-books'>Browse Books</Link>
-                <Link to='/app/browse-lists'>Browse Lists</Link>
+                <Link onClick={toggleMenu} to='/app/browse-books'>Browse Books</Link>
+                <Link onClick={toggleMenu} to='/app/browse-lists'>Browse Lists</Link>
             </div>
         </div>
     )
