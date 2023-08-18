@@ -20,7 +20,8 @@ import LoginFormPage from "./components/AuthComponents/LoginFormPage";
 import SignupFormPage from "./components/AuthComponents/SignupFormPage";
 import MyBooksPage from "./components/BookshelfComponents/MyBooksPage";
 import AboutMe from "./components/SplashPageComponents/AboutMe";
-import Navigation from './components/SplashPageComponents/Navigation'
+import Navigation from "./components/SplashPageComponents/Navigation";
+import RequireLogin from "./components/UtiltyComponents/RequireLogin";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,59 +37,74 @@ function App() {
           <Route exact path="/">
             <LandingPage isLoaded={isLoaded} />
           </Route>
-          <Route exact path='/about-me'>
+          <Route exact path="/about-me">
             <Navigation />
             <AboutMe />
           </Route>
           <Route path="/app">
             <NavBar />
-              <Switch>
-                <Route path="/app/browse-books">
-                  <BrowseBooks />
-                </Route>
-                <Route path="/app/my-books">
-                  <MyBooksPage />
-                </Route>
-                <Route path="/app/browse-lists">
-                  <BrowseLists />
-                </Route>
-                <Route path="/app/books/:bookId/details">
-                  <BookDetails />
-                </Route>
-                <Route path="/app/books/:bookId/edit">
-                  <EditBook type="EDIT" />
-                </Route>
-                <Route path="/app/books/:bookId/review">
-                  <ReviewForm type="CREATE" />
-                </Route>
-                <Route path="/app/reviews/:reviewId/edit">
-                  <ReviewForm type="EDIT" />
-                </Route>
-                <Route path="/app/books/search">
-                  <SearchResults />
-                </Route>
-                <Route path="/app/user">
-                  <UserHomePage />
-                </Route>
-                <Route path="/app/create-book">
-                  <BookForm type="CREATE" />
-                </Route>
-                <Route path="/app/create-list">
-                  <ListForm type="CREATE" />
-                </Route>
-                <Route path="/app/lists/:listId/edit">
-                  <ListForm type="EDIT" />
-                </Route>
-                <Route path="/app/lists/:listId/details">
-                  <ListDetails />
-                </Route>
-                <Route path="/app/bookshelves/:shelfId/details">
-                  <BookshelfDetails />
-                </Route>
-                <Route path="*">
-                  <AppHomePage isLoaded={isLoaded} />
-                </Route>
-              </Switch>
+            <Switch>
+              <Route path="/app/browse-books">
+                <RequireLogin isLoaded={isLoaded} />
+                <BrowseBooks />
+              </Route>
+              <Route path="/app/my-books">
+                <RequireLogin isLoaded={isLoaded} />
+                <MyBooksPage />
+              </Route>
+              <Route path="/app/browse-lists">
+                <RequireLogin isLoaded={isLoaded} />
+                <BrowseLists />
+              </Route>
+              <Route path="/app/books/:bookId/details">
+                <RequireLogin isLoaded={isLoaded} />
+                <BookDetails />
+              </Route>
+              <Route path="/app/books/:bookId/edit">
+                <RequireLogin isLoaded={isLoaded} />
+                <EditBook type="EDIT" />
+              </Route>
+              <Route path="/app/books/:bookId/review">
+                <RequireLogin isLoaded={isLoaded} />
+                <ReviewForm type="CREATE" />
+              </Route>
+              <Route path="/app/reviews/:reviewId/edit">
+                <RequireLogin isLoaded={isLoaded} />
+                <ReviewForm type="EDIT" />
+              </Route>
+              <Route path="/app/books/search">
+                <RequireLogin isLoaded={isLoaded} />
+                <SearchResults />
+              </Route>
+              <Route path="/app/user">
+                <RequireLogin isLoaded={isLoaded} />
+                <UserHomePage />
+              </Route>
+              <Route path="/app/create-book">
+                <RequireLogin isLoaded={isLoaded} />
+                <BookForm type="CREATE" />
+              </Route>
+              <Route path="/app/create-list">
+                <RequireLogin isLoaded={isLoaded} />
+                <ListForm type="CREATE" />
+              </Route>
+              <Route path="/app/lists/:listId/edit">
+                <RequireLogin isLoaded={isLoaded} />
+                <ListForm type="EDIT" />
+              </Route>
+              <Route path="/app/lists/:listId/details">
+                <RequireLogin isLoaded={isLoaded} />
+                <ListDetails />
+              </Route>
+              <Route path="/app/bookshelves/:shelfId/details">
+                <RequireLogin isLoaded={isLoaded} />
+                <BookshelfDetails />
+              </Route>
+              <Route path="*">
+                <RequireLogin isLoaded={isLoaded} />
+                <AppHomePage isLoaded={isLoaded} />
+              </Route>
+            </Switch>
           </Route>
           <Route path="/login">
             <LoginFormPage />
