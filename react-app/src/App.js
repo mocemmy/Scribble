@@ -19,6 +19,8 @@ import AppHomePage from './components/AppHomePage'
 import LoginFormPage from './components/AuthComponents/LoginFormPage'
 import SignupFormPage from './components/AuthComponents/SignupFormPage'
 import MyBooksPage from "./components/BookshelfComponents/MyBooksPage";
+import AboutMe from "./components/SplashPageComponents/AboutMe";
+import Navigation from './components/SplashPageComponents/Navigation'
 
 
 function App() {
@@ -34,6 +36,10 @@ function App() {
         <Switch>
           <Route exact path="/">
             <LandingPage isLoaded={isLoaded} />
+          </Route>
+          <Route exact path='/about-me'>
+            <Navigation />
+            <AboutMe />
           </Route>
           <Route path="/app">
             <NavBar />
