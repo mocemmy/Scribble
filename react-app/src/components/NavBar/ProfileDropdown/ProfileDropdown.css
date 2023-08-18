@@ -5,6 +5,7 @@
 
 .user-icon-container {
     height: 100%;
+    position: relative;
 }
 
 #userDropdown{

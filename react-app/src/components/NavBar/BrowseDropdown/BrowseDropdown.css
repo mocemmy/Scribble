@@ -1,0 +1,35 @@
+.browse-container {
+    height: 100%;
+    width: fit-content;
+}
+.browse-links {
+    color: black;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 0.5rem;
+}
+
+.dropdown {
+    position: absolute;
+    top: 4.5rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.15);
+    background-color: white;
+    width: 7rem;
+}
+
+.dropdown > a {
+    margin: 0.5rem 0;
+}
+
+.browse-links:hover {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}

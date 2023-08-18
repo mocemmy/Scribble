@@ -61,7 +61,7 @@ function LandingPage({ isLoaded }) {
       <div className="footer-container">
         <div>
           <h3>Creator</h3>
-          <Link to="/">About us</Link>
+          <Link to="/about-me">About me</Link>
         </div>
         <div>
           <h3>Connect</h3>

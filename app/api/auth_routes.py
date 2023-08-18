@@ -91,7 +91,6 @@ def sign_up():
 
         db.session.add(user)
         db.session.commit()
-        print('***************************', user.id)
         tbr = Bookshelf(user_id=user.id, shelf_type="Want to Read")
         currently_reading = Bookshelf(user_id=user.id, shelf_type="Reading")
         already_read = Bookshelf(user_id=user.id, shelf_type="Read")
