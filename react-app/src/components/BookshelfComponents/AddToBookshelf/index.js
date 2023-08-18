@@ -65,7 +65,6 @@ function AddToBookshelf({ bookId, type = "" }) {
       response = await dispatch(thunkAddBookToShelf(bookId, tbr.id));
     }
     if (response.errors) {
-      console.log(response);
     }
     if(tbr) dispatch(thunkGetBookshelfDetails(tbr.id))
   };
