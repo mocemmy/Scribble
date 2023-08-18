@@ -10,7 +10,6 @@ function EditBook() {
     const book = useSelector(state => state.books.SingleBook)
     const [bookFound, setBookFound] = useState(false)
     const dispatch = useDispatch();
-    console.log(book)
 
     useEffect(() => {
         if(bookId){

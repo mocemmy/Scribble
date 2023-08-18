@@ -22,6 +22,7 @@ import MyBooksPage from "./components/BookshelfComponents/MyBooksPage";
 import AboutMe from "./components/SplashPageComponents/AboutMe";
 import Navigation from "./components/SplashPageComponents/Navigation";
 import RequireLogin from "./components/UtiltyComponents/RequireLogin";
+import NotFoundPage from "./components/UtiltyComponents/NotFoundPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -100,9 +101,12 @@ function App() {
                 <RequireLogin isLoaded={isLoaded} />
                 <BookshelfDetails />
               </Route>
-              <Route path="*">
+              <Route exact path="/app">
                 <RequireLogin isLoaded={isLoaded} />
                 <AppHomePage isLoaded={isLoaded} />
+              </Route>
+              <Route>
+                <NotFoundPage />
               </Route>
             </Switch>
           </Route>
@@ -113,7 +117,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route>
-            <h1>404: Page not found</h1>
+            <NotFoundPage />
           </Route>
         </Switch>
       )}
