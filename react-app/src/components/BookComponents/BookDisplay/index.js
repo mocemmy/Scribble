@@ -6,6 +6,7 @@ import ConfirmModal from "../../UtiltyComponents/ConfirmModal";
 import "./BookDisplay.css";
 import ReviewInfoDisplay from "../../ReviewComponents/ReviewInfoDisplay";
 import AddToBookshelf from "../../BookshelfComponents/AddToBookshelf";
+import { thunkGetListsCurrUser } from "../../../store/list";
 
 function BookDisplay({ book, type }) {
   const history = useHistory();
@@ -15,8 +16,9 @@ function BookDisplay({ book, type }) {
     history.push(`/app/books/${book.id}/edit`);
   };
 
-  const handleDeleteBook = () => {
-    dispatch(thunkDeleteBook(book.id));
+  const handleDeleteBook = async () => {
+    await dispatch(thunkDeleteBook(book.id));
+    dispatch(thunkGetListsCurrUser())
   };
 
   return (

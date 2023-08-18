@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 import Search from "../Search";
 import "./NavBar.css";
+import BrowseDropdown from "./BrowseDropdown";
 
 function NavBar() {
 
@@ -20,12 +21,7 @@ function NavBar() {
         <Link className="nav-bar-links" to="/app/my-books">
           My Books
         </Link>
-        <Link className="nav-bar-links" to="/app/browse-books">
-          Browse Books&nbsp;<span>&#9660;</span>
-        </Link>
-        <Link className="nav-bar-links" to="/app/browse-lists">
-          Browse Lists&nbsp;<span>&#9660;</span>
-        </Link>
+        <BrowseDropdown />
         <Search />
         <ProfileDropdown />
       </div>
