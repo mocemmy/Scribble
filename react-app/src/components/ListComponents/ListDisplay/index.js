@@ -25,7 +25,7 @@ function ListDisplay({ list, type }) {
         <div className='list-item-container'>
         <Link to={`/app/lists/${list.id}/details`} className='list-display-container'>
             {bookList.map(book => (
-                <img className="list-book-covers" src={book.book_cover} alt='cover' id={book.id}/>
+                <img key={book.id} className="list-book-covers" src={book.book_cover} alt='cover' id={book.id}/>
             ))}
             <p id='list-title'>{list.list_name}</p>
         </Link>

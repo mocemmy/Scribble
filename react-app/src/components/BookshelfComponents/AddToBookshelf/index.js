@@ -17,54 +17,38 @@ function AddToBookshelf({ bookId, type = "" }) {
   const dispatch = useDispatch();
   const [toggleAdded, setToggleAdded] = useState(false);
   const [currShelf, setCurrShelf] = useState()
+  const [tbr, setTbr] = useState()
   const bookshelves = useSelector((state) => state.bookshelves.AllBookshelves);
 
   const { setModalContent } = useModal();
 
-  let tbr, shelfArr;
-  if (bookshelves) {
-    shelfArr = Object.values(bookshelves);
-    tbr = shelfArr.find((shelf) => shelf.shelf_type === "Want to Read");
-  }
-
-  useEffect(() => {
-    if(shelfArr){
-        const curr = findCurrShelf(shelfArr, bookId)
-        setCurrShelf(curr)
-    }
-  }, [bookshelves])
-
   useEffect(() => {
     if (bookshelves) {
-      shelfArr = Object.values(bookshelves);
-      tbr = shelfArr.find((shelf) => shelf.shelf_type === "Want to Read");
+      const shelves = Object.values(bookshelves)
+      const curr = findCurrShelf(shelves, bookId)
+      setCurrShelf(curr)
+      const found = shelves.find((shelf) => shelf.shelf_type === "Want to Read")
+      setTbr(found);
+      if(found){
+        if(found.books.find((book) => +bookId === book.id)){
+          setToggleAdded(true)
+        } else setToggleAdded(false)
+      }
     }
-  }, [bookshelves]);
+  }, [bookshelves, bookId]);
 
   useEffect(() => {
     dispatch(thunkGetBookshelvesCurr());
-  }, [dispatch]);
+  }, []);
 
-  useEffect(() => {
-    if (tbr) {
-      if (tbr.books.find((book) => +bookId === book.id)) {
-        setToggleAdded(true);
-      } else {
-        setToggleAdded(false);
-      }
-    }
-  }, [bookshelves]);
 
   if (!bookshelves) return <Loading />;
 
   const handleToggleTBR = async () => {
-    let response;
     if (toggleAdded && tbr) {
-      response = await dispatch(thunkRemoveBookFromShelf(bookId, tbr.id));
+      await dispatch(thunkRemoveBookFromShelf(bookId, tbr.id));
     } else if (!toggleAdded && tbr) {
-      response = await dispatch(thunkAddBookToShelf(bookId, tbr.id));
-    }
-    if (response.errors) {
+      await dispatch(thunkAddBookToShelf(bookId, tbr.id));
     }
     if(tbr) dispatch(thunkGetBookshelfDetails(tbr.id))
   };
