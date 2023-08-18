@@ -76,21 +76,34 @@
 }
 
 
-.discovery-container{
+.discovery-container,
+.quote-container{
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.5rem;
     padding: 2rem;
-    width: 65%;
-    margin-left: 5rem;
+    margin: 2rem;
+    width: fit-content;
     box-sizing: border-box;
+    background-color: #f4f1ea;
+}
+
+.book-main-container {
+    display: flex;
+}
+
+.book-main-container p {
+    margin-left: 1.5rem;
 }
 
 .book-container {
     display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .book-container img {
-    width: 3rem;
+    width: 6rem;
+    height: 8rem;
     margin: 0 0.5rem;
 }
 
@@ -110,4 +123,28 @@
 .links-container {
     display: flex;
     flex-direction: column;
+}
+
+
+#root {
+    max-width: 100% !important;
+}
+
+.body-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    place-items: center;
+    margin: auto;
+    width: fit-content;
+}
+
+.quote-container>p {
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.quote>span{
+    font-style: normal;
+    font-weight: bold;
 }
