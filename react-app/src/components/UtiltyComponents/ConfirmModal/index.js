@@ -16,10 +16,10 @@ const ConfirmModal = ({ modalTitle, yesHandler }) => {
     <div className="confirm-modal-container">
       <h1 className="form-title">{modalTitle}</h1>
       <div className="modal-button-container">
-        <button className="confirm-button" onClick={handleClick}>
+        <button className="yes-button" onClick={handleClick}>
           Yes
         </button>
-        <button className="confirm-button cancel-button" onClick={closeModal}>
+        <button className="yes-button no-button" onClick={closeModal}>
           No
         </button>
       </div>

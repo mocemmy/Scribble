@@ -17,8 +17,8 @@
     gap: 2rem;
 }
 
-.confirm-button,
-.cancel-button {
+.yes-button,
+.no-button {
     background-color: #333;
     color: white;
     padding: 1rem;
@@ -28,16 +28,16 @@
     font-size: 1rem;
 }
 
-.cancel-button {
+.no-button {
     background-color: #f4f1ea;
     color: black;
 }
 
-.confirm-button:hover {
+.yes-button:hover {
     background-color: #564848;
     cursor: pointer;
 }
 
-.cancel-button:hover {
+.no-button:hover {
     background-color: #c6c4be;
 }

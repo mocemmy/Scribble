@@ -64,13 +64,19 @@
 }
 
 .cancel-button {
-    background-color: #f4f1ea;
-    color: black;
-    border-radius: 1rem;
+    background-color: #f4f1ea !important;
+    color: black !important;
+    border-radius: 1rem !important;
+    border: none !important;
 }
 
 .cancel-button:hover {
-    background-color: #c6c4be;
+    background-color: #c6c4be !important;
+    cursor: pointer;
+}
+
+.submit-button {
+    border: none !important;
 }
 
 .character-count,
