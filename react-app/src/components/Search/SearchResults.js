@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../UtiltyComponents/Loading";
 import BookDisplay from "../BookComponents/BookDisplay";
 import './SearchResults.css'
@@ -31,7 +31,7 @@ function SearchResults() {
         localStorage.removeItem("search")
         setSearchPhrase(null)
     }
-  }, [searchPhrase, storedSearch])
+  }, [dispatch, searchPhrase, storedSearch])
 
   useEffect(() => {
     if(books && lists) setSearchLoaded(true);

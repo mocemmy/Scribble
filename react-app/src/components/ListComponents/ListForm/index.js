@@ -24,7 +24,7 @@ function ListForm({ type }) {
       setListName(list.list_name);
       setDescription(list.description);
     }
-  }, [list]);
+  }, [list, listId]);
 
   useEffect(() => {
     const validationErrors = {};

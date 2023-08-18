@@ -22,7 +22,7 @@ function ListDetails() {
 
   if (!list || !user) return <Loading />;
   let type;
-  if (list.creator_id == user.id) {
+  if (list.creator_id === user.id) {
     type = "OWNED";
   }
 

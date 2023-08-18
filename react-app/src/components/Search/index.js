@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSearch } from '../../context/Search';
 
@@ -7,7 +6,6 @@ function Search() {
   const { searchPhrase, setSearchPhrase } = useSearch();
   const storedSearch = localStorage.getItem("search")
     const [search, setSearch] = useState( storedSearch ? storedSearch : "");
-    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
