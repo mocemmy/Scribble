@@ -101,7 +101,7 @@ function LandingPage({ isLoaded }) {
         <div>
           <h3>Creator</h3>
           <Link onClick={(e) => window.alert("Feature coming soon!")} to="/">
-            About me
+            About us
           </Link>
         </div>
         <div>
