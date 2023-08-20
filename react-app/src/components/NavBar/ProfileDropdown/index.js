@@ -28,9 +28,9 @@ function ProfileDropdown() {
 
     if (!user) return <Loading />
 
-    const logout = (e) => {
+    const logout = async (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout());
+        await dispatch(sessionActions.logout());
         history.push("/");
         closeMenu();
     };
