@@ -26,7 +26,7 @@ function SearchResults() {
         dispatch(thunkSearchBooks(searchPhrase))
         dispatch(thunkSearchLists(searchPhrase))
     }
-
+    //cleanup local storage
     return () => {
         localStorage.removeItem("search")
         setSearchPhrase(null)

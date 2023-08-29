@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from .shelf_books import shelf_books
 
 
 class User(db.Model, UserMixin):
@@ -23,6 +24,7 @@ class User(db.Model, UserMixin):
 
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
     lists = db.relationship('List', back_populates='user', cascade='all, delete-orphan')
+    
 
     @property
     def password(self):

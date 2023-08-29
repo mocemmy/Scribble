@@ -209,6 +209,7 @@ def search_books():
     """"
     Query for books matching the search terms
     """
+    # search phrase from the request body
     search_terms = request.json
     search_words = search_terms.split()
 
