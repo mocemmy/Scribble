@@ -16,7 +16,6 @@ function Search() {
         if(search.length){
             setSearchPhrase(search)
             localStorage.setItem("search", search)
-            console.log(localStorage.getItem("search"))
             history.push('/app/books/search')
         }
     }
