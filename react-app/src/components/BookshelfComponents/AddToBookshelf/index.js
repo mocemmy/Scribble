@@ -36,12 +36,7 @@ function AddToBookshelf({ bookId, type = "" }) {
       }
     }
   }, [bookshelves, bookId]);
-
-  useEffect(() => {
-    dispatch(thunkGetBookshelvesCurr());
-  }, []);
-
-
+  
   if (!bookshelves) return <Loading />;
 
   const handleToggleTBR = async () => {

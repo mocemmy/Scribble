@@ -3,6 +3,7 @@ import Loading from '../../UtiltyComponents/Loading';
 import { useEffect } from 'react';
 import { thunkGetAllBooks } from '../../../store/book';
 import BookDisplay from '../../BookComponents/BookDisplay';
+import { thunkGetBookshelvesCurr } from '../../../store/bookshelf';
 
 function BrowseBooks() {
     const books = useSelector(state => state.books.AllBooks)
@@ -10,6 +11,7 @@ function BrowseBooks() {
 
     useEffect(() => {
         dispatch(thunkGetAllBooks());
+        dispatch(thunkGetBookshelvesCurr())
     }, [dispatch])
 
     if(!books) return <Loading />
