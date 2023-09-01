@@ -22,10 +22,11 @@ function SearchResults() {
     if (storedSearch) {
       dispatch(thunkSearchBooks(storedSearch));
       dispatch(thunkSearchLists(storedSearch));
-    } else if (searchPhrase) {
-      dispatch(thunkSearchBooks(searchPhrase));
-      dispatch(thunkSearchLists(searchPhrase));
-    }
+    } 
+    // else if (searchPhrase) {
+    //   dispatch(thunkSearchBooks(searchPhrase));
+    //   dispatch(thunkSearchLists(searchPhrase));
+    // }
     dispatch(thunkGetBookshelvesCurr())
     //cleanup local storage
     return () => {

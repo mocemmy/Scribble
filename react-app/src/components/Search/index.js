@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSearch } from '../../context/Search';
 import { useDispatch } from 'react-redux';
 import { thunkSearchBooks } from '../../store/book';
+import { thunkSearchLists } from '../../store/list';
 
 function Search() {
   const { searchPhrase, setSearchPhrase } = useSearch();
@@ -20,6 +21,7 @@ function Search() {
             setSearchPhrase(search)
             localStorage.setItem("search", search)
             dispatch(thunkSearchBooks(search))
+            dispatch(thunkSearchLists(search))
             history.push('/app/books/search')
         }
     }
