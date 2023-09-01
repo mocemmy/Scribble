@@ -7,6 +7,7 @@ import { useSearch } from "../../context/Search";
 import { thunkSearchLists } from "../../store/list";
 import ListDisplay from "../ListComponents/ListDisplay";
 import { thunkSearchBooks } from "../../store/book";
+import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
 
 function SearchResults() {
   const storedSearch = localStorage.getItem("search");
@@ -25,6 +26,7 @@ function SearchResults() {
       dispatch(thunkSearchBooks(searchPhrase));
       dispatch(thunkSearchLists(searchPhrase));
     }
+    dispatch(thunkGetBookshelvesCurr())
     //cleanup local storage
     return () => {
       localStorage.removeItem("search");
