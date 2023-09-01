@@ -101,10 +101,10 @@ function App() {
                 <RequireLogin isLoaded={isLoaded} />
                 <BookshelfDetails />
               </Route>
-              <Route exact path="/app">
+              {/* <Route exact path="/app">
                 <RequireLogin isLoaded={isLoaded} />
                 <AppHomePage isLoaded={isLoaded} />
-              </Route>
+              </Route> */}
               <Route>
                 <NotFoundPage />
               </Route>
