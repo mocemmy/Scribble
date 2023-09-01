@@ -23,6 +23,7 @@ import AboutMe from "./components/SplashPageComponents/AboutMe";
 import Navigation from "./components/SplashPageComponents/Navigation";
 import RequireLogin from "./components/UtiltyComponents/RequireLogin";
 import NotFoundPage from "./components/UtiltyComponents/NotFoundPage";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,10 +102,10 @@ function App() {
                 <RequireLogin isLoaded={isLoaded} />
                 <BookshelfDetails />
               </Route>
-              {/* <Route exact path="/app">
+              <Route exact path="/app">
                 <RequireLogin isLoaded={isLoaded} />
-                <AppHomePage isLoaded={isLoaded} />
-              </Route> */}
+                <Redirect to='/app/browse-books' />
+              </Route>
               <Route>
                 <NotFoundPage />
               </Route>
