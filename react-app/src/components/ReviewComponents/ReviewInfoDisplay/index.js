@@ -4,7 +4,7 @@ function ReviewInfoDisplay({ book }) {
   const emptyStar = "fa-regular fa-star";
   const halfStar = "fa-solid fa-star-half-stroke";
 
-  const avgRating = parseInt(book.avg_rating).toFixed(2)
+  const avgRating = (+book.avg_rating).toFixed(2)
   return (
     <div>
       {book.review_count === 0 && (
