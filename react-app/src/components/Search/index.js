@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useSearch } from '../../context/Search';
+import { useDispatch } from 'react-redux';
+import { thunkSearchBooks } from '../../store/book';
 
 function Search() {
   const { searchPhrase, setSearchPhrase } = useSearch();
   const storedSearch = localStorage.getItem("search")
     const [search, setSearch] = useState( storedSearch ? storedSearch : "");
     const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect(() => {
       if(!storedSearch) setSearch("")
@@ -16,6 +19,7 @@ function Search() {
         if(search.length){
             setSearchPhrase(search)
             localStorage.setItem("search", search)
+            dispatch(thunkSearchBooks(search))
             history.push('/app/books/search')
         }
     }
