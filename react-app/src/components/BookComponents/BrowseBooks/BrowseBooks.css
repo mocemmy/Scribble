@@ -1,0 +1,24 @@
+.pagination-container>ul {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    list-style-type: none;
+}
+.pagination-container li {
+    padding: 0.25rem;
+}
+
+.previous.disabled>a,
+.next.disabled>a {
+    color: gray;
+}
+
+.previous.disabled>a:hover,
+.next.next.disabled>a:hover {
+    cursor: default !important; 
+    text-decoration: none !important;
+}
+
+li.selected{
+    border-radius: 0.25rem;
+}
