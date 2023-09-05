@@ -1,6 +1,6 @@
 from app.models import db, User, Bookshelf, environment, SCHEMA
 from sqlalchemy.sql import text
-
+import random
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -17,6 +17,7 @@ def seed_users():
     suzanne = User(
         first_name="Suzanne", last_name="Collins", username='suzanne', email='suzanne@aa.io', password='password') #6
     
+
 
     db.session.add(demo)
     db.session.add(jane)
@@ -49,6 +50,43 @@ def seed_users():
     for shelf in bookshelves:
         db.session.add(shelf)
     db.session.commit()
+
+        # List of real first names and last names
+    real_first_names = [
+        "Emma", "Liam", "Olivia", "Noah", "Ava", "Isabella", "Sophia", "Jackson", "Mia", "Lucas",
+        "Harper", "Evelyn", "Oliver", "Aria", "Charlotte", "Benjamin", "Amelia", "Elijah", "Abigail", "Henry",
+        "Sofia", "Alexander", "Madison", "Sebastian", "Scarlett", "Matthew", "Victoria", "Joseph", "Grace",
+        "Levi", "Riley", "David", "Chloe", "Samuel", "Zoey", "John", "Nora", "Liam", "Avery", "James",
+        "Ella", "Lincoln", "Samantha", "Daniel", "Hazel", "Joseph", "Penelope", "Michael", "Luna"
+    ]
+    real_last_names = [
+        "Smith", "Johnson", "Brown", "Taylor", "Miller", "Wilson", "Moore", "Davis", "Garcia", "Martinez",
+        "Jones", "Clark", "Hernandez", "Lopez", "Young", "Lee", "Walker", "Perez", "Hall", "Lewis"
+    ]
+
+    user_data = []
+
+    for _ in range(50):
+        first_name = random.choice(real_first_names)
+        last_name = random.choice(real_last_names)
+        username = last_name.lower() + first_name.lower() + str(random.randint(100, 999))
+        email = f"{first_name.lower()}.{last_name.lower()}{str(random.randint(100, 999))}@email.io"
+        password = "password"
+        
+        user = User(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password
+        )
+        db.session.add(user)
+        db.session.commit()
+        bookshelves = [Bookshelf(user_id=user.id, shelf_type="Want to Read"), Bookshelf(user_id=user.id, shelf_type="Reading"), Bookshelf(user_id=user.id, shelf_type="Read")]
+        for shelf in bookshelves:
+            db.session.add(shelf)
+        db.session.commit()
+        user_data.append(user)
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
