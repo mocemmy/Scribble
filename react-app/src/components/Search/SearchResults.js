@@ -19,6 +19,12 @@ function SearchResults() {
   const { searchPhrase, setSearchPhrase } = useSearch();
 
   useEffect(() => {
+    if(storedSearch){
+      setSearchPhrase(storedSearch)
+    }
+  }, [storedSearch])
+
+  useEffect(() => {
     if (storedSearch) {
       dispatch(thunkSearchBooks(storedSearch));
       dispatch(thunkSearchLists(storedSearch));

@@ -39,13 +39,6 @@ function BrowseBooks() {
 
   return (
     <div>
-      <div className="pagination-container">
-        <ReactPaginate
-          pageCount={totalPages}
-          onPageChange={handlePageChange}
-          forcePage={currPage}
-        />
-      </div>
       {!!subset.length &&
         subset.map((book) => <BookDisplay key={book.id} book={book} />)}
       {!subset.length && <h4>No books to browse!</h4>}

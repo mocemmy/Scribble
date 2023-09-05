@@ -13,7 +13,8 @@ function Search() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      if(!storedSearch) setSearch("")
+      if(!storedSearch && !searchPhrase) setSearch("")
+      console.log('searches: ', searchPhrase, storedSearch)
     }, [storedSearch, searchPhrase])
 
     const handleSearch = async () => {
