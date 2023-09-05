@@ -83,9 +83,7 @@ def seed_users():
         db.session.add(user)
         db.session.commit()
         bookshelves = [Bookshelf(user_id=user.id, shelf_type="Want to Read"), Bookshelf(user_id=user.id, shelf_type="Reading"), Bookshelf(user_id=user.id, shelf_type="Read")]
-        for shelf in bookshelves:
-            db.session.add(shelf)
-        db.session.commit()
+        db.session.bulk_save_objects(bookshelves)
         user_data.append(user)
 
 
