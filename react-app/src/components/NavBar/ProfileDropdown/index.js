@@ -56,9 +56,6 @@ function ProfileDropdown() {
                     <p>{user.first_name.toUpperCase()} {user.last_name.toUpperCase()}</p>
                 </li>
                 <li className="userDropdown-li pfpButton">
-                    <p onClick={e => window.alert("Feature coming soon")}>Friends: **add functionality</p>
-                </li>
-                <li className="userDropdown-li pfpButton">
                     <p><Link to='/app/user'>User Home</Link></p>
                 </li>
                 <li className="userDropdown-li pfpButton">

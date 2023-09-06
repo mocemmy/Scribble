@@ -11,7 +11,7 @@ function BookshelfBookDisplay ({ book, shelfId }) {
             <Link to={`/app/books/${book.id}/details`}>
             <p>{book.title}</p></Link>
             <p>{book.author_last_name}, {book.author_first_name} </p>
-            <p>{book.avg_rating}</p>
+            <p>{book.avg_rating.toFixed(2)}</p>
         </div>
     )
 }
