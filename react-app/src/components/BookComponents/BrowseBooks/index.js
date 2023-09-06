@@ -39,6 +39,7 @@ function BrowseBooks() {
 
   return (
     <div>
+      <p className="author-name">Showing {startIndex + 1} - {endIndex} of {booksArr.length} results</p>
       {!!subset.length &&
         subset.map((book) => <BookDisplay key={book.id} book={book} />)}
       {!subset.length && <h4>No books to browse!</h4>}
