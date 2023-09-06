@@ -10,7 +10,7 @@ import './BrowseBooks.css'
 
 function BrowseBooks() {
   const books = useSelector((state) => state.books.AllBooks);
-  const [currPage, setCurrPage] = useState(1);
+  const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState();
   const booksPerPage = 20;
   const dispatch = useDispatch();
