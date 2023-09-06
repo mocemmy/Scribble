@@ -10,7 +10,7 @@ import './BrowseBooks.css'
 
 function BrowseBooks() {
   const books = useSelector((state) => state.books.AllBooks);
-  const [currPage, setCurrPage] = useState(1);
+  const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState();
   const booksPerPage = 20;
   const dispatch = useDispatch();
@@ -39,6 +39,7 @@ function BrowseBooks() {
 
   return (
     <div>
+      <p className="author-name">Showing {startIndex + 1} - {endIndex} of {booksArr.length} results</p>
       {!!subset.length &&
         subset.map((book) => <BookDisplay key={book.id} book={book} />)}
       {!subset.length && <h4>No books to browse!</h4>}

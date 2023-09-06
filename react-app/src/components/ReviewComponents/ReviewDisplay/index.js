@@ -36,7 +36,6 @@ function ReviewDisplay({ review }) {
           <img src={review.user.profile_pic} alt="profile pic" />
         </div>
         <p>{review.user.first_name}</p>
-        <p>follow</p>
       </div>
       <div className="review-content">
         <div className="review-header">
