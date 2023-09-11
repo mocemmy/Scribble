@@ -107,8 +107,8 @@ function LandingPage({ isLoaded }) {
         <div>
           <h3>Connect</h3>
           <div className="links-container">
-            <a href="https://github.com/mocemmy">Github</a>
-            <a href="http://www.linkedin.com/in/emily-morgan-7761b1155">
+            <a href="https://github.com/mocemmy" target="_blank">Github</a>
+            <a href="http://www.linkedin.com/in/emily-morgan-7761b1155" target="_blank">
               Linkedin
             </a>
           </div>
