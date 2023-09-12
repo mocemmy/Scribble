@@ -23,6 +23,22 @@
     box-sizing: border-box;
 }
 
+.nav-bar-right-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 1rem;
+}
+
+.fa-brands {
+    color: #ad957d;
+    font-size: 1.5rem;
+}
+
+.fa-brands:hover {
+    color: #333;
+}
+
 .nav-bar-container>a:hover {
     text-decoration: none;
 }

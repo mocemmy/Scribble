@@ -5,7 +5,6 @@ import "./NavBar.css";
 import BrowseDropdown from "./BrowseDropdown";
 
 function NavBar() {
-
   return (
     <>
       <div className="dummy-nav-bar"></div>
@@ -23,7 +22,23 @@ function NavBar() {
         </Link>
         <BrowseDropdown />
         <Search />
-        <ProfileDropdown />
+        <div className="nav-bar-right-container">
+          <a
+            title="creator github"
+            href="https://github.com/mocemmy"
+            target="_blank"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            title="creator linkedin"
+            href="https://www.linkedin.com/in/emily-morgan-7761b1155"
+            target="_blank"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <ProfileDropdown />
+        </div>
       </div>
     </>
   );
