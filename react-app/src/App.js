@@ -74,7 +74,7 @@ function App() {
                 <RequireLogin isLoaded={isLoaded} />
                 <ReviewForm type="EDIT" />
               </Route>
-              <Route path="/app/books/search">
+              <Route path="/app/search">
                 <RequireLogin isLoaded={isLoaded} />
                 <SearchResults />
               </Route>

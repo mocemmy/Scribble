@@ -7,7 +7,7 @@ const actionSearchLists = (lists) => ({
 })
 
 const actionSearchBooks = (books) => ({
-    type: SEARCH_LISTS,
+    type: SEARCH_BOOKS,
     books
 })
 
@@ -24,7 +24,10 @@ export const thunkSearchLists = (search) => async dispatch => {
         const data = await response.json()
         dispatch(actionSearchLists(data.lists))
         return data.lists
-    } else return data
+    } else {
+        const data = await response.json()
+        return data
+    }
 }
 
 export const thunkSearchBooks = (search) => async dispatch => {
@@ -40,7 +43,10 @@ export const thunkSearchBooks = (search) => async dispatch => {
         const data = await response.json()
         dispatch(actionSearchBooks(data.books))
         return data.books
-    } else return data
+    } else {
+        const data = await response.json()
+        return data
+    }
 }
 
 const initialState = {searchedBooks: null, searchedLists: null}

@@ -4,9 +4,9 @@ import Loading from "../UtiltyComponents/Loading";
 import BookDisplay from "../BookComponents/BookDisplay";
 import "./SearchResults.css";
 import { useSearch } from "../../context/Search";
-import { thunkSearchLists } from "../../store/list";
+import { thunkSearchLists } from "../../store/search";
 import ListDisplay from "../ListComponents/ListDisplay";
-import { thunkSearchBooks } from "../../store/book";
+import { thunkSearchBooks } from "../../store/search";
 import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
 import ReactPaginate from "react-paginate";
 
