@@ -1,6 +1,5 @@
 const GET_LISTS = 'lists/GET_LISTS'
 const GET_LIST_DETAILS = 'lists/GET_LIST_DETAILS'
-const SET_SEARCH_LISTS = 'lists/SET_SEARCH_LISTS'
 
 const actionGetAllLists = (lists) => ({
     type: GET_LISTS,
@@ -10,11 +9,6 @@ const actionGetAllLists = (lists) => ({
 const actionGetListDetails = (list) => ({
     type: GET_LIST_DETAILS,
     list
-})
-
-const actionSetSearchResults = (lists) => ({
-    type: SET_SEARCH_LISTS,
-    lists
 })
 
 export const thunkGetAllLists = () => async (dispatch) => {
@@ -162,25 +156,8 @@ export const thunkRemoveBookAllLists = (bookId) => async (dispatch) => {
     }
 }
 
-export const thunkSearchLists = (search) => async (dispatch) => {
-    const response = await fetch('/api/lists/search', {
-        method: "POST",
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify(search)        
-    })
 
-    if(response.ok){
-        const data = await response.json()
-        dispatch(actionSetSearchResults(data.lists))
-    }
-}
-
-
-
-
-const initialState = {AllLists: null, SingleList: null, SearchLists: null}
+const initialState = {AllLists: null, SingleList: null}
 
 export default function reducer(state = initialState, action) {
     let newState;
@@ -192,10 +169,6 @@ export default function reducer(state = initialState, action) {
         case GET_LIST_DETAILS:
             newState = {...state, SingleList: {} }
             newState.SingleList = action.list
-            return newState;
-        case SET_SEARCH_LISTS:
-            newState = {...state, SearchLists: {}}
-            action.lists.forEach(list => newState.SearchLists[list.id] = list)
             return newState;
         default:
             return state

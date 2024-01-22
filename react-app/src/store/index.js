@@ -5,13 +5,15 @@ import books from './book'
 import reviews from './review'
 import bookshelves from './bookshelf'
 import lists from './list'
+import search from './search'
 
 const rootReducer = combineReducers({
   session,
   books,
   reviews,
   lists,
-  bookshelves
+  bookshelves,
+  search
 });
 
 

@@ -1,6 +1,5 @@
 const GET_BOOKS = "books/GET_BOOKS"
 const GET_BOOK_DETAILS = "books/GET_BOOK_DETAILS"
-const SEARCH_BOOKS = 'books/SEARCH_BOOKS'
 
 export const actionGetAllBooks = (books) => ({
     type: GET_BOOKS,
@@ -10,11 +9,6 @@ export const actionGetAllBooks = (books) => ({
 const actionGetBookDetails = (book) => ({
     type: GET_BOOK_DETAILS,
     book
-})
-
-const actionSetSearchResults = (books) => ({
-    type: SEARCH_BOOKS,
-    books
 })
 
 export const thunkGetAllBooks = () => async (dispatch) => {
@@ -102,28 +96,7 @@ export const thunkDeleteBook = (bookId) => async (dispatch) => {
     }
 }
 
-export const thunkSearchBooks = (search) => async (dispatch) => {
-    const response = await fetch('/api/books/search', {
-        method: "POST",
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify(search)
-    })
-
-    if(response.ok){
-        const data = await response.json()
-        dispatch(actionSetSearchResults(data.books))
-        return data
-    } else {
-        const errors = await response.json()
-        return errors
-    }
-}
-
-
-
-const initialState = {AllBooks: null, SingleBook: null, SearchBooks: null}
+const initialState = {AllBooks: null, SingleBook: null}
 
 export default function reducer(state = initialState, action) {
     let newState;
@@ -136,10 +109,6 @@ export default function reducer(state = initialState, action) {
         case GET_BOOK_DETAILS:
             newState = {...state, AllBooks:{...state.AllBooks}, SingleBook: {}, SearchBooks: {}}
             newState.SingleBook = action.book
-            return newState
-        case SEARCH_BOOKS:
-            newState = {...state, AllBooks:{}, SingleBook: {}, SearchBooks: {}}
-            action.books.forEach(book => newState.SearchBooks[book.id] = book)
             return newState
         default:
             return state;
