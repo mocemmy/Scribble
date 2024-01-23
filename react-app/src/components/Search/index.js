@@ -14,7 +14,6 @@ function Search() {
 
     const handleEnter = (e) =>  {
       if(e.key === 'Enter' || e.key === 'NumpadEnter') handleSearch();
-
     }
 
     return (

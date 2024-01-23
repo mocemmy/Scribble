@@ -11,53 +11,28 @@ import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
 import ReactPaginate from "react-paginate";
 
 function SearchResults() {
-  const storedSearch = localStorage.getItem("search");
-  const books = useSelector((state) => state.books.SearchBooks);
+  const books = useSelector((state) => state.search.searchedBooks)
+  const lists = useSelector((state) => state.search.searchedLists)
   const [searchLists, setSearchLists] = useState(false);
-  const [searchLoaded, setSearchLoaded] = useState(false);
   const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState();
   const itemsPerPage = 5;
-  const lists = useSelector((state) => state.lists.SearchLists);
-  const dispatch = useDispatch();
-  const { searchPhrase, setSearchPhrase } = useSearch();
 
-  useEffect(() => {
-    if (storedSearch) {
-      setSearchPhrase(storedSearch);
-    }
-  }, [storedSearch]);
+  // useEffect(() => {
+  //   let dataArr;
+  //   if (searchLoaded && !searchLists) {
+  //     const booksArr = Object.values(books).reverse();
+  //     setTotalPages(Math.ceil(booksArr.length / itemsPerPage));
+  //   } else if (searchLoaded && searchLists) {
+  //     const listArr = Object.values(lists).reverse();
+  //     setTotalPages(Math.ceil(listArr.length / itemsPerPage));
+  //   }
+  // }, [searchLoaded]);
 
-  useEffect(() => {
-    let dataArr;
-    if (searchLoaded && !searchLists) {
-      const booksArr = Object.values(books).reverse();
-      setTotalPages(Math.ceil(booksArr.length / itemsPerPage));
-    } else if (searchLoaded && searchLists) {
-      const listArr = Object.values(lists).reverse();
-      setTotalPages(Math.ceil(listArr.length / itemsPerPage));
-    }
-  }, [searchLoaded]);
+  // if (!searchLoaded) return <Loading />;
+  console.log("search results", books, lists)
+  if(!books || !lists) return <Loading/>
 
-  useEffect(() => {
-    const fetchData = async() => {
-
-      if (storedSearch) {
-        await dispatch(thunkSearchBooks(storedSearch));
-        await dispatch(thunkSearchLists(storedSearch));
-        if(books && lists) setSearchLoaded(true);
-      }
-      dispatch(thunkGetBookshelvesCurr());
-    }
-    fetchData();
-    //cleanup local storage and search context
-    return () => {
-      localStorage.removeItem("search");
-      setSearchPhrase(null);
-    };
-  }, [dispatch]);
-
-  if (!searchLoaded) return <Loading />;
   const booksArr = Object.values(books).reverse();
   const listArr = Object.values(lists).reverse();
 
@@ -73,6 +48,7 @@ function SearchResults() {
   const handlePageChange = (selectedPage) => {
     setCurrPage(selectedPage.selected);
   };
+  
 
   return (
     <>
@@ -92,7 +68,7 @@ function SearchResults() {
       </div>
       <h3>
         Search results for{" "}
-        <span className="search-phrase">"{storedSearch}"</span>:{" "}
+        <span className="search-phrase">"{}"</span>:{" "}
       </h3>
       <p className="author-name">
         Showing {startIndex + 1} - {endIndex} of{" "}
