@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Loading from "../UtiltyComponents/Loading";
 import BookDisplay from "../BookComponents/BookDisplay";
 import "./SearchResults.css";
 import { useSearch } from "../../context/Search";
-import { thunkSearchLists } from "../../store/search";
 import ListDisplay from "../ListComponents/ListDisplay";
-import { thunkSearchBooks } from "../../store/search";
-import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
 import ReactPaginate from "react-paginate";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function SearchResults() {
   const { searchLoaded, setSearching, setQuery, query } = useSearch();
@@ -18,6 +16,9 @@ function SearchResults() {
   const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState();
   const itemsPerPage = 5;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location?.search);
+
 
   const clearSearch = () => {
     setSearching(false)
@@ -25,6 +26,9 @@ function SearchResults() {
   }
 
   useEffect(() => {
+    //on component mount extract search params from url and set query
+    const param = searchParams.get('query')
+    setQuery(param)
     return clearSearch
   }, [])
 

@@ -7,7 +7,10 @@ function Search() {
     const history = useHistory();
 
     const handleSearch = () =>{
-        history.push('/app/search')
+        //use search params to keep the search context on page refresh
+        const url = '/app/search'
+        const searchParams = new URLSearchParams({query})
+        history.push(`${url}?${searchParams.toString()}`)
         search(query)
     }
 
