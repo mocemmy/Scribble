@@ -11,6 +11,7 @@ import { thunkGetBookshelvesCurr } from "../../store/bookshelf";
 import ReactPaginate from "react-paginate";
 
 function SearchResults() {
+  const { searchLoaded, setSearching, setQuery, query } = useSearch();
   const books = useSelector((state) => state.search.searchedBooks)
   const lists = useSelector((state) => state.search.searchedLists)
   const [searchLists, setSearchLists] = useState(false);
@@ -18,19 +19,26 @@ function SearchResults() {
   const [totalPages, setTotalPages] = useState();
   const itemsPerPage = 5;
 
-  // useEffect(() => {
-  //   let dataArr;
-  //   if (searchLoaded && !searchLists) {
-  //     const booksArr = Object.values(books).reverse();
-  //     setTotalPages(Math.ceil(booksArr.length / itemsPerPage));
-  //   } else if (searchLoaded && searchLists) {
-  //     const listArr = Object.values(lists).reverse();
-  //     setTotalPages(Math.ceil(listArr.length / itemsPerPage));
-  //   }
-  // }, [searchLoaded]);
+  const clearSearch = () => {
+    setSearching(false)
+    setQuery('')
+  }
 
-  // if (!searchLoaded) return <Loading />;
-  console.log("search results", books, lists)
+  useEffect(() => {
+    return clearSearch
+  }, [])
+
+
+  useEffect(() => {
+    if (searchLoaded && !searchLists) {
+      const booksArr = Object.values(books);
+      setTotalPages(Math.ceil(booksArr.length / itemsPerPage));
+    } else if (searchLoaded && searchLists) {
+      const listArr = Object.values(lists);
+      setTotalPages(Math.ceil(listArr.length / itemsPerPage));
+    }
+  }, [searchLoaded]);
+
   if(!books || !lists) return <Loading/>
 
   const booksArr = Object.values(books).reverse();
@@ -68,7 +76,7 @@ function SearchResults() {
       </div>
       <h3>
         Search results for{" "}
-        <span className="search-phrase">"{}"</span>:{" "}
+        <span className="search-phrase">"{query}"</span>:{" "}
       </h3>
       <p className="author-name">
         Showing {startIndex + 1} - {endIndex} of{" "}
@@ -82,14 +90,14 @@ function SearchResults() {
       {!!subsetLists.length &&
         searchLists &&
         subsetLists.map((list) => <ListDisplay key={list.id} list={list} />)}
-      {!searchLists && booksArr.length > itemsPerPage && <div className="pagination-container">
+      {!searchLists && <div className="pagination-container">
         <ReactPaginate
           pageCount={totalPages}
           onPageChange={handlePageChange}
           forcePage={currPage}
         />
       </div>}
-      {searchLists && listArr.length > itemsPerPage && <div className="pagination-container">
+      {searchLists && <div className="pagination-container">
         <ReactPaginate
           pageCount={totalPages}
           onPageChange={handlePageChange}

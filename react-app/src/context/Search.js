@@ -10,6 +10,7 @@ export function SearchProvider({ children }) {
     const [searching, setSearching] = useState(false);
     const [searchLoaded, setSearchLoaded] = useState(false);
     const [searchPhrase, setSearchPhrase] = useState(null);
+    const [query, setQuery] = useState('')
 
     const dispatch = useDispatch();
 
@@ -30,6 +31,8 @@ export function SearchProvider({ children }) {
         searching,
         setSearching,
         searchLoaded,
+        query, 
+        setQuery,
         search
     }
 

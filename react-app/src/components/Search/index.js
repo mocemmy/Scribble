@@ -3,8 +3,7 @@ import { useSearch } from '../../context/Search';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Search() {
-  const { search } = useSearch();
-    const [query, setQuery] = useState("");
+  const { search, query, setQuery } = useSearch();
     const history = useHistory();
 
     const handleSearch = () =>{
