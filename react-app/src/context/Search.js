@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { thunkSearchBooks, thunkSearchLists } from "../store/search";
+import { thunkGetBookshelvesCurr } from "../store/bookshelf";
 
 
 
@@ -23,6 +24,7 @@ export function SearchProvider({ children }) {
         }
         await dispatch(thunkSearchBooks(query))
         await dispatch(thunkSearchLists(query))
+        await dispatch(thunkGetBookshelvesCurr())
         setSearchLoaded(true)
     }
     
