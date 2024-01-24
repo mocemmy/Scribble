@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSearch } from '../../context/Search';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 

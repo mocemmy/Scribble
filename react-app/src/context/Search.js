@@ -12,12 +12,9 @@ export function SearchProvider({ children }) {
     const [searchPhrase, setSearchPhrase] = useState(null);
     const [query, setQuery] = useState('');
     
-    useEffect(() => {
-        search(query)
-    }, [query])
-
+    
     const dispatch = useDispatch();
-
+    
     const search = async (query) => {
         if(!query || !query.length){
             setSearching(false)
@@ -28,6 +25,10 @@ export function SearchProvider({ children }) {
         await dispatch(thunkSearchLists(query))
         setSearchLoaded(true)
     }
+    
+    useEffect(() => {
+        search(query)
+    }, [query])
 
     const contextValue = {
         searchPhrase,

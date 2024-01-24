@@ -41,7 +41,7 @@ function SearchResults() {
       const listArr = Object.values(lists);
       setTotalPages(Math.ceil(listArr.length / itemsPerPage));
     }
-  }, [searchLoaded]);
+  }, [searchLoaded, books, lists, searchLists]);
 
   if(!books || !lists) return <Loading/>
 

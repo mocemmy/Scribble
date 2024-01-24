@@ -27,15 +27,17 @@ function NavBar() {
             title="creator github"
             href="https://github.com/mocemmy"
             target="_blank"
+            rel='noreferrer'
           >
-            <i class="fa-brands fa-github"></i>
+            <i className="fa-brands fa-github"></i>
           </a>
           <a
             title="creator linkedin"
             href="https://www.linkedin.com/in/emily-morgan-7761b1155"
             target="_blank"
+            rel='noreferrer'
           >
-            <i class="fa-brands fa-linkedin"></i>
+            <i className="fa-brands fa-linkedin"></i>
           </a>
           <ProfileDropdown />
         </div>

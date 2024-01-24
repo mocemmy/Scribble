@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   thunkAddBookToShelf,
   thunkGetBookshelfDetails,
-  thunkGetBookshelvesCurr,
   thunkRemoveBookFromShelf,
 } from "../../../store/bookshelf";
 import Loading from "../../UtiltyComponents/Loading";
