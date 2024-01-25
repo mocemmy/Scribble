@@ -25,11 +25,11 @@ def seed_list_books():
         {"book_id": 5, "list_id": 3},
         {"book_id": 8, "list_id": 4},
         {"book_id": 9, "list_id": 5},
-        {"book_id": 13, "list_id": 5},
-        {"book_id": 14, "list_id": 5},
-        {"book_id": 10, "list_id": 6},
-        {"book_id": 11, "list_id": 6},
-        {"book_id": 12, "list_id": 6}
+        {"book_id": 10, "list_id": 5},
+        {"book_id": 11, "list_id": 5},
+        {"book_id": 12, "list_id": 6},
+        {"book_id": 13, "list_id": 6},
+        {"book_id": 14, "list_id": 6}
     ]
 
     for list in data:
