@@ -23,6 +23,7 @@ import Navigation from "./components/SplashPageComponents/Navigation";
 import RequireLogin from "./components/UtiltyComponents/RequireLogin";
 import NotFoundPage from "./components/UtiltyComponents/NotFoundPage";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,9 @@ function App() {
               <Route path="/app/user">
                 <RequireLogin isLoaded={isLoaded} />
                 <UserHomePage />
+              </Route>
+              <Route path='/app/profile'>
+                <ProfilePage />
               </Route>
               <Route path="/app/create-book">
                 <RequireLogin isLoaded={isLoaded} />

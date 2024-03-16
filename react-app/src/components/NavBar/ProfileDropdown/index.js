@@ -53,7 +53,7 @@ function ProfileDropdown() {
 
             <ul id="userDropdown" className={ulClassName} ref={ulRef}>
                 <li className="userDropdown-li" id="user-first-lastName">
-                    <p>{user.first_name.toUpperCase()} {user.last_name.toUpperCase()}</p>
+                    <p><Link to='/app/profile' title='Profile Page'>{user.first_name.toUpperCase()} {user.last_name.toUpperCase()}</Link></p>
                 </li>
                 <li className="userDropdown-li pfpButton">
                     <p><Link to='/app/user'>User Home</Link></p>
