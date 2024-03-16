@@ -39,7 +39,6 @@ def follow_user(id):
     Follow a user by their id
     """
     following = User.query.get(id)
-    follower = User.query.get(current_user.id)
     #check user exists
     if not following:
         return {"errors": f"User {id} not found"}, 404
@@ -49,7 +48,7 @@ def follow_user(id):
     #check current user isn't already following the requested user
     if current_user in following.followers:
         return {"errors": "You are already following this user"}, 404
-    following.followers.append(follower)
+    following.followers.append(current_user)
     db.session.commit()
     return following.to_dict()
 
@@ -60,5 +59,14 @@ def unfollow_user(id):
     """
     Unfollow a user by their id
     """
-
+    following = User.query.get(id)
+     #check user exists
+    if not following:
+        return {"errors": f"User {id} not found"}, 404
+    #check user isn't trying to unfollow themselves
+    if current_user.id == following.id:
+        return {"errors": "Cannot unfollow yourself!"}, 404
+    
+    following.followers.remove(current_user)
+    db.session.commit()
     return {"message": f"Unfollowed user {id}"}
