@@ -11,6 +11,9 @@ const ProfilePage = () => {
                 <img src={user.profile_pic} />
                 <h1>{user.first_name} {user.last_name}</h1>
             </div>
+            <div className="followers-section">
+                
+            </div>
         </>
     )
 }

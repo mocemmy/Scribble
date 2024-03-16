@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from .shelf_books import shelf_books
+from .followers import followers
 
 
 class User(db.Model, UserMixin):
@@ -24,6 +25,7 @@ class User(db.Model, UserMixin):
 
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
     lists = db.relationship('List', back_populates='user', cascade='all, delete-orphan')
+    followers = db.relationship('User', secondary=followers, primaryjoin=(followers.c.following_id == id), secondaryjoin=(followers.c.user_id == id), backref='following')
     
 
     @property
