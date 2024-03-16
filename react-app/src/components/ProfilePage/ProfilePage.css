@@ -1,0 +1,10 @@
+.profile-header {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap:20px;
+}
+
+.profile-header>img {
+    width: 100px;
+}
