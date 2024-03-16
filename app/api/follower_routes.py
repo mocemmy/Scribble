@@ -14,8 +14,7 @@ def get_followers():
     Query for all followers for the logged in user
     """
     followers = current_user.followers
-    print('***************************', followers)
-    return { "followers": 'test'}
+    return { "followers": [follower.to_dict() for follower in followers]}
 
 #Get followers for a user by their id:
 @follower_routes.route('/<int:id>/followers')

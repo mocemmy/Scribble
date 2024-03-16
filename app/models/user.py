@@ -26,11 +26,11 @@ class User(db.Model, UserMixin):
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
     lists = db.relationship('List', back_populates='user', cascade='all, delete-orphan')
     followers = db.relationship('User', secondary=followers, primaryjoin=(followers.c.following_id == id), secondaryjoin=(followers.c.user_id == id), backref='following')
-    
 
     @property
     def password(self):
         return self.hashed_password
+
 
     @password.setter
     def password(self, password):
@@ -48,6 +48,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'profile_pic': self.profile_pic,
+            'follower_count': len(self.followers),
+            'following_count': len(self.following),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
