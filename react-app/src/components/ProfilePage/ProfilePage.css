@@ -8,3 +8,15 @@
 .profile-header>img {
     width: 100px;
 }
+
+.followers-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.bio-section {
+    margin: auto;
+    width: fit-content;
+}
