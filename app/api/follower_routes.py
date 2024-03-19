@@ -69,3 +69,15 @@ def unfollow_user(id):
     following.followers.remove(current_user)
     db.session.commit()
     return {"message": f"Unfollowed user {id}"}
+
+#Get list of all users that current user is following
+@follower_routes.route('/following')
+@login_required
+def get_following():
+    """
+    Query to return a list of all users that the current user is following
+    """
+
+    following = current_user.following
+
+    return {"following": [follow.to_dict() for follow in following]}

@@ -9,6 +9,7 @@ import ReviewInfoDisplay from "../../ReviewComponents/ReviewInfoDisplay";
 import OpenModalButton from "../../OpenModalButton";
 import AddBookToListModal from "../../ListComponents/AddBookToListModal";
 import AddToBookshelf from "../../BookshelfComponents/AddToBookshelf";
+import { thunkGetFollowing } from "../../../store/follow";
 
 function BookDetails() {
   const { bookId } = useParams();

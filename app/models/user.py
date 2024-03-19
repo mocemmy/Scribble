@@ -50,6 +50,21 @@ class User(db.Model, UserMixin):
             'profile_pic': self.profile_pic,
             'follower_count': len(self.followers),
             'following_count': len(self.following),
+            'following': [following.to_dict_no_follow() for following in self.following],
+            'followers': [follower.to_dict_no_follow() for follower in self.followers],
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
+    def to_dict_no_follow(self):
+        return{
+            'id': self.id,
+            'username': self.username,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'bio': self.bio,
+            'profile_pic': self.profile_pic,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

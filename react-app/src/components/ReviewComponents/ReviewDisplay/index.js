@@ -5,6 +5,7 @@ import ConfirmModal from "../../UtiltyComponents/ConfirmModal";
 import { thunkDeleteReview } from "../../../store/review";
 import { thunkGetBookDetails } from "../../../store/book";
 import "./ReviewDisplay.css";
+import FollowButton from "../../FollowComponents/FollowButton";
 
 function ReviewDisplay({ review }) {
   const user = useSelector((state) => state.session.user);
@@ -36,6 +37,7 @@ function ReviewDisplay({ review }) {
           <img src={review.user.profile_pic} alt="profile pic" />
         </div>
         <p>{review.user.first_name}</p>
+        <FollowButton user={user} review={review} />
       </div>
       <div className="review-content">
         <div className="review-header">
