@@ -31,7 +31,20 @@ class User(db.Model, UserMixin):
     def password(self):
         return self.hashed_password
 
+    @property
+    def followingDict(self):
+        followingDict = {}
+        for user in self.following:
+            followingDict[user.id] = user.to_dict_no_follow()
+        return followingDict
 
+    @property
+    def followerDict(self):
+        followerDict = {}
+        for user in self.followers:
+            followerDict[user.id] = user.to_dict_no_follow()
+        return followerDict
+    
     @password.setter
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
@@ -50,8 +63,8 @@ class User(db.Model, UserMixin):
             'profile_pic': self.profile_pic,
             'follower_count': len(self.followers),
             'following_count': len(self.following),
-            'following': [following.to_dict_no_follow() for following in self.following],
-            'followers': [follower.to_dict_no_follow() for follower in self.followers],
+            'following': self.followingDict,
+            'followers': self.followerDict,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

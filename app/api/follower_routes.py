@@ -49,7 +49,7 @@ def follow_user(id):
         return {"errors": "You are already following this user"}, 404
     following.followers.append(current_user)
     db.session.commit()
-    return following.to_dict()
+    return {"user": following.to_dict()}
 
 #Unfollow a user by id
 @follower_routes.route('/<int:id>/unfollow', methods=['POST'])
