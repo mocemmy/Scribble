@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkFollowUser, thunkUnfollowUser } from "../../store/follow";
+import './FollowButton.css'
 
 const FollowButton = (props) => {
     //get user's following list:
@@ -18,8 +19,8 @@ const FollowButton = (props) => {
     }
     return (
         <div>
-            {!followed && <button onClick={follow}>Follow</button>}
-            {!!followed && <button onClick={unfollow}>Unfollow</button>}
+            {!followed && <button className="follow-button" onClick={follow}>Follow</button>}
+            {!!followed && <button className="follow-button" onClick={unfollow}>Unfollow</button>}
         </div>
     )
 }
