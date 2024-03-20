@@ -10,6 +10,7 @@ import OpenModalButton from "../../OpenModalButton";
 import AddBookToListModal from "../../ListComponents/AddBookToListModal";
 import AddToBookshelf from "../../BookshelfComponents/AddToBookshelf";
 import { thunkGetFollowing } from "../../../store/follow";
+import { thunkGetBookshelfDetails, thunkGetBookshelvesCurr } from "../../../store/bookshelf";
 
 function BookDetails() {
   const { bookId } = useParams();
@@ -18,6 +19,7 @@ function BookDetails() {
 
   useEffect(() => {
     dispatch(thunkGetBookDetails(bookId));
+    dispatch(thunkGetBookshelvesCurr())
   }, [dispatch, bookId]);
 
   if (!book || +bookId !== book.id) return <Loading />;
