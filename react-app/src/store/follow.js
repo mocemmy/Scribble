@@ -59,17 +59,17 @@ export const thunkUnfollowUser = (userId) => async dispatch => {
 
 const initialState = {allFollowers: null, allFollowing: null};
 export default function reducer(state = initialState, action) {
-    let newState;
+    let newState = { ...state };
     switch(action.type){
         case GET_FOLLOWING:
             newState = {...state, allFollowing: action.following}
             return newState;
         case FOLLOW_USER:
-            newState = {...state, allFollowing: {} }
+            newState = {...state, allFollowing: {...state.allFollowing} }
             newState.allFollowing[action.user.id] = action.user
             return newState
         case UNFOLLOW_USER:
-            newState = {...state, allFollowing: {} }
+            newState = {...state, allFollowing: {...state.allFollowing} }
             delete newState.allFollowing[action.userId]
             return newState
         default:
