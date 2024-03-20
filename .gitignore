@@ -6,3 +6,4 @@ __pycache__/
 .vscode/
 instance/
 instance/dev.db
+./instance
