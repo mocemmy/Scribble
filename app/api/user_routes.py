@@ -4,6 +4,7 @@ from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_
 from app.api.auth_routes import validation_errors_to_error_messages_dict
 from app.models import User, db
 from app.forms import UserForm
+from datetime import datetime
 
 user_routes = Blueprint('users', __name__)
 
@@ -48,6 +49,7 @@ def edit_user():
         #bio
         bio = form.data['bio']
 
+        print("***********************************", profile_pic)
         if profile_pic:
             profile_pic.filename = get_unique_filename(profile_pic.filename)
             upload = upload_file_to_s3(profile_pic)
@@ -65,6 +67,9 @@ def edit_user():
         
         if bio:
             current_user.bio = bio
+        
+        if profile_pic or email or password or bio:
+            current_user.updated_at = datetime.now()
         db.session.commit()
 
         return {"user": current_user.to_dict()}
