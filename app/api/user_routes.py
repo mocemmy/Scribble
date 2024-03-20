@@ -49,7 +49,6 @@ def edit_user():
         #bio
         bio = form.data['bio']
 
-        print("***********************************", profile_pic)
         if profile_pic:
             profile_pic.filename = get_unique_filename(profile_pic.filename)
             upload = upload_file_to_s3(profile_pic)
