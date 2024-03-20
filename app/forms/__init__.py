@@ -4,3 +4,4 @@ from .book_form import BookForm
 from .edit_book_form import EditBookForm
 from .review_form import ReviewForm
 from .list_form import ListForm
+from .user_form import UserForm
