@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import './ProfilePage.css'
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProfilePage = () => {
     //user information displayed:
@@ -13,8 +14,8 @@ const ProfilePage = () => {
                 
             </div>
             <div className="followers-section">
-                <p>Followers: {user.follower_count}</p>
-                <p>Following: {user.following_count}</p>
+                <Link to='/app/profile/followers'>Followers: {user.follower_count}</Link>
+                <Link to='/app/profile/following'>Following: {user.following_count}</Link>
             </div>
             <div className="bio-section">
                 <p>{user.bio ? user.bio : "No bio yet"}</p>

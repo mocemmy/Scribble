@@ -24,6 +24,8 @@ import RequireLogin from "./components/UtiltyComponents/RequireLogin";
 import NotFoundPage from "./components/UtiltyComponents/NotFoundPage";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import ProfilePage from "./components/ProfilePage";
+import FollowingList from "./components/FollowComponents/FollowingList";
+import FollowerList from "./components/FollowComponents/FollowerList";
 
 function App() {
   const dispatch = useDispatch();
@@ -82,8 +84,14 @@ function App() {
                 <RequireLogin isLoaded={isLoaded} />
                 <UserHomePage />
               </Route>
-              <Route path='/app/profile'>
+              <Route exact path='/app/profile'>
                 <ProfilePage />
+              </Route>
+              <Route path="/app/profile/following">
+                <FollowingList />
+              </Route>
+              <Route path='/app/profile/followers'>
+                <FollowerList />
               </Route>
               <Route path="/app/create-book">
                 <RequireLogin isLoaded={isLoaded} />
