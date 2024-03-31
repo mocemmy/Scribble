@@ -1,11 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './ProfilePage.css'
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
+import { authenticate } from "../../store/session";
 
 const ProfilePage = () => {
     //user information displayed:
     const user = useSelector(state => state.session.user)
-    console.log(user)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(authenticate())
+    }, [])
     return (
         <>
             <div className="profile-header">
