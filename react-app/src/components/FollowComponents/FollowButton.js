@@ -10,9 +10,6 @@ const FollowButton = (props) => {
     const following = useSelector(state => state.follow.allFollowing)
     const followed = following[review.user?.id] ? true : false;
 
-    useEffect(() => {
-        console.log('state changed', following)
-    }, [following])
 
     const follow = () => {
         dispatch(thunkFollowUser(review.user.id))
