@@ -8,7 +8,8 @@ const FollowButton = (props) => {
     const { user, review } = props;
     const dispatch = useDispatch();
     const following = useSelector(state => state.follow.allFollowing)
-    const followed = following[review.user?.id] ? true : false;
+    let followed;
+    if(review.user) followed = following[review.user.id] ? true : false;
 
 
     const follow = () => {
