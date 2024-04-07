@@ -29,7 +29,7 @@ function BrowseDropdown() {
         <div className='browse-container'>
             <div className='browse-links'>
                 <Link className='browse-links' to='/app/browse-books'>Browse</Link>
-                <Link onClick={toggleMenu} className="browse-links" >&nbsp;&#9660;</Link>
+                <button onClick={toggleMenu} className="dropdown-arrow browse-buttons" >&nbsp;&#9660;</button>
                 <div className={showMenu ? "dropdown" : "hidden"} ref={dropdownRef}>
                     <Link onClick={toggleMenu} to='/app/browse-books'>Browse Books</Link>
                     <Link onClick={toggleMenu} to='/app/browse-lists'>Browse Lists</Link>

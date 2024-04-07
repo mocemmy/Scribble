@@ -12,6 +12,7 @@ const FollowList = ({ type }) => {
     const listArr = Object.values(list)
 
     const handleUnfollow = (user) => {
+        console.log(user)
         dispatch(thunkUnfollowUser(user.id))
     }
     return (

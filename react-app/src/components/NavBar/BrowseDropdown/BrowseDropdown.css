@@ -34,3 +34,14 @@
     color: white;
     text-decoration: none;
 }
+
+.browse-buttons {
+    border: none;
+    background-color: transparent;
+}
+
+.dropdown-arrow:hover,
+.browse-buttons:hover {
+    color: white;
+    cursor: pointer;
+}

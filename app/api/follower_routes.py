@@ -65,7 +65,6 @@ def unfollow_user(id):
     #check user isn't trying to unfollow themselves
     if current_user.id == following.id:
         return {"errors": "Cannot unfollow yourself!"}, 404
-    
     following.followers.remove(current_user)
     db.session.commit()
     return {"message": f"Unfollowed user {id}"}
