@@ -7,6 +7,7 @@ import bookshelves from './bookshelf'
 import lists from './list'
 import search from './search'
 import follow from './follow'
+import user from './user'
 
 const rootReducer = combineReducers({
   session,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   lists,
   bookshelves,
   search,
-  follow
+  follow,
+  user
 });
 
 
