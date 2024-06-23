@@ -8,8 +8,17 @@ from datetime import datetime
 
 user_routes = Blueprint('users', __name__)
 
+@user_routes.route('/current-user')
+@login_required
+def get_current_user():
+    """
+    Query to return user information for logged in user
+    """
 
-@user_routes.route('/')
+    return { "user": current_user.to_dict() }
+
+
+@user_routes.route('/all-users')
 @login_required
 def users():
     """
@@ -17,6 +26,7 @@ def users():
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
 
 
 @user_routes.route('/<int:id>')

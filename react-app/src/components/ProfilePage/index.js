@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './ProfilePage.css'
 import { useEffect } from "react";
 import { authenticate } from "../../store/session";
+import { thunkGetUserData } from "../../store/user";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProfilePage = () => {
@@ -11,6 +12,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         dispatch(authenticate())
+        dispatch(thunkGetUserData())
     }, [])
     return (
         <>
